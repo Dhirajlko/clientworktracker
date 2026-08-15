@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Client Test</title>
+</head>
+
+<body>
+
+<h2>Test Client Insert</h2>
+
+<input type="text" id="client_name" placeholder="Client Name"><br><br>
+
+<input type="text" id="mobile" placeholder="Mobile"><br><br>
+
+<input type="text" id="pan" placeholder="PAN"><br><br>
+
+<button onclick="saveClient()">Save Client</button>
+
+<script>
+
+async function saveClient(){
+
+    const response = await fetch("api/save_client.php",{
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+
+            client_code:"C001",
+
+            client_name:document.getElementById("client_name").value,
+
+            mobile:document.getElementById("mobile").value,
+
+            email:"",
+
+            pan:document.getElementById("pan").value,
+
+            aadhaar:"",
+            gstin:"",
+            address:"",
+            city:"",
+            state:"",
+            remarks:"",
+            status:"Active"
+
+        })
+
+    });
+
+    const result = await response.json();
+
+    alert(result.message);
+
+    console.log(result);
+
+}
+
+</script>
+
+</body>
+
+</html>

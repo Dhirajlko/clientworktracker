@@ -1,0 +1,5655 @@
+
+    
+
+<!doctype html>
+
+<html lang="en">
+
+  <head>
+
+    <!-- STRICT SERVICE-SPECIFIC FORM / WORK TYPE DROPDOWN ENGINE -->
+    <style>
+      .cwt-field-label-service {
+        font-weight: 700 !important;
+        color: #60a5fa !important;
+      }
+      .cwt-auto-hint-title {
+        color: #94a3b8;
+        font-size: 0.72rem;
+        font-weight: 600;
+        margin-top: 4px;
+      }
+    </style>
+
+    <script>
+      (function() {
+        const API_BASE = '/reports/client-work-tracker/api';
+        localStorage.setItem('cwt_active_tenant_id', '1');
+
+        // SERVICE-SPECIFIC OPTIONS DICTIONARY
+        const SERVICE_WORK_OPTIONS = {
+          'food': [
+            'New FSSAI Registration',
+            'FSSAI Basic Registration',
+            'FSSAI State License',
+            'FSSAI Central License',
+            'FSSAI Renewal',
+            'FSSAI Modification',
+            'FSSAI Transfer',
+            'FSSAI Annual Return',
+            'FSSAI License Surrender',
+            'FSSAI Notice / Reply',
+            'Other FSSAI Work'
+          ],
+          'income tax': [
+            'ITR-1 (Salary / Pension / One House)',
+            'ITR-2 (Capital Gains / Multiple Houses)',
+            'ITR-3 (Business / Profession)',
+            'ITR-4 (Presumptive Business / Section 44AD)',
+            'ITR-5 (Partnership Firm / LLP)',
+            'ITR-6 (Company / Pvt Ltd)',
+            'ITR-7 (Trust / NGO)',
+            'Income Tax Notice Reply',
+            'Revised ITR Filing',
+            'Updated ITR (Section 139(8A))',
+            'Other Income Tax Work'
+          ],
+          'gst': [
+            'GSTR-1 Return Filing',
+            'GSTR-3B Return Filing',
+            'CMP-08 Return Filing',
+            'GSTR-9 Annual Return',
+            'GSTR-9C',
+            'GST Registration',
+            'GST Registration Amendment',
+            'GST Cancellation',
+            'GST Revocation',
+            'GST LUT',
+            'GST Notice Reply',
+            'Other GST Work'
+          ],
+          'tds': [
+            'TDS 24Q Return',
+            'TDS 26Q Return',
+            'TDS 27Q Return',
+            'TDS Correction',
+            'TDS Certificate',
+            'TDS Notice Reply',
+            'Other TDS Work'
+          ],
+          'dsc': [
+            'Class 3 DSC',
+            'DSC Renewal',
+            'DSC Token',
+            'DSC Replacement',
+            'DSC Installation',
+            'DSC Certificate',
+            'Other DSC Work'
+          ],
+          'msme': [
+            'New Udyam Registration',
+            'Udyam Certificate',
+            'Udyam Update',
+            'Udyam Modification',
+            'Udyam Cancellation',
+            'Other Udyam Work'
+          ],
+          'trademark': [
+            'New Trademark Application',
+            'Trademark Renewal',
+            'Trademark Objection',
+            'Trademark Reply',
+            'Trademark Hearing',
+            'Trademark Amendment',
+            'Trademark Assignment',
+            'Trademark Opposition',
+            'Other Trademark Work'
+          ],
+          'company': [
+            'Private Limited Company Registration',
+            'OPC Registration',
+            'LLP Registration',
+            'Company Name Reservation',
+            'Company Incorporation',
+            'Company Amendment',
+            'Other Company / LLP Work'
+          ],
+          'accounting': [
+            'Monthly Accounting',
+            'Bookkeeping',
+            'Bank Reconciliation',
+            'Ledger Maintenance',
+            'GST Accounting',
+            'Payroll',
+            'Final Accounts',
+            'Profit & Loss',
+            'Balance Sheet',
+            'Other Accounting Work'
+          ],
+          'website': [
+            'Website Development',
+            'Website Maintenance',
+            'Domain Registration',
+            'Hosting',
+            'Website Renewal',
+            'Website Modification',
+            'Website Backup',
+            'SSL Installation',
+            'Other Website Work'
+          ]
+        };
+
+        const SERVICE_PERIOD_LABELS = {
+          'food': { label: 'Application / Renewal Year', options: ['FY 2026-27', 'FY 2025-26', '1 Year', '2 Years', '5 Years'] },
+          'income tax': { label: 'Assessment Year', options: ['AY 2026-27', 'AY 2027-28', 'AY 2025-26'] },
+          'gst': { label: 'Filing Period', options: ['August 2026', 'July 2026', 'September 2026', 'Q1 FY 2026-27'] },
+          'tds': { label: 'Quarter / Financial Year', options: ['Q1 FY 2026-27', 'Q2 FY 2026-27', 'Q3 FY 2026-27', 'Q4 FY 2025-26'] },
+          'dsc': { label: 'Validity Period', options: ['2 Years', '3 Years', '1 Year'] },
+          'msme': { label: 'Registration Year', options: ['FY 2026-27', 'FY 2025-26'] },
+          'trademark': { label: 'Application Year', options: ['FY 2026-27', 'FY 2025-26'] },
+          'accounting': { label: 'Accounting Period', options: ['August 2026', 'July 2026', 'Q1 FY 2026-27', 'FY 2026-27'] }
+        };
+
+        function generateTaskTitle(srvKey, formVal) {
+          if (srvKey === 'food') {
+            if (formVal.includes('Renewal')) return 'FSSAI Renewal';
+            if (formVal.includes('State')) return 'FSSAI State License';
+            if (formVal.includes('Central')) return 'FSSAI Central License';
+            if (formVal.includes('Basic')) return 'FSSAI Basic Registration';
+            return 'FSSAI Registration';
+          }
+          if (srvKey === 'income tax') {
+            if (formVal.includes('ITR-1')) return 'ITR-1 Income Tax Return Filing';
+            if (formVal.includes('ITR-2')) return 'ITR-2 Income Tax Return Filing';
+            if (formVal.includes('ITR-3')) return 'ITR-3 Income Tax Return Filing';
+            if (formVal.includes('ITR-4')) return 'ITR-4 Income Tax Return Filing';
+            if (formVal.includes('ITR-5')) return 'ITR-5 Income Tax Return Filing';
+            if (formVal.includes('ITR-6')) return 'ITR-6 Income Tax Return Filing';
+            if (formVal.includes('ITR-7')) return 'ITR-7 Income Tax Return Filing';
+            return 'Income Tax Return Filing';
+          }
+          if (srvKey === 'gst') {
+            if (formVal.includes('3B') && formVal.includes('Payment')) return 'GSTR-3B Tax Payment';
+            if (formVal.includes('3B')) return 'GSTR-3B Return Filing';
+            if (formVal.includes('1')) return 'GSTR-1 Return Filing';
+            if (formVal.includes('CMP')) return 'CMP-08 Return Filing';
+            if (formVal.includes('9C')) return 'GSTR-9C Reconciliation & Filing';
+            if (formVal.includes('9')) return 'GSTR-9 Annual Return';
+            return 'GST Return Filing';
+          }
+          if (srvKey === 'tds') {
+            if (formVal.includes('24Q')) return 'TDS 24Q Return';
+            if (formVal.includes('26Q')) return 'TDS 26Q Return';
+            if (formVal.includes('27Q')) return 'TDS 27Q Return';
+            return 'TDS Return';
+          }
+          if (srvKey === 'dsc') {
+            if (formVal.includes('Class 3')) return 'Class 3 Digital Signature (DSC)';
+            if (formVal.includes('Renewal')) return 'Digital Signature Renewal';
+            return 'Digital Signature (DSC)';
+          }
+          if (srvKey === 'msme') return 'MSME / Udyam Registration';
+          if (srvKey === 'trademark') return 'Trademark Registration';
+          if (srvKey === 'accounting') return 'Monthly Accounting';
+          if (srvKey === 'website') return 'Website Maintenance';
+
+          return formVal || 'Filing Work Item';
+        }
+
+        function purgeAndPopulateServiceForms(modal) {
+          const selects = modal.querySelectorAll('select');
+          let srvSelect = null;
+          let formSelect = null;
+          let periodSelect = null;
+          let formLabel = null;
+          let periodLabel = null;
+
+          selects.forEach(s => {
+            const labelEl = s.previousElementSibling || s.parentElement?.querySelector('label');
+            const text = (labelEl ? labelEl.innerText : s.parentElement?.innerText || '').toLowerCase();
+            if (text.includes('service category') || text.includes('service')) srvSelect = s;
+            if (text.includes('form / work type') || text.includes('form type') || text.includes('return form') || text.includes('form')) {
+              formSelect = s;
+              formLabel = labelEl;
+            }
+            if (text.includes('filing period') || text.includes('assessment year') || text.includes('period') || text.includes('year')) {
+              periodSelect = s;
+              periodLabel = labelEl;
+            }
+          });
+
+          if (srvSelect && formSelect) {
+            // Update Label to "Form / Work Type *"
+            if (formLabel && formLabel.innerText !== 'Form / Work Type *') {
+              formLabel.innerText = 'Form / Work Type *';
+              formLabel.className = 'cwt-field-label-service';
+            }
+
+            const srvText = (srvSelect.options[srvSelect.selectedIndex]?.text || srvSelect.value || '').toLowerCase();
+            let srvKey = 'income tax';
+            if (srvText.includes('food') || srvText.includes('fssai')) srvKey = 'food';
+            else if (srvText.includes('gst') && !srvText.includes('accounting')) srvKey = 'gst';
+            else if (srvText.includes('tds')) srvKey = 'tds';
+            else if (srvText.includes('dsc') || srvText.includes('digital signature')) srvKey = 'dsc';
+            else if (srvText.includes('msme') || srvText.includes('udyam')) srvKey = 'msme';
+            else if (srvText.includes('trademark')) srvKey = 'trademark';
+            else if (srvText.includes('company') || srvText.includes('llp')) srvKey = 'company';
+            else if (srvText.includes('accounting') || srvText.includes('bookkeeping')) srvKey = 'accounting';
+            else if (srvText.includes('website') || srvText.includes('digital service')) srvKey = 'website';
+
+            // REPOPULATE FORM SELECT IF SERVICE CHANGED OR IF CONTAINS INVALID OPTIONS
+            const currentFormOptions = Array.from(formSelect.options).map(o => o.value);
+            const validOptions = SERVICE_WORK_OPTIONS[srvKey] || SERVICE_WORK_OPTIONS['income tax'];
+
+            const hasInvalidITR = (srvKey !== 'income tax') && currentFormOptions.some(o => o.includes('ITR-1') || o.includes('ITR-2'));
+
+            if (formSelect.dataset.activeSrvKey !== srvKey || hasInvalidITR) {
+              formSelect.dataset.activeSrvKey = srvKey;
+              formSelect.innerHTML = '<option value="">-- Select Form / Work Type --</option>';
+
+              validOptions.forEach(optVal => {
+                const opt = document.createElement('option');
+                opt.value = optVal;
+                opt.text = optVal;
+                formSelect.appendChild(opt);
+              });
+
+              formSelect.selectedIndex = 0;
+            }
+
+            // DYNAMIC PERIOD LABEL & OPTIONS
+            if (periodSelect && periodLabel) {
+              const pInfo = SERVICE_PERIOD_LABELS[srvKey] || SERVICE_PERIOD_LABELS['income tax'];
+              if (periodLabel.innerText !== pInfo.label + ' *') {
+                periodLabel.innerText = pInfo.label + ' *';
+              }
+              if (periodSelect.dataset.activePeriodKey !== srvKey) {
+                periodSelect.dataset.activePeriodKey = srvKey;
+                periodSelect.innerHTML = '';
+                pInfo.options.forEach(optVal => {
+                  const opt = document.createElement('option');
+                  opt.value = optVal;
+                  opt.text = optVal;
+                  periodSelect.appendChild(opt);
+                });
+              }
+            }
+
+            // AUTO GENERATE TASK TITLE
+            const selectedForm = formSelect.options[formSelect.selectedIndex]?.value || '';
+            const titleInput = modal.querySelector('input[name="taskTitle"], input[id*="taskTitle"], input[placeholder*="Title"], input[value*="ITR"], input[value*="DSC"], input[value*="GSTR"], input[value*="Sahaj"]');
+            if (titleInput && selectedForm) {
+              const computedTitle = generateTaskTitle(srvKey, selectedForm);
+              if (titleInput.value !== computedTitle) {
+                titleInput.value = computedTitle;
+                titleInput.dispatchEvent(new Event('input', { bubbles: true }));
+                titleInput.dispatchEvent(new Event('change', { bubbles: true }));
+              }
+
+              if (!modal.querySelector('.cwt-auto-hint-title')) {
+                const hint = document.createElement('div');
+                hint.className = 'cwt-auto-hint-title';
+                hint.innerHTML = '⚡ <em>Auto-generated from Service & Work Type</em>';
+                titleInput.parentNode.appendChild(hint);
+              }
+            }
+
+            // AUTO FINANCIALS & PAYMENT STATUS
+            const feeInput = modal.querySelector('input[name="feeCharged"], input[name="feeAmount"], input[placeholder*="fee"], input[placeholder*="1500"]');
+            const advInput = modal.querySelector('input[name="advancePaid"], input[placeholder*="advance"], input[placeholder*="500"]');
+            const dueInput = modal.querySelector('input[name="dueAmount"], input[placeholder*="Auto-calculated"], input[value*="Auto"]');
+            const pStatusSelect = modal.querySelector('select[name="paymentStatus"], select[id*="paymentStatus"]');
+
+            if (feeInput && advInput) {
+              const fee = parseFloat(feeInput.value || 0);
+              const adv = parseFloat(advInput.value || 0);
+              const due = fee - adv;
+
+              if (dueInput) {
+                if (due > 0) dueInput.value = '₹' + due.toLocaleString('en-IN');
+                else if (due === 0 && fee > 0) dueInput.value = 'PAID';
+                else if (adv > fee) dueInput.value = 'Advance Credit: ₹' + (adv - fee).toLocaleString('en-IN');
+              }
+
+              if (pStatusSelect) {
+                if (adv === 0) pStatusSelect.value = 'Pending';
+                else if (adv > 0 && adv < fee) pStatusSelect.value = 'Partial';
+                else if (adv >= fee && fee > 0) pStatusSelect.value = 'Paid';
+              }
+            }
+          }
+        }
+
+        // BIND EVENT LISTENERS TO INTERCEPT MODAL OPEN, FOCUS, MOUSEDOWN, AND CHANGE
+        document.addEventListener('change', function(e) {
+          if (e.target && e.target.tagName === 'SELECT') {
+            const modal = e.target.closest('.modal-content, div[role="dialog"], form');
+            if (modal) purgeAndPopulateServiceForms(modal);
+          }
+        });
+
+        document.addEventListener('mousedown', function(e) {
+          if (e.target && e.target.tagName === 'SELECT') {
+            const modal = e.target.closest('.modal-content, div[role="dialog"], form');
+            if (modal) purgeAndPopulateServiceForms(modal);
+          }
+        });
+
+        document.addEventListener('click', function(e) {
+          if (e.target && (e.target.innerText.includes('Add') || e.target.innerText.includes('Edit') || e.target.className.includes('btn'))) {
+            setTimeout(function() {
+              const modals = document.querySelectorAll('.modal-content, div[role="dialog"], form');
+              modals.forEach(m => purgeAndPopulateServiceForms(m));
+            }, 100);
+          }
+        });
+      })();
+    </script>
+<meta charset="utf-8">
+
+    
+
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+
+    <meta http-equiv="Pragma" content="no-cache" />
+
+    <meta http-equiv="Expires" content="0" />
+
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="description" content="Daily client work, ITR, GST, Website maintenance, and online services tracker." />
+
+    <title>Client Work & Tax Tracker - Daily Operations Dashboard</title>
+
+    <script type="module" crossorigin src="/reports/client-work-tracker/assets/index-BSTltiXe.js"></script>
+
+    <link rel="stylesheet" crossorigin href="/reports/client-work-tracker/assets/index-Dq-ujYVM.css">
+
+  
+    <!-- SECURITY GUARD: REDIRECT OTHER BROWSERS / UNAUTHENTICATED USERS TO MAIN LOGIN PORTAL -->
+    <script>
+      (function() {
+        const API_BASE = (function() {
+          const href = window.location.href;
+          if (href.includes('/reports/client-work-tracker/')) return '/reports/client-work-tracker/api';
+          const path = window.location.pathname;
+          const folder = path.substring(0, path.lastIndexOf('/'));
+          return folder ? folder + '/api' : './api';
+        })();
+
+        // Check if user is logged in
+        fetch(API_BASE + '/check_auth.php')
+          .then(r => r.json())
+          .then(data => {
+            if (data && data.authenticated === false && !window.location.href.includes('localhost')) {
+              // Redirect unauthenticated user to main login portal!
+              window.location.href = 'https://mybook1.in/reports/index.php';
+            }
+          })
+          .catch(() => {});
+      })();
+    </script>
+
+</head>
+
+  <body>
+
+    <!-- Back to Admin Dashboard Bar -->
+
+    <div style="position:fixed;top:0;left:0;width:100%;z-index:9999;background:linear-gradient(90deg,#1e3a5f,#2563eb);padding:8px 16px;box-shadow:0 2px 8px rgba(0,0,0,0.3);display:flex;align-items:center;box-sizing:border-box;">
+
+      <a href="https://mybook1.in/reports/admin-dashboard.php"
+
+         style="color:#fff;text-decoration:none;font-family:sans-serif;font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.15);padding:5px 14px;border-radius:6px;border:1px solid rgba(255,255,255,0.3);transition:background 0.2s;"
+
+         onmouseover="this.style.background='rgba(255,255,255,0.28)'"
+
+         onmouseout="this.style.background='rgba(255,255,255,0.15)'">
+
+        &#8592; Back to Admin Dashboard
+
+      </a>
+
+    </div>
+
+    <div style="padding-top:46px;">
+
+      <div id="root"></div>
+
+    </div>
+
+  <!-- ===== Client Active/Non-Active Status Script ===== -->
+
+  <script>
+
+  (function(){
+
+    const API_BASE = (function() {
+
+      const href = window.location.href;
+
+      if (href.includes('/reports/client-work-tracker/')) return '/reports/client-work-tracker/api';
+
+      const path = window.location.pathname;
+
+      const folder = path.substring(0, path.lastIndexOf('/'));
+
+      return folder ? folder + '/api' : './api';
+
+    })();
+
+
+
+    // --- API Fetch Interceptor for Real-Time Client Reloading & Checkbox Payload Override ---
+
+    const originalFetch = window.fetch;
+
+    window.fetch = function(...args) {
+
+      const url = args[0] || '';
+
+      const isSaveClient = typeof url === 'string' && url.includes('save_client.php');
+
+
+
+      if (isSaveClient && args[1] && args[1].body) {
+
+        try {
+
+          const bodyObj = JSON.parse(args[1].body);
+
+          const groupDiv = document.querySelector('.cwt-service-selector-group');
+
+          if (groupDiv) {
+
+            const checked = Array.from(groupDiv.querySelectorAll('.cwt-cat-chk:checked')).map(cb => cb.value);
+
+            let noteText = '';
+
+            if (checked.length === 5) noteText = 'ITR, GST, Website, Book Keeping & Other Work Client';
+
+            else if (checked.length > 0) noteText = checked.join(' & ');
+
+            else noteText = 'ITR Client';
+
+
+
+            bodyObj.notes = noteText;
+
+
+
+            const gstUserInp = document.getElementById('cwt-gst-username-inp');
+
+            const gstPassInp = document.getElementById('cwt-gst-password-inp');
+
+            const itUserInp  = document.getElementById('cwt-it-username-inp');
+
+
+
+            if (gstUserInp) bodyObj.gst_username = gstUserInp.value.trim();
+
+            if (gstPassInp) bodyObj.gst_password = gstPassInp.value.trim();
+
+            if (itUserInp)  bodyObj.it_username  = itUserInp.value.trim();
+
+
+
+            const entityChks = document.querySelectorAll('.cwt-entity-chk:checked');
+
+            if (entityChks.length > 0) {
+
+              bodyObj.category = Array.from(entityChks).map(c => c.value).join(' & ');
+
+            }
+
+
+
+            args[1].body = JSON.stringify(bodyObj);
+
+          }
+
+        } catch(e) {}
+
+      }
+
+
+
+      return originalFetch.apply(this, args).then(response => {
+
+        if (isSaveClient) {
+
+          response.clone().json().then(data => {
+
+            if (data && data.success) {
+
+              setTimeout(() => {
+
+                loadClients();
+
+                setTimeout(runDOMEnhancements, 200);
+
+              }, 150);
+
+            }
+
+          }).catch(() => {});
+
+        }
+
+        return response;
+
+      });
+
+    };
+
+
+
+    // --- Styles ---
+
+    const style = document.createElement('style');
+
+    style.textContent = `
+
+      #cwt-status-panel {
+
+        position: fixed !important;
+
+        bottom: 24px !important;
+
+        right: 24px !important;
+
+        z-index: 999999 !important;
+
+        background: #0f172a !important;
+
+        border-radius: 16px !important;
+
+        box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 20px rgba(59,130,246,0.3) !important;
+
+        padding: 0 !important;
+
+        min-width: 340px !important;
+
+        max-width: 420px !important;
+
+        font-family: sans-serif !important;
+
+        display: flex;
+
+        flex-direction: column !important;
+
+        overflow: hidden !important;
+
+        border: 2px solid #3b82f6 !important;
+
+      }
+
+      #cwt-status-panel.cwt-open { display: flex !important; }
+
+      #cwt-panel-header {
+
+        background: linear-gradient(90deg,#1e3a5f,#2563eb);
+
+        color: #fff;
+
+        padding: 12px 16px;
+
+        font-weight: 700;
+
+        font-size: 15px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+      }
+
+      #cwt-panel-header span { font-size: 12px; font-weight: 400; opacity: .8; }
+
+      #cwt-filter-bar {
+
+        display: flex;
+
+        gap: 6px;
+
+        padding: 10px 14px 6px;
+
+        background: #f8fafc;
+
+        border-bottom: 1px solid #e2e8f0;
+
+      }
+
+      .cwt-filter-btn {
+
+        flex: 1;
+
+        padding: 6px 10px;
+
+        border-radius: 8px;
+
+        border: 2px solid transparent;
+
+        font-size: 13px;
+
+        font-weight: 600;
+
+        cursor: pointer;
+
+        transition: all .2s;
+
+      }
+
+      .cwt-filter-btn.all   { background:#e2e8f0; color:#1e3a5f; }
+
+      .cwt-filter-btn.active-f  { background:#dcfce7; color:#166534; border-color:#86efac; }
+
+      .cwt-filter-btn.inactive-f{ background:#fee2e2; color:#991b1b; border-color:#fca5a5; }
+
+      .cwt-filter-btn.selected  { box-shadow: 0 0 0 3px rgba(37,99,235,.35); }
+
+      #cwt-client-list {
+
+        max-height: 300px;
+
+        overflow-y: auto;
+
+        padding: 8px 0;
+
+      }
+
+      .cwt-client-row {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        padding: 7px 16px;
+
+        border-bottom: 1px solid #f1f5f9;
+
+        font-size: 13px;
+
+      }
+
+      .cwt-client-row:last-child { border-bottom: none; }
+
+      .cwt-client-name { font-weight: 600; color: #1e293b; flex: 1; }
+
+      .cwt-badge {
+
+        font-size: 11px;
+
+        font-weight: 700;
+
+        padding: 2px 9px;
+
+        border-radius: 20px;
+
+        margin-right: 8px;
+
+      }
+
+      .cwt-badge.active   { background: #dcfce7; color: #166534; }
+
+      .cwt-badge.inactive { background: #fee2e2; color: #991b1b; }
+
+      .cwt-toggle-btn {
+
+        font-size: 11px;
+
+        padding: 3px 10px;
+
+        border-radius: 6px;
+
+        border: none;
+
+        cursor: pointer;
+
+        font-weight: 600;
+
+        transition: all .2s;
+
+      }
+
+      .cwt-toggle-btn.make-active   { background: #2563eb; color: #fff; }
+
+      .cwt-toggle-btn.make-inactive { background: #dc2626; color: #fff; }
+
+      .cwt-toggle-btn:hover { opacity: .82; }
+
+      #cwt-search {
+
+        margin: 8px 14px 2px;
+
+        padding: 6px 12px;
+
+        border: 1px solid #e2e8f0;
+
+        border-radius: 8px;
+
+        font-size: 13px;
+
+        width: calc(100% - 28px);
+
+        box-sizing: border-box;
+
+        outline: none;
+
+      }
+
+      #cwt-open-btn {
+
+        position: fixed !important;
+
+        bottom: 14px !important;
+
+        right: 14px !important;
+
+        z-index: 999999 !important;
+
+        width: 38px !important;
+
+        height: 38px !important;
+
+        border-radius: 50% !important;
+
+        background: linear-gradient(135deg, #2563eb, #7c3aed) !important;
+
+        color: #ffffff !important;
+
+        border: 1.5px solid rgba(255, 255, 255, 0.6) !important;
+
+        font-size: 17px !important;
+
+        cursor: pointer !important;
+
+        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.5), 0 0 10px rgba(124, 58, 237, 0.4) !important;
+
+        display: flex !important;
+
+        align-items: center !important;
+
+        justify-content: center !important;
+
+        padding: 0 !important;
+
+        margin: 0 !important;
+
+        transition: transform 0.2s, box-shadow 0.2s !important;
+
+      }
+
+      #cwt-open-btn:hover {
+
+        transform: scale(1.12) !important;
+
+        box-shadow: 0 6px 20px rgba(37, 99, 235, 0.75) !important;
+
+      }
+
+      #cwt-open-btn:hover { transform: scale(1.06) translateY(-2px) !important; box-shadow: 0 12px 30px rgba(37, 99, 235, 0.7) !important; }
+
+      #cwt-close-btn {
+
+        background: none;
+
+        border: none;
+
+        color: #fff;
+
+        font-size: 20px;
+
+        cursor: pointer;
+
+        line-height: 1;
+
+        padding: 0 0 0 8px;
+
+      }
+
+      .cwt-hidden { display: none !important; }
+
+    `;
+
+    document.head.appendChild(style);
+
+
+
+    // --- Data store ---
+
+    let allClients = [];
+
+    let currentFilter = 'all'; // all | active | inactive
+
+
+
+    // --- Build & Re-attach Floating UI Safely ---
+
+    function ensureFloatingPanelUI() {
+
+      try {
+
+        let panel = document.getElementById('cwt-status-panel');
+
+        let openBtn = document.getElementById('cwt-open-btn');
+
+
+
+        if (!panel || !panel.parentNode) {
+
+          if (panel && panel.parentNode) panel.remove();
+
+          panel = document.createElement('div');
+
+          panel.id = 'cwt-status-panel';
+
+          panel.style.cssText = 'position:fixed !important; bottom:24px !important; right:24px !important; z-index:999999 !important; background:#0f172a !important; border-radius:16px !important; box-shadow:0 20px 50px rgba(0,0,0,0.6), 0 0 20px rgba(59,130,246,0.3) !important; padding:0 !important; min-width:340px !important; max-width:420px !important; font-family:sans-serif !important; border:2px solid #3b82f6 !important;';
+
+          panel.innerHTML = `
+
+            <div id="cwt-panel-header">
+
+              <div>&#128100; Client Status Manager <span id="cwt-count-label"></span></div>
+
+              <button id="cwt-close-btn">&#215;</button>
+
+            </div>
+
+            <input id="cwt-search" type="text" placeholder="&#128269; Search client name..." />
+
+            <div id="cwt-filter-bar">
+
+              <button class="cwt-filter-btn all selected" data-f="all">All</button>
+
+              <button class="cwt-filter-btn active-f" data-f="active">&#9679; Active</button>
+
+              <button class="cwt-filter-btn inactive-f" data-f="inactive">&#9679; Inactive</button>
+
+            </div>
+
+            <div id="cwt-client-list"><div style="padding:20px;text-align:center;color:#94a3b8;">Loading...</div></div>
+
+          `;
+
+          document.body.appendChild(panel);
+
+
+
+          const closeBtn = document.getElementById('cwt-close-btn');
+
+          if (closeBtn) {
+
+            closeBtn.onclick = () => {
+
+              panel.classList.remove('cwt-open');
+
+              const ob = document.getElementById('cwt-open-btn');
+
+              if (ob) ob.classList.remove('cwt-hidden');
+
+            };
+
+          }
+
+
+
+          const searchInput = document.getElementById('cwt-search');
+
+          if (searchInput) searchInput.oninput = renderList;
+
+
+
+          const filterBar = document.getElementById('cwt-filter-bar');
+
+          if (filterBar) {
+
+            filterBar.onclick = e => {
+
+              const btn = e.target.closest('.cwt-filter-btn');
+
+              if (!btn) return;
+
+              currentFilter = btn.dataset.f;
+
+              document.querySelectorAll('.cwt-filter-btn').forEach(b => b.classList.remove('selected'));
+
+              btn.classList.add('selected');
+
+              renderList();
+
+            };
+
+          }
+
+        }
+
+
+
+        if (!openBtn || !openBtn.parentNode) {
+
+          if (openBtn && openBtn.parentNode) openBtn.remove();
+
+          openBtn = document.createElement('button');
+
+          openBtn.id = 'cwt-open-btn';
+
+          openBtn.type = 'button';
+
+          openBtn.title = 'Client Status Manager';
+
+          openBtn.style.cssText = 'position:fixed !important; bottom:14px !important; right:14px !important; z-index:999999 !important; width:38px !important; height:38px !important; border-radius:50% !important; background:linear-gradient(135deg, #2563eb, #7c3aed) !important; color:#ffffff !important; border:1.5px solid rgba(255,255,255,0.6) !important; font-size:17px !important; cursor:pointer !important; box-shadow:0 4px 15px rgba(37,99,235,0.5) !important; display:flex !important; align-items:center !important; justify-content:center !important; padding:0 !important; margin:0 !important;';
+
+          openBtn.innerHTML = '👤';
+
+          document.body.appendChild(openBtn);
+
+
+
+          openBtn.onclick = () => {
+
+            const p = document.getElementById('cwt-status-panel');
+
+            if (p) {
+
+              p.classList.toggle('cwt-open');
+
+              openBtn.classList.toggle('cwt-hidden', p.classList.contains('cwt-open'));
+
+              if (p.classList.contains('cwt-open') && allClients.length === 0) loadClients();
+
+            }
+
+          };
+
+        }
+
+      } catch(err) {}
+
+    }
+
+
+
+    // --- Load clients (used by panel + dashboard badges) ---
+
+    function loadClients() {
+
+      fetch(API_BASE + '/get_clients.php')
+
+        .then(r => r.json())
+
+        .then(data => {
+
+          if (data.success) {
+
+            window.allClients = data.clients;
+            allClients = data.clients.map(c => ({
+
+              id: c.id,
+
+              name: c.name || c.client_name || '',
+
+              company: c.company || '',
+
+              pan: c.pan || '',
+
+              itPassword: c.itPassword || c.it_password || '',
+
+              it_username: c.it_username || '',
+
+              gstin: c.gstin || '',
+
+              gst_username: c.gst_username || '',
+
+              gst_password: c.gst_password || '',
+
+              phone: c.phone || c.mobile || c.whatsapp || '',
+
+              whatsapp: c.whatsapp || c.phone || c.mobile || '',
+
+              category: c.category || '',
+
+              notes: c.notes || c.remarks || '',
+
+              remarks: c.notes || c.remarks || '',
+
+              status: (c.status || 'Active')
+
+            }));
+
+            if (document.getElementById('cwt-count-label')) renderList();
+
+            injectDashboardBadges();
+
+          }
+
+        })
+
+        .catch(() => {
+
+          if (document.getElementById('cwt-client-list'))
+
+            document.getElementById('cwt-client-list').innerHTML =
+
+              '<div style="padding:16px;color:#dc2626;text-align:center;">Error loading clients</div>';
+
+        });
+
+    }
+
+
+
+    // --- Inject Active/Non-Active count near Client Directory tab ---
+
+    function injectDashboardBadges() {
+
+      if (document.getElementById('cwt-dash-badges')) {
+
+        updateDashBadges(); return;
+
+      }
+
+      var allBtns = document.querySelectorAll('button, [role="tab"]');
+
+      var targetBtn = null;
+
+      for (var i = 0; i < allBtns.length; i++) {
+
+        if (allBtns[i].textContent && allBtns[i].textContent.indexOf('Client Directory') >= 0) {
+
+          targetBtn = allBtns[i]; break;
+
+        }
+
+      }
+
+      if (!targetBtn) return;
+
+      var wrap = document.createElement('div');
+
+      wrap.id = 'cwt-dash-badges';
+
+      wrap.style.cssText = 'display:inline-flex;align-items:center;gap:8px;margin-left:16px;font-family:sans-serif;vertical-align:middle;';
+
+      wrap.innerHTML =
+
+        '<span style="background:#dcfce7;color:#166534;font-size:12px;font-weight:700;padding:4px 13px;border-radius:20px;border:1.5px solid #86efac;white-space:nowrap;">&#9679; Active: <b id="cwt-a-num">...</b></span>' +
+
+        '<span style="background:#fee2e2;color:#991b1b;font-size:12px;font-weight:700;padding:4px 13px;border-radius:20px;border:1.5px solid #fca5a5;white-space:nowrap;">&#9679; Inactive: <b id="cwt-i-num">...</b></span>';
+
+      targetBtn.insertAdjacentElement('afterend', wrap);
+
+      updateDashBadges();
+
+    }
+
+
+
+    function updateDashBadges() {
+
+      var aEl = document.getElementById('cwt-a-num');
+
+      var iEl = document.getElementById('cwt-i-num');
+
+      if (!aEl || !iEl) return;
+
+      var ac = allClients.filter(function(c){ return c.status === 'Active'; }).length;
+
+      var ic = allClients.filter(function(c){ return c.status === 'Inactive'; }).length;
+
+      aEl.textContent = ac;
+
+      iEl.textContent = ic;
+
+    }
+
+
+
+    // Watch for React to render the Client Directory tab
+
+    var badgeObserver = new MutationObserver(function() {
+
+      if (!document.getElementById('cwt-dash-badges') && allClients.length > 0) {
+
+        injectDashboardBadges();
+
+      }
+
+    });
+
+    badgeObserver.observe(document.getElementById('root'), { childList: true, subtree: true });
+
+
+
+    // Load on page start
+
+    loadClients();
+
+
+
+    // --- Render filtered list ---
+
+    function renderList() {
+
+      const search = document.getElementById('cwt-search').value.toLowerCase();
+
+      let list = allClients.filter(c => {
+
+        const matchName = c.name.toLowerCase().includes(search);
+
+        const matchFilter =
+
+          currentFilter === 'all' ||
+
+          (currentFilter === 'active'   && c.status === 'Active') ||
+
+          (currentFilter === 'inactive' && c.status === 'Inactive');
+
+        return matchName && matchFilter;
+
+      });
+
+
+
+      // Update count label in panel safely
+
+      const activeCount   = allClients.filter(c => c.status === 'Active').length;
+
+      const inactiveCount = allClients.filter(c => c.status === 'Inactive').length;
+
+      const countLabel = document.getElementById('cwt-count-label');
+
+      if (countLabel) {
+
+        countLabel.textContent = `(${activeCount} Active / ${inactiveCount} Inactive)`;
+
+      }
+
+      // Also update dashboard badges
+
+      updateDashBadges();
+
+
+
+      const container = document.getElementById('cwt-client-list');
+
+      if (!container) return;
+
+      if (list.length === 0) {
+
+        container.innerHTML = '<div style="padding:16px;text-align:center;color:#94a3b8;">No clients found</div>';
+
+        return;
+
+      }
+
+
+
+      container.innerHTML = list.map(c => {
+
+        const isActive = c.status === 'Active';
+
+        return `
+
+          <div class="cwt-client-row" data-id="${c.id}">
+
+            <div class="cwt-client-name">${c.name}</div>
+
+            <span class="cwt-badge ${isActive ? 'active' : 'inactive'}">
+
+              ${isActive ? 'Active' : 'Inactive'}
+
+            </span>
+
+            <button class="cwt-toggle-btn ${isActive ? 'make-inactive' : 'make-active'}"
+
+                    onclick="cwtToggle('${c.id}','${isActive ? 'Inactive' : 'Active'}',this)">
+
+              ${isActive ? 'Deactivate' : 'Activate'}
+
+            </button>
+
+          </div>`;
+
+      }).join('');
+
+    }
+
+
+
+    // --- Toggle status ---
+
+    window.cwtToggle = function(id, newStatus, btn) {
+
+      btn.disabled = true;
+
+      btn.textContent = '...';
+
+      fetch(API_BASE + '/toggle_client_status.php', {
+
+        method: 'POST',
+
+        headers: { 'Content-Type': 'application/json' },
+
+        body: JSON.stringify({ id, status: newStatus })
+
+      })
+
+        .then(r => r.json())
+
+        .then(data => {
+
+          if (data.success) {
+
+            const client = allClients.find(c => String(c.id) === String(id));
+
+            if (client) client.status = newStatus;
+
+            renderList();
+
+          } else {
+
+            btn.disabled = false;
+
+            btn.textContent = newStatus === 'Active' ? 'Activate' : 'Deactivate';
+
+            alert('Error: ' + (data.error || 'Could not update status'));
+
+          }
+
+        })
+
+        .catch(() => {
+
+          btn.disabled = false;
+
+          alert('Network error. Please try again.');
+
+        });
+
+    };
+
+
+
+    // --- WhatsApp Card Share Feature ---
+
+    const waStyle = document.createElement('style');
+
+    waStyle.textContent = `
+
+      .cwt-wa-card-btn {
+
+        background: #25D366;
+
+        color: #fff;
+
+        border: none;
+
+        border-radius: 6px;
+
+        padding: 4px 10px;
+
+        font-size: 11px;
+
+        font-weight: 700;
+
+        cursor: pointer;
+
+        display: inline-flex;
+
+        align-items: center;
+
+        gap: 5px;
+
+        transition: all 0.2s ease;
+
+        box-shadow: 0 2px 6px rgba(37,211,102,0.3);
+
+        margin-left: 6px;
+
+        font-family: sans-serif;
+
+      }
+
+      .cwt-wa-card-btn:hover {
+
+        background: #1eb954;
+
+        transform: translateY(-1px);
+
+        box-shadow: 0 4px 10px rgba(37,211,102,0.45);
+
+      }
+
+      #cwt-wa-modal-overlay {
+
+        position: fixed;
+
+        top: 0; left: 0; width: 100%; height: 100%;
+
+        background: rgba(15, 23, 42, 0.7);
+
+        backdrop-filter: blur(4px);
+
+        z-index: 99999;
+
+        display: none;
+
+        align-items: center;
+
+        justify-content: center;
+
+        font-family: sans-serif;
+
+      }
+
+      #cwt-wa-modal-overlay.cwt-open { display: flex; }
+
+      #cwt-wa-modal {
+
+        background: #fff;
+
+        width: 90%;
+
+        max-width: 480px;
+
+        border-radius: 16px;
+
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+
+        overflow: hidden;
+
+        animation: cwtPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+
+      }
+
+      @keyframes cwtPop {
+
+        from { transform: scale(0.92); opacity: 0; }
+
+        to { transform: scale(1); opacity: 1; }
+
+      }
+
+      .cwt-wa-head {
+
+        background: linear-gradient(135deg, #128C7E, #25D366);
+
+        color: #fff;
+
+        padding: 14px 20px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        font-weight: 700;
+
+        font-size: 16px;
+
+      }
+
+      .cwt-wa-body {
+
+        padding: 18px 20px;
+
+      }
+
+      .cwt-wa-field {
+
+        margin-bottom: 14px;
+
+      }
+
+      .cwt-wa-field label {
+
+        display: block;
+
+        font-size: 12px;
+
+        font-weight: 700;
+
+        color: #475569;
+
+        margin-bottom: 5px;
+
+      }
+
+      .cwt-wa-input {
+
+        width: 100%;
+
+        padding: 9px 12px;
+
+        border: 1px solid #cbd5e1;
+
+        border-radius: 8px;
+
+        font-size: 13px;
+
+        box-sizing: border-box;
+
+        outline: none;
+
+      }
+
+      .cwt-wa-input:focus {
+
+        border-color: #25D366;
+
+        box-shadow: 0 0 0 3px rgba(37,211,102,0.2);
+
+      }
+
+      .cwt-wa-textarea {
+
+        width: 100%;
+
+        height: 160px;
+
+        padding: 10px 12px;
+
+        border: 1px solid #cbd5e1;
+
+        border-radius: 8px;
+
+        font-size: 12px;
+
+        box-sizing: border-box;
+
+        outline: none;
+
+        font-family: monospace;
+
+        resize: vertical;
+
+      }
+
+      .cwt-wa-foot {
+
+        padding: 12px 20px 18px;
+
+        display: flex;
+
+        gap: 10px;
+
+        justify-content: flex-end;
+
+      }
+
+      .cwt-wa-send-btn {
+
+        background: #25D366;
+
+        color: #fff;
+
+        border: none;
+
+        padding: 9px 20px;
+
+        border-radius: 8px;
+
+        font-weight: 700;
+
+        font-size: 13px;
+
+        cursor: pointer;
+
+        display: inline-flex;
+
+        align-items: center;
+
+        gap: 6px;
+
+        box-shadow: 0 3px 10px rgba(37,211,102,0.4);
+
+      }
+
+      .cwt-wa-send-btn:hover { background: #1eb954; }
+
+      .cwt-wa-cancel-btn {
+
+        background: #e2e8f0;
+
+        color: #475569;
+
+        border: none;
+
+        padding: 9px 16px;
+
+        border-radius: 8px;
+
+        font-weight: 600;
+
+        font-size: 13px;
+
+        cursor: pointer;
+
+      }
+
+
+
+      /* --- High Contrast Client Names & Crisp Row Visibility --- */
+
+      .data-table tbody tr td:first-child,
+
+      .data-table tbody tr td:nth-child(2),
+
+      .data-table tbody tr td strong,
+
+      .cwt-client-name {
+
+        color: #ffffff !important;
+
+        font-weight: 700 !important;
+
+        font-size: 15px !important;
+
+        text-shadow: 0 1px 3px rgba(0,0,0,0.9) !important;
+
+      }
+
+      .data-table tbody tr td {
+
+        color: #f1f5f9 !important;
+
+      }
+
+      .data-table tbody tr td small,
+
+      .data-table tbody tr td span[style*="text-muted"],
+
+      .data-table tbody tr td div[style*="opacity"] {
+
+        color: #cbd5e1 !important;
+
+        opacity: 1 !important;
+
+      }
+
+
+
+      /* Active vs Deactivated Row Shading */
+
+      .data-table tbody tr.cwt-inactive-row {
+
+        background: rgba(185, 28, 28, 0.22) !important;
+
+        border-left: 5px solid #ef4444 !important;
+
+      }
+
+      .data-table tbody tr.cwt-inactive-row td {
+
+        background: transparent !important;
+
+        color: #f8fafc !important;
+
+      }
+
+      .data-table tbody tr.cwt-active-row {
+
+        border-left: 5px solid #10b981 !important;
+
+      }
+
+      .cwt-status-tag-active {
+
+        display: inline-block;
+
+        background: #10b981;
+
+        color: #ffffff;
+
+        font-size: 10px;
+
+        font-weight: 800;
+
+        padding: 2px 7px;
+
+        border-radius: 10px;
+
+        margin-left: 8px;
+
+        vertical-align: middle;
+
+        box-shadow: 0 2px 6px rgba(16,185,129,0.3);
+
+      }
+
+      .cwt-status-tag-inactive {
+
+        display: inline-block;
+
+        background: #ef4444;
+
+        color: #ffffff;
+
+        font-size: 10px;
+
+        font-weight: 800;
+
+        padding: 2px 7px;
+
+        border-radius: 10px;
+
+        margin-left: 8px;
+
+        vertical-align: middle;
+
+        box-shadow: 0 2px 6px rgba(239,68,68,0.4);
+
+      }
+
+    `;
+
+    document.head.appendChild(waStyle);
+
+
+
+    // --- Build WhatsApp Preview Modal ---
+
+    const waModal = document.createElement('div');
+
+    waModal.id = 'cwt-wa-modal-overlay';
+
+    waModal.innerHTML = `
+
+      <div id="cwt-wa-modal">
+
+        <div class="cwt-wa-head">
+
+          <div>💬 Send Work Card to Client</div>
+
+          <button id="cwt-wa-close-x" style="background:none;border:none;color:#fff;font-size:20px;cursor:pointer;">&#215;</button>
+
+        </div>
+
+        <div class="cwt-wa-body">
+
+          <div class="cwt-wa-field">
+
+            <label>📱 Client Mobile Number (WhatsApp):</label>
+
+            <input type="text" id="cwt-wa-mobile" class="cwt-wa-input" placeholder="e.g. 9876543210" />
+
+          </div>
+
+          <div class="cwt-wa-field">
+
+            <label>📋 WhatsApp Message Content:</label>
+
+            <textarea id="cwt-wa-text" class="cwt-wa-textarea"></textarea>
+
+          </div>
+
+        </div>
+
+        <div class="cwt-wa-foot">
+
+          <button id="cwt-wa-cancel" class="cwt-wa-cancel-btn">Cancel</button>
+
+          <button id="cwt-wa-send" class="cwt-wa-send-btn">🚀 Send on WhatsApp</button>
+
+        </div>
+
+      </div>
+
+    `;
+
+    document.body.appendChild(waModal);
+
+
+
+    document.getElementById('cwt-wa-close-x').onclick = () => waModal.classList.remove('cwt-open');
+
+    document.getElementById('cwt-wa-cancel').onclick = () => waModal.classList.remove('cwt-open');
+
+
+
+    document.getElementById('cwt-wa-send').onclick = () => {
+
+      let mobile = document.getElementById('cwt-wa-mobile').value.replace(/\D/g, '');
+
+      const text = document.getElementById('cwt-wa-text').value;
+
+      if (!mobile) {
+
+        alert('Please enter a valid mobile number.');
+
+        return;
+
+      }
+
+      if (mobile.length === 10) mobile = '91' + mobile;
+
+
+
+      // Launch native WhatsApp Application directly!
+
+      const appUrl = `whatsapp://send?phone=${mobile}&text=${encodeURIComponent(text)}`;
+
+      const webUrl = `https://api.whatsapp.com/send?phone=${mobile}&text=${encodeURIComponent(text)}`;
+
+
+
+      // Try opening WhatsApp App directly
+
+      const a = document.createElement('a');
+
+      a.href = appUrl;
+
+      a.click();
+
+
+
+      // Fallback fallback timeout if app not installed
+
+      setTimeout(() => {
+
+        if (document.hasFocus()) {
+
+          // If browser is still focused after 1.5s, app might not be installed, so fallback to web link
+
+        }
+
+      }, 1500);
+
+
+
+      waModal.classList.remove('cwt-open');
+
+    };
+
+
+
+    // --- Extract Card Data & Trigger WhatsApp Modal ---
+
+    window.cwtShareCardWA = function(cardElem) {
+
+      const textContent = (cardElem.innerText || cardElem.textContent || '').trim();
+
+
+
+      // Sort clients by name length descending so longer names match first!
+
+      // (e.g. 'Akanksha Nigam' matches before 'Akanksha')
+
+      const sortedClients = [...allClients].sort((a, b) => (b.name ? b.name.length : 0) - (a.name ? a.name.length : 0));
+
+
+
+      let foundClient = null;
+
+      let clientName = '';
+
+
+
+      // Scan lines of card text to find matching client
+
+      const lines = textContent.split('\n').map(l => l.trim()).filter(Boolean);
+
+      for (let line of lines) {
+
+        const lineLower = line.toLowerCase();
+
+        const match = sortedClients.find(c => {
+
+          if (!c.name) return false;
+
+          const cNameLower = c.name.trim().toLowerCase();
+
+          return lineLower === cNameLower || lineLower.startsWith(cNameLower) || lineLower.includes(cNameLower);
+
+        });
+
+        if (match) {
+
+          foundClient = match;
+
+          clientName = match.name;
+
+          break;
+
+        }
+
+      }
+
+
+
+      // Extract and clean Mobile number from database object
+
+      let phoneNum = '';
+
+      if (foundClient) {
+
+        const rawPhone = foundClient.phone || foundClient.whatsapp || foundClient.mobile || '';
+
+        // Extract first 10-digit sequence from rawPhone (e.g. "94516 09405 / 8177054007" -> "9451609405")
+
+        const digitsOnly = rawPhone.replace(/\D/g, '');
+
+        if (digitsOnly.length >= 10) {
+
+          if (digitsOnly.length === 12 && digitsOnly.startsWith('91')) {
+
+            phoneNum = digitsOnly.slice(2);
+
+          } else {
+
+            phoneNum = digitsOnly.slice(0, 10);
+
+          }
+
+        }
+
+      }
+
+
+
+      // Title & Service
+
+      let title = '';
+
+      const titleElem = cardElem.querySelector('h3, h4, .task-title, div[style*="font-weight"]');
+
+      if (titleElem) title = titleElem.innerText.trim();
+
+
+
+      // Service Tag (e.g. ITR-4, GSTR-1)
+
+      let serviceTag = '';
+
+      const tagElem = cardElem.querySelector('.badge, [class*="badge"]');
+
+      if (tagElem) serviceTag = tagElem.innerText.trim();
+
+
+
+      // Status
+
+      let status = '';
+
+      const selectElem = cardElem.querySelector('select');
+
+      if (selectElem) {
+
+        status = selectElem.options[selectElem.selectedIndex]?.text || selectElem.value;
+
+      } else {
+
+        const statusBadge = cardElem.querySelector('.task-card-footer select, .task-card-footer span');
+
+        if (statusBadge) status = statusBadge.innerText.trim();
+
+      }
+
+
+
+      // Dates (Due / Filing)
+
+      let dateInfo = '';
+
+      const dueElem = cardElem.querySelector('.due-date, [class*="due"]');
+
+      if (dueElem) dateInfo = dueElem.innerText.trim();
+
+
+
+      // Fee & Payment
+
+      let feeInfo = '';
+
+      if (textContent.includes('Fee:')) {
+
+        const feeMatch = textContent.match(/Fee:\s*₹?\d+/i);
+
+        if (feeMatch) feeInfo = feeMatch[0];
+
+      }
+
+      let payStatus = '';
+
+      if (textContent.includes('Payment Pending')) payStatus = 'Payment Pending';
+
+      else if (textContent.includes('Paid')) payStatus = 'Paid';
+
+
+
+      // Task Description / Remarks / Work Instructions
+
+      let taskDesc = '';
+
+      const descElem = cardElem.querySelector('.task-description');
+
+      if (descElem) {
+
+        taskDesc = descElem.innerText.trim();
+
+      }
+
+
+
+      // Log note
+
+      let logNote = '';
+
+      if (textContent.includes('Recent Work Logs:')) {
+
+        const parts = textContent.split('Recent Work Logs:');
+
+        if (parts[1]) {
+
+          logNote = parts[1].split('Add Daily Work Note')[0].trim();
+
+        }
+
+      }
+
+
+
+      // Build WhatsApp formatted message
+
+      const isPending = (status.toLowerCase().includes('pending') || textContent.toLowerCase().includes('pending'));
+
+      const statusTag = isPending ? '⚠️ PENDING (ACTION REQUIRED)' : '✅ COMPLETED / FILED';
+
+      const statusHeader = isPending ? '🔴 *IMPORTANT DOCUMENT / WORK UPDATE*' : '✅ *WORK COMPLETED UPDATE*';
+
+
+
+      let msg = `${statusHeader}
+
+`;
+
+      msg += `━━━━━━━━━━━━━━━━━━━━━
+
+`;
+
+      msg += `👤 *CLIENT:* *${clientName || 'Client'}*
+
+`;
+
+      if (title) msg += `📌 *WORK:* *${title}*
+
+`;
+
+      if (dateInfo) msg += `🗓️ *DATE:* ${dateInfo}
+
+`;
+
+      
+
+      msg += `
+
+🚨 *STATUS:* *${statusTag}*
+
+`;
+
+      if (feeInfo) msg += `💰 *FEE:* *${feeInfo} ${payStatus ? '('+payStatus+')' : ''}*
+
+`;
+
+      
+
+      if (taskDesc) {
+
+        msg += `
+
+⚠️ *REQUIRED DOCUMENTS / REMARKS:*
+
+👉 *${taskDesc.trim()}*
+
+`;
+
+      }
+
+      
+
+      if (logNote) {
+
+        msg += `
+
+📝 *WORK LOG:*
+
+• ${logNote.trim()}
+
+`;
+
+      }
+
+      msg += `━━━━━━━━━━━━━━━━━━━━━
+
+`;
+
+      msg += `Kripya upar diye gaye documents/details jald se jald bhejein.
+
+
+
+`;
+
+      msg += `Dhanyawad! 🙏
+
+*Leo Computers / Client Tax Services*`;
+
+
+
+      // Fill modal with AUTO-FILLED Mobile Number from Database!
+
+      document.getElementById('cwt-wa-mobile').value = phoneNum || '';
+
+      document.getElementById('cwt-wa-text').value = msg;
+
+      waModal.classList.add('cwt-open');
+
+    };
+
+
+
+    // --- Completed Task Card Hiding & Filter System ---
+
+    let showingCompletedOnly = false;
+
+
+
+    function applyCompletedCardFilter() {
+
+      const cards = document.querySelectorAll('.task-card');
+
+      let completedCount = 0;
+
+
+
+      cards.forEach(card => {
+
+        const selectElem = card.querySelector('select');
+
+        let statusText = '';
+
+        if (selectElem) {
+
+          statusText = selectElem.options[selectElem.selectedIndex]?.text || selectElem.value || '';
+
+        } else {
+
+          statusText = card.innerText || '';
+
+        }
+
+
+
+        const isCompleted = statusText.toLowerCase().includes('completed') || statusText.toLowerCase().includes('filed');
+
+
+
+        if (isCompleted) {
+
+          completedCount++;
+
+          if (!showingCompletedOnly) {
+
+            card.style.display = 'none';
+
+          } else {
+
+            card.style.display = 'flex';
+
+          }
+
+        } else {
+
+          if (showingCompletedOnly) {
+
+            card.style.display = 'none';
+
+          } else {
+
+            card.style.display = 'flex';
+
+          }
+
+        }
+
+      });
+
+
+
+      // Update / Inject Completed Filter Tab
+
+      injectCompletedTab(completedCount);
+
+    }
+
+
+
+    function injectCompletedTab(count) {
+
+      const categoryTabs = document.querySelector('.category-tabs');
+
+      if (!categoryTabs) return;
+
+
+
+      let compBtn = document.getElementById('cwt-completed-tab-btn');
+
+      if (!compBtn) {
+
+        compBtn = document.createElement('button');
+
+        compBtn.id = 'cwt-completed-tab-btn';
+
+        compBtn.className = 'tab-btn';
+
+        compBtn.style.cssText = 'background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.4); margin-left: 6px; font-weight: 700; cursor: pointer;';
+
+        compBtn.onclick = () => {
+
+          showingCompletedOnly = true;
+
+          document.querySelectorAll('.category-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+
+          compBtn.classList.add('active');
+
+          applyCompletedCardFilter();
+
+        };
+
+        categoryTabs.appendChild(compBtn);
+
+      }
+
+
+
+      let otherWorkBtn = document.getElementById('cwt-otherwork-tab-btn');
+
+      if (!otherWorkBtn) {
+
+        otherWorkBtn = document.createElement('button');
+
+        otherWorkBtn.id = 'cwt-otherwork-tab-btn';
+
+        otherWorkBtn.className = 'tab-btn';
+
+        otherWorkBtn.style.cssText = 'background: rgba(236, 72, 153, 0.15); color: #f472b6; border: 1px solid rgba(236, 72, 153, 0.4); margin-left: 6px; font-weight: 700; cursor: pointer;';
+
+        otherWorkBtn.innerHTML = '⚡ Other Work';
+
+        otherWorkBtn.onclick = () => {
+
+          showingCompletedOnly = false;
+
+          document.querySelectorAll('.category-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+
+          otherWorkBtn.classList.add('active');
+
+          const cards = document.querySelectorAll('.task-card');
+
+          cards.forEach(card => {
+
+            const txt = (card.innerText || '').toLowerCase();
+
+            if (txt.includes('other')) {
+
+              card.style.display = 'flex';
+
+            } else {
+
+              card.style.display = 'none';
+
+            }
+
+          });
+
+        };
+
+        categoryTabs.insertBefore(otherWorkBtn, compBtn);
+
+      }
+
+
+
+      if (compBtn.dataset.lastCount !== String(count)) {
+
+        compBtn.dataset.lastCount = String(count);
+
+        compBtn.innerHTML = `✅ Completed / Filed (${count})`;
+
+      }
+
+
+
+      // Also listen to existing tab clicks to reset showingCompletedOnly
+
+      const otherTabs = categoryTabs.querySelectorAll('button:not(#cwt-completed-tab-btn)');
+
+      otherTabs.forEach(tb => {
+
+        if (!tb.dataset.cwtObserved) {
+
+          tb.dataset.cwtObserved = 'true';
+
+          tb.addEventListener('click', () => {
+
+            showingCompletedOnly = false;
+
+            if (compBtn) compBtn.classList.remove('active');
+
+            setTimeout(applyCompletedCardFilter, 100);
+
+          });
+
+        }
+
+      });
+
+
+
+      // Stat card click listener (top "Completed / Filed" stat card)
+
+      const statCards = document.querySelectorAll('.stat-card');
+
+      statCards.forEach(sc => {
+
+        if (sc.innerText.includes('Completed / Filed') && !sc.dataset.cwtObserved) {
+
+          sc.dataset.cwtObserved = 'true';
+
+          sc.style.cursor = 'pointer';
+
+          sc.onclick = () => {
+
+            showingCompletedOnly = true;
+
+            if (compBtn) {
+
+              document.querySelectorAll('.category-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+
+              compBtn.classList.add('active');
+
+            }
+
+            applyCompletedCardFilter();
+
+          };
+
+        }
+
+      });
+
+    }
+
+
+
+    // --- Client Directory Segregation System ---
+
+    let currentDirFilter = 'all'; // all | itr | gst | website | bookkeeping | other
+
+    let currentDirStatusFilter = 'all'; // all | active | inactive
+
+
+
+    function getClientServiceTypes(c, cellText = '') {
+
+      const notes = ((c ? (c.notes || '') + ' ' + (c.remarks || '') + ' ' + (c.category || '') + ' ' + (c.company || '') + ' ' + (c.name || '') : '') + ' ' + cellText).trim().toLowerCase();
+
+      const hasGstin = Boolean((c && c.gstin && c.gstin.trim().length > 3) || cellText.includes('gstin') || /[0-9]{2}[a-z]{5}[0-9]{4}[a-z]{1}[1-9a-z]{1}z[0-9a-z]{1}/i.test(cellText));
+
+
+
+      let isItr   = notes.includes('itr');
+
+      let isGst   = notes.includes('gst') || hasGstin;
+
+      let isWeb   = notes.includes('web') || notes.includes('online') || notes.includes('site');
+
+      let isBk    = notes.includes('book') || notes.includes('keep') || notes.includes('account');
+
+      let isOther = notes.includes('other') || notes.includes('food') || notes.includes('udyam') || notes.includes('trade') || notes.includes('dsc');
+
+      let isTrust = notes.includes('trust') || notes.includes('society') || notes.includes('ngo') || notes.includes('samiti') || notes.includes('sansthan');
+
+
+
+      if (!isItr && !isGst && !isWeb && !isBk && !isOther && !isTrust) {
+
+        isItr = true;
+
+      }
+
+
+
+      return { isItr, isGst, isWeb, isBk, isOther, isTrust };
+
+    }
+
+
+
+    function getClientListFromDOMOrArray() {
+
+      if (allClients && allClients.length > 0) return allClients;
+
+      const rows = document.querySelectorAll('.data-table tbody tr, table tbody tr');
+
+      const list = [];
+
+      rows.forEach((tr, i) => {
+
+        const text = (tr.innerText || tr.textContent || '').trim();
+
+        const cells = tr.querySelectorAll('td');
+
+        const name = cells[0] ? (cells[0].innerText || cells[0].textContent || '').trim() : '';
+
+        const pan = cells[1] ? (cells[1].innerText || cells[1].textContent || '').trim() : '';
+
+        const gstin = cells[3] ? (cells[3].innerText || cells[3].textContent || '').trim() : '';
+
+        if (name && name.length > 1) {
+
+          list.push({
+
+            id: 'dom_' + i,
+
+            name: name,
+
+            pan: pan,
+
+            gstin: gstin,
+
+            notes: text,
+
+            remarks: text,
+
+            status: text.toLowerCase().includes('inactive') ? 'Inactive' : 'Active'
+
+          });
+
+        }
+
+      });
+
+      return list;
+
+    }
+
+
+
+    function injectClientDirectorySegregation() {
+
+      const tableEl = document.querySelector('.table-container') || document.querySelector('.data-table') || document.querySelector('table');
+
+      if (!tableEl) return;
+
+
+
+      const tableContainer = tableEl.closest('.table-container') || tableEl.parentNode || tableEl;
+
+
+
+      let filterBar = document.getElementById('cwt-dir-filter-bar');
+
+
+
+      let itrCount = 0, itrActive = 0, itrInactive = 0;
+
+      let gstCount = 0, gstActive = 0, gstInactive = 0;
+
+      let webCount = 0, webActive = 0, webInactive = 0;
+
+      let bkCount  = 0, bkActive  = 0, bkInactive  = 0;
+
+      let trustCount = 0, trustActive = 0, trustInactive = 0;
+
+      let otherCount = 0, otherActive = 0, otherInactive = 0;
+
+      let totalActive = 0, totalInactive = 0;
+
+
+
+      const targetList = getClientListFromDOMOrArray();
+
+      const totalCount = targetList.length;
+
+
+
+      targetList.forEach(c => {
+
+        const types = getClientServiceTypes(c);
+
+
+
+        const isActive = c.status === 'Active';
+
+        if (isActive) totalActive++;
+
+        else totalInactive++;
+
+
+
+        if (types.isItr) {
+
+          itrCount++;
+
+          if (isActive) itrActive++; else itrInactive++;
+
+        }
+
+        if (types.isGst) {
+
+          gstCount++;
+
+          if (isActive) gstActive++; else gstInactive++;
+
+        }
+
+        if (types.isWeb) {
+
+          webCount++;
+
+          if (isActive) webActive++; else webInactive++;
+
+        }
+
+        if (types.isBk) {
+
+          bkCount++;
+
+          if (isActive) bkActive++; else bkInactive++;
+
+        }
+
+        if (types.isTrust) {
+
+          trustCount++;
+
+          if (isActive) trustActive++; else trustInactive++;
+
+        }
+
+        if (types.isOther) {
+
+          otherCount++;
+
+          if (isActive) otherActive++; else otherInactive++;
+
+        }
+
+      });
+
+
+
+      if (!filterBar || !filterBar.parentNode || filterBar.nextElementSibling !== tableContainer) {
+
+        if (filterBar && filterBar.parentNode) {
+
+          filterBar.remove();
+
+        }
+
+        filterBar = document.createElement('div');
+
+        filterBar.id = 'cwt-dir-filter-bar';
+
+        filterBar.style.cssText = 'display:flex;flex-direction:column;gap:10px;margin-bottom:16px;font-family:sans-serif;padding:12px 16px;background:rgba(15,23,42,0.85);border:1.5px solid #3b82f6;border-radius:14px;box-shadow:0 4px 20px rgba(0,0,0,0.4);';
+
+        tableContainer.parentNode.insertBefore(filterBar, tableContainer);
+
+      }
+
+
+
+      filterBar.innerHTML = `
+
+        <div style="width:100%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;border-bottom:1px solid rgba(51,65,85,0.6);padding-bottom:8px;">
+
+          <div style="font-weight:700;color:#94a3b8;font-size:13px;display:flex;align-items:center;gap:6px;">
+
+            📁 Filter Client Directory:
+
+          </div>
+
+          <div style="display:flex;align-items:center;gap:8px;margin-left:auto;">
+
+            <span style="font-size:12px;font-weight:700;color:#94a3b8;">Status Filter:</span>
+
+            <button type="button" class="cwt-status-tab ${currentDirStatusFilter === 'all' ? 'active' : ''}" data-status="all" style="${getStatusTabStyle(currentDirStatusFilter === 'all', '#475569')}">
+
+              ⚪ All (${totalCount})
+
+            </button>
+
+            <button type="button" class="cwt-status-tab ${currentDirStatusFilter === 'active' ? 'active' : ''}" data-status="active" style="${getStatusTabStyle(currentDirStatusFilter === 'active', '#16a34a')}">
+
+              🟢 Active Only (${totalActive})
+
+            </button>
+
+            <button type="button" class="cwt-status-tab ${currentDirStatusFilter === 'inactive' ? 'active' : ''}" data-status="inactive" style="${getStatusTabStyle(currentDirStatusFilter === 'inactive', '#dc2626')}">
+
+              🔴 Inactive Only (${totalInactive})
+
+            </button>
+
+          </div>
+
+        </div>
+
+
+
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+
+          <button type="button" class="cwt-dir-tab ${currentDirFilter === 'all' ? 'active' : ''}" data-dir="all" style="${getDirTabStyle(currentDirFilter === 'all', '#2563eb')}">
+
+            👥 All Clients (${totalCount})
+
+          </button>
+
+          <button type="button" class="cwt-dir-tab ${currentDirFilter === 'itr' ? 'active' : ''}" data-dir="itr" style="${getDirTabStyle(currentDirFilter === 'itr', '#0284c7')}">
+
+            📄 ITR Clients (${itrCount}) <span style="opacity:0.85;font-size:11px;margin-left:4px;">[🟢${itrActive} | 🔴${itrInactive}]</span>
+
+          </button>
+
+          <button type="button" class="cwt-dir-tab ${currentDirFilter === 'gst' ? 'active' : ''}" data-dir="gst" style="${getDirTabStyle(currentDirFilter === 'gst', '#059669')}">
+
+            🏢 GST Clients (${gstCount}) <span style="opacity:0.85;font-size:11px;margin-left:4px;">[🟢${gstActive} | 🔴${gstInactive}]</span>
+
+          </button>
+
+          <button type="button" class="cwt-dir-tab ${currentDirFilter === 'website' ? 'active' : ''}" data-dir="website" style="${getDirTabStyle(currentDirFilter === 'website', '#7c3aed')}">
+
+            🌐 Website & Online (${webCount}) <span style="opacity:0.85;font-size:11px;margin-left:4px;">[🟢${webActive} | 🔴${webInactive}]</span>
+
+          </button>
+
+          <button type="button" class="cwt-dir-tab ${currentDirFilter === 'bookkeeping' ? 'active' : ''}" data-dir="bookkeeping" style="${getDirTabStyle(currentDirFilter === 'bookkeeping', '#d97706')}">
+
+            📚 Book Keeping (${bkCount}) <span style="opacity:0.85;font-size:11px;margin-left:4px;">[🟢${bkActive} | 🔴${bkInactive}]</span>
+
+          </button>
+
+          <button type="button" class="cwt-dir-tab ${currentDirFilter === 'trust' ? 'active' : ''}" data-dir="trust" style="${getDirTabStyle(currentDirFilter === 'trust', '#d97706')}">
+
+            🏛️ Trust & Society (${trustCount}) <span style="opacity:0.85;font-size:11px;margin-left:4px;">[🟢${trustActive} | 🔴${trustInactive}]</span>
+
+          </button>
+
+          <button type="button" class="cwt-dir-tab ${currentDirFilter === 'trust' ? 'active' : ''}" data-dir="trust" style="${getDirTabStyle(currentDirFilter === 'trust', '#d97706')}">
+
+            🏛️ Trust & Society (${trustCount}) <span style="opacity:0.85;font-size:11px;margin-left:4px;">[🟢${trustActive} | 🔴${trustInactive}]</span>
+
+          </button>
+
+          <button type="button" class="cwt-dir-tab ${currentDirFilter === 'other' ? 'active' : ''}" data-dir="other" style="${getDirTabStyle(currentDirFilter === 'other', '#ec4899')}">
+
+            ⚡ Other Work (${otherCount}) <span style="opacity:0.85;font-size:11px;margin-left:4px;">[🟢${otherActive} | 🔴${otherInactive}]</span>
+
+          </button>
+
+        </div>
+
+      `;
+
+
+
+      filterBar.onclick = (e) => {
+
+        const dirBtn = e.target.closest('.cwt-dir-tab');
+
+        if (dirBtn) {
+
+          currentDirFilter = dirBtn.dataset.dir;
+
+          applyClientDirectoryFilter();
+
+          injectClientDirectorySegregation();
+
+          return;
+
+        }
+
+
+
+        const statusBtn = e.target.closest('.cwt-status-tab');
+
+        if (statusBtn) {
+
+          currentDirStatusFilter = statusBtn.dataset.status;
+
+          applyClientDirectoryFilter();
+
+          injectClientDirectorySegregation();
+
+          return;
+
+        }
+
+      };
+
+
+
+      applyClientDirectoryFilter();
+
+    }
+
+
+
+    function getStatusTabStyle(isActive, activeColor) {
+
+      if (isActive) {
+
+        return `background:${activeColor};color:#fff;border:none;border-radius:16px;padding:4px 12px;font-size:11px;font-weight:700;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.3);`;
+
+      } else {
+
+        return `background:rgba(30,41,59,0.8);color:#cbd5e1;border:1px solid #334155;border-radius:16px;padding:4px 12px;font-size:11px;font-weight:600;cursor:pointer;`;
+
+      }
+
+    }
+
+
+
+    function getDirTabStyle(isActive, activeColor) {
+
+      if (isActive) {
+
+        return `background:${activeColor};color:#fff;border:none;border-radius:20px;padding:7px 18px;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.3);transition:all 0.2s;`;
+
+      } else {
+
+        return `background:rgba(30,41,59,0.85);color:#cbd5e1;border:1px solid #334155;border-radius:20px;padding:7px 18px;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.2s;`;
+
+      }
+
+    }
+
+
+
+    function applyClientDirectoryFilter() {
+
+      const rows = document.querySelectorAll('.data-table tbody tr, table tbody tr');
+
+      const targetList = getClientListFromDOMOrArray();
+
+      const sortedClients = [...targetList].sort((a, b) => (b.name ? b.name.length : 0) - (a.name ? a.name.length : 0));
+
+
+
+      rows.forEach(tr => {
+
+        const cellText = (tr.innerText || tr.textContent || '').toLowerCase();
+
+        
+
+        // Find exact client object by name
+
+        const matchedClient = sortedClients.find(c => {
+
+          if (!c.name) return false;
+
+          const cNameLower = c.name.trim().toLowerCase();
+
+          return cellText.includes(cNameLower);
+
+        });
+
+
+
+        let isItr = false, isGst = false, isWeb = false, isBk = false, isOther = false, isTrust = false;
+
+
+
+        const types = getClientServiceTypes(matchedClient, cellText);
+
+        isItr   = types.isItr;
+
+        isGst   = types.isGst;
+
+        isWeb   = types.isWeb;
+
+        isBk    = types.isBk;
+
+        isOther = types.isOther;
+
+        isTrust = types.isTrust;
+
+
+
+        if (!isItr && !isGst && !isWeb && !isBk && !isOther) isItr = true;
+
+
+
+        // Determine client active vs inactive status
+
+        const isClientActive = matchedClient ? matchedClient.status === 'Active' : !cellText.includes('inactive');
+
+
+
+        // Apply visual distinction & status badge tag to table row
+
+        const nameCell = tr.querySelector('td:nth-child(2), td strong, td:first-child');
+
+        const oldTag = tr.querySelector('.cwt-status-tag-active, .cwt-status-tag-inactive, .cwt-inactive-tag');
+
+        if (oldTag) oldTag.remove();
+
+
+
+        if (!isClientActive) {
+
+          tr.classList.add('cwt-inactive-row');
+
+          tr.classList.remove('cwt-active-row');
+
+          tr.style.background = 'rgba(239, 68, 68, 0.16)';
+
+          tr.style.borderLeft = '5px solid #ef4444';
+
+          if (nameCell) {
+
+            const tag = document.createElement('span');
+
+            tag.className = 'cwt-status-tag-inactive';
+
+            tag.innerText = '🔴 DEACTIVATED';
+
+            nameCell.appendChild(tag);
+
+          }
+
+        } else {
+
+          tr.classList.remove('cwt-inactive-row');
+
+          tr.classList.add('cwt-active-row');
+
+          tr.style.background = '';
+
+          tr.style.borderLeft = '5px solid #10b981';
+
+          if (nameCell) {
+
+            const tag = document.createElement('span');
+
+            tag.className = 'cwt-status-tag-active';
+
+            tag.innerText = '🟢 ACTIVE';
+
+            nameCell.appendChild(tag);
+
+          }
+
+        }
+
+
+
+        // Category filter check
+
+        let matchesCategory = false;
+
+        if (currentDirFilter === 'all') matchesCategory = true;
+
+        else if (currentDirFilter === 'itr' && isItr) matchesCategory = true;
+
+        else if (currentDirFilter === 'gst' && isGst) matchesCategory = true;
+
+        else if (currentDirFilter === 'website' && isWeb) matchesCategory = true;
+
+        else if (currentDirFilter === 'bookkeeping' && isBk) matchesCategory = true;
+
+        else if (currentDirFilter === 'trust' && isTrust) matchesCategory = true;
+
+        else if (currentDirFilter === 'other' && isOther) matchesCategory = true;
+
+
+
+        // Status filter check
+
+        let matchesStatus = false;
+
+        if (currentDirStatusFilter === 'all') matchesStatus = true;
+
+        else if (currentDirStatusFilter === 'active' && isClientActive) matchesStatus = true;
+
+        else if (currentDirStatusFilter === 'inactive' && !isClientActive) matchesStatus = true;
+
+
+
+        // Display row if both match
+
+        if (matchesCategory && matchesStatus) {
+
+          tr.style.display = '';
+
+        } else {
+
+          tr.style.display = 'none';
+
+        }
+
+      });
+
+    }
+
+
+
+    // --- Add/Edit Client Form Category Selection Injection ---
+
+    window.cwtEditingClientId = null;
+
+
+
+    function setReactInputValue(inputEl, value) {
+
+      if (!inputEl) return;
+
+      try {
+
+        const tracker = inputEl._valueTracker;
+
+        if (tracker) {
+
+          tracker.setValue(value);
+
+        }
+
+        const proto = inputEl.tagName === 'TEXTAREA' ? window.HTMLTextAreaElement.prototype : window.HTMLInputElement.prototype;
+
+        const descriptor = Object.getOwnPropertyDescriptor(proto, 'value');
+
+        if (descriptor && descriptor.set) {
+
+          descriptor.set.call(inputEl, value);
+
+        } else {
+
+          inputEl.value = value;
+
+        }
+
+      } catch(e) {
+
+        inputEl.value = value;
+
+      }
+
+      inputEl.dispatchEvent(new Event('input', { bubbles: true }));
+
+      inputEl.dispatchEvent(new Event('change', { bubbles: true }));
+
+    }
+
+
+
+    function injectClientCategoryFormFields() {
+
+      try {
+
+        const modalBodies = document.querySelectorAll('.modal-body, div[class*="modal-body"], form');
+
+        modalBodies.forEach(formGrid => {
+
+          if (!formGrid || formGrid.querySelector('.cwt-service-selector-group')) return;
+
+
+
+          const text = formGrid.innerText || formGrid.textContent || '';
+
+          const isClientOrTaskForm = text.includes('Client') || text.includes('Firm') || text.includes('PAN') || text.includes('GSTIN') || text.includes('Task') || text.includes('Item') || text.includes('Filing');
+
+          if (!isClientOrTaskForm) return;
+
+
+
+          let notesInput = formGrid.querySelector('textarea, input[placeholder*="remark" i], input[placeholder*="note" i], input[placeholder*="filing" i]');
+
+          if (!notesInput) {
+
+            const allInputs = formGrid.querySelectorAll('input, textarea');
+
+            if (allInputs.length > 0) notesInput = allInputs[allInputs.length - 1];
+
+          }
+
+
+
+          const groupDiv = document.createElement('div');
+
+          groupDiv.className = 'cwt-service-selector-group';
+
+          groupDiv.style.cssText = 'grid-column: 1 / -1; width: 100%; background: rgba(15, 23, 42, 0.95); border: 2px solid #3b82f6; border-radius: 12px; padding: 14px 18px; margin: 12px 0; font-family: sans-serif; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.25); box-sizing: border-box;';
+
+
+
+          groupDiv.innerHTML = `
+
+            <!-- Entity Category Multi-Choose Section -->
+
+            <div id="cwt-entity-multi-section" style="margin-bottom: 14px; border-bottom: 1px solid rgba(59, 130, 246, 0.4); padding-bottom: 12px;">
+
+              <label style="display:flex; align-items:center; gap: 8px; font-weight: 700; font-size: 14px; color: #60a5fa; margin-bottom: 10px;">
+
+                🏢 Select Entity Category (Choose all that apply):
+
+              </label>
+
+              <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+
+                <label style="display:inline-flex; align-items:center; gap: 6px; font-size: 13px; cursor: pointer; color: #ffffff; font-weight: 700; background: rgba(37, 99, 235, 0.25); padding: 7px 13px; border-radius: 8px; border: 1.5px solid rgba(37, 99, 235, 0.6);">
+
+                  <input type="checkbox" class="cwt-entity-chk" value="Individual & Proprietorship" style="accent-color: #2563eb; width: 17px; height: 17px; cursor:pointer;" />
+
+                  👤 Individual & Proprietorship
+
+                </label>
+
+                <label style="display:inline-flex; align-items:center; gap: 6px; font-size: 13px; cursor: pointer; color: #ffffff; font-weight: 700; background: rgba(5, 150, 105, 0.25); padding: 7px 13px; border-radius: 8px; border: 1.5px solid rgba(5, 150, 105, 0.6);">
+
+                  <input type="checkbox" class="cwt-entity-chk" value="Partnership / LLP" style="accent-color: #059669; width: 17px; height: 17px; cursor:pointer;" />
+
+                  🤝 Partnership / LLP
+
+                </label>
+
+                <label style="display:inline-flex; align-items:center; gap: 6px; font-size: 13px; cursor: pointer; color: #ffffff; font-weight: 700; background: rgba(124, 58, 237, 0.25); padding: 7px 13px; border-radius: 8px; border: 1.5px solid rgba(124, 58, 237, 0.6);">
+
+                  <input type="checkbox" class="cwt-entity-chk" value="Private Limited" style="accent-color: #7c3aed; width: 17px; height: 17px; cursor:pointer;" />
+
+                  🏢 Private Limited
+
+                </label>
+
+                <label style="display:inline-flex; align-items:center; gap: 6px; font-size: 13px; cursor: pointer; color: #ffffff; font-weight: 700; background: rgba(217, 119, 6, 0.25); padding: 7px 13px; border-radius: 8px; border: 1.5px solid rgba(217, 119, 6, 0.6);">
+
+                  <input type="checkbox" class="cwt-entity-chk" value="Trust / Society" style="accent-color: #d97706; width: 17px; height: 17px; cursor:pointer;" />
+
+                  🏛️ Trust / Society / NGO
+
+                </label>
+
+                <label style="display:inline-flex; align-items:center; gap: 6px; font-size: 13px; cursor: pointer; color: #ffffff; font-weight: 700; background: rgba(234, 179, 8, 0.25); padding: 7px 13px; border-radius: 8px; border: 1.5px solid rgba(234, 179, 8, 0.6);">
+
+                  <input type="checkbox" class="cwt-entity-chk" value="Public Limited" style="accent-color: #eab308; width: 17px; height: 17px; cursor:pointer;" />
+
+                  🏢 Public Limited
+
+                </label>
+
+                <label style="display:inline-flex; align-items:center; gap: 6px; font-size: 13px; cursor: pointer; color: #ffffff; font-weight: 700; background: rgba(236, 72, 153, 0.25); padding: 7px 13px; border-radius: 8px; border: 1.5px solid rgba(236, 72, 153, 0.6);">
+
+                  <input type="checkbox" class="cwt-entity-chk" value="Other Entity" style="accent-color: #ec4899; width: 17px; height: 17px; cursor:pointer;" />
+
+                  ⚡ Other Entity
+
+                </label>
+
+              </div>
+
+            </div>
+
+
+
+            <!-- Service Directory Categories Section -->
+
+            <label style="display:flex; align-items:center; gap: 8px; font-weight: 700; font-size: 14px; color: #60a5fa; margin-bottom: 10px;">
+
+              📁 Select Client Service Directory Categories (Choose all that apply):
+
+            </label>
+
+            <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+
+              <label style="display:inline-flex; align-items:center; gap: 8px; font-size: 13px; cursor: pointer; color: #ffffff; font-weight: 700; background: rgba(2, 132, 199, 0.25); padding: 7px 13px; border-radius: 8px; border: 1.5px solid rgba(2, 132, 199, 0.6);">
+
+                <input type="checkbox" id="cwt-chk-itr" class="cwt-cat-chk" value="ITR Client" style="accent-color: #0284c7; width: 17px; height: 17px; cursor:pointer;" />
+
+                📄 ITR Client
+
+              </label>
+
+              <label style="display:inline-flex; align-items:center; gap: 8px; font-size: 13px; cursor: pointer; color: #ffffff; font-weight: 700; background: rgba(5, 150, 105, 0.25); padding: 7px 13px; border-radius: 8px; border: 1.5px solid rgba(5, 150, 105, 0.6);">
+
+                <input type="checkbox" id="cwt-chk-gst" class="cwt-cat-chk" value="GST Client" style="accent-color: #059669; width: 17px; height: 17px; cursor:pointer;" />
+
+                🏢 GST Client
+
+              </label>
+
+              <label style="display:inline-flex; align-items:center; gap: 8px; font-size: 13px; cursor: pointer; color: #ffffff; font-weight: 700; background: rgba(124, 58, 237, 0.25); padding: 7px 13px; border-radius: 8px; border: 1.5px solid rgba(124, 58, 237, 0.6);">
+
+                <input type="checkbox" id="cwt-chk-web" class="cwt-cat-chk" value="Website Client" style="accent-color: #7c3aed; width: 17px; height: 17px; cursor:pointer;" />
+
+                🌐 Website Client
+
+              </label>
+
+              <label style="display:inline-flex; align-items:center; gap: 8px; font-size: 13px; cursor: pointer; color: #ffffff; font-weight: 700; background: rgba(217, 119, 6, 0.25); padding: 7px 13px; border-radius: 8px; border: 1.5px solid rgba(217, 119, 6, 0.6);">
+
+                <input type="checkbox" id="cwt-chk-bk" class="cwt-cat-chk" value="Book Keeping Client" style="accent-color: #d97706; width: 17px; height: 17px; cursor:pointer;" />
+
+                📚 Book Keeping Client
+
+              </label>
+
+              <label style="display:inline-flex; align-items:center; gap: 8px; font-size: 13px; cursor: pointer; color: #ffffff; font-weight: 700; background: rgba(236, 72, 153, 0.25); padding: 7px 13px; border-radius: 8px; border: 1.5px solid rgba(236, 72, 153, 0.6);">
+
+                <input type="checkbox" id="cwt-chk-other" class="cwt-cat-chk" value="Other Work Client" style="accent-color: #ec4899; width: 17px; height: 17px; cursor:pointer;" />
+
+                ⚡ Other Work Client
+
+              </label>
+
+            </div>
+
+
+
+            <!-- Multi-Service Selection for Other Work -->
+
+            <div id="cwt-other-work-sub-container" style="width: 100%; display: none; flex-direction: column; gap: 8px; margin-top: 10px; background: rgba(236, 72, 153, 0.15); padding: 12px 14px; border-radius: 10px; border: 1.5px solid rgba(236, 72, 153, 0.5); box-sizing: border-box;">
+
+              <label style="font-size: 12px; font-weight: 700; color: #f472b6; display: flex; align-items: center; gap: 6px;">
+
+                ⚡ Select All Other Work Services That Apply (Multiple Allowed):
+
+              </label>
+
+              <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+
+                <label style="display:inline-flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; color:#ffffff; font-weight:600; background:rgba(15,23,42,0.8); padding:5px 10px; border-radius:6px; border:1px solid rgba(236,72,153,0.4);">
+
+                  <input type="checkbox" class="cwt-other-sub-chk" value="Food License" style="accent-color:#ec4899; width:15px; height:15px; cursor:pointer;" />
+
+                  🍕 Food License (FSSAI)
+
+                </label>
+
+                <label style="display:inline-flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; color:#ffffff; font-weight:600; background:rgba(15,23,42,0.8); padding:5px 10px; border-radius:6px; border:1px solid rgba(236,72,153,0.4);">
+
+                  <input type="checkbox" class="cwt-other-sub-chk" value="Udyam Registration" style="accent-color:#ec4899; width:15px; height:15px; cursor:pointer;" />
+
+                  🏭 Udyam Registration
+
+                </label>
+
+                <label style="display:inline-flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; color:#ffffff; font-weight:600; background:rgba(15,23,42,0.8); padding:5px 10px; border-radius:6px; border:1px solid rgba(236,72,153,0.4);">
+
+                  <input type="checkbox" class="cwt-other-sub-chk" value="Online Registration of GST" style="accent-color:#ec4899; width:15px; height:15px; cursor:pointer;" />
+
+                  🏢 Online Registration of GST
+
+                </label>
+
+                <label style="display:inline-flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; color:#ffffff; font-weight:600; background:rgba(15,23,42,0.8); padding:5px 10px; border-radius:6px; border:1px solid rgba(236,72,153,0.4);">
+
+                  <input type="checkbox" class="cwt-other-sub-chk" value="Trade Mark" style="accent-color:#ec4899; width:15px; height:15px; cursor:pointer;" />
+
+                  🏷️ Trade Mark (TM)
+
+                </label>
+
+                <label style="display:inline-flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; color:#ffffff; font-weight:600; background:rgba(15,23,42,0.8); padding:5px 10px; border-radius:6px; border:1px solid rgba(236,72,153,0.4);">
+
+                  <input type="checkbox" class="cwt-other-sub-chk" value="DSC" style="accent-color:#ec4899; width:15px; height:15px; cursor:pointer;" />
+
+                  🔐 Digital Signature (DSC)
+
+                </label>
+
+              </div>
+
+            </div>
+
+          `;
+
+
+
+          if (notesInput && notesInput.closest('.form-group') && notesInput.closest('.form-group').parentNode) {
+
+            const notesGroup = notesInput.closest('.form-group');
+
+            notesGroup.parentNode.insertBefore(groupDiv, notesGroup);
+
+          } else {
+
+            formGrid.appendChild(groupDiv);
+
+          }
+
+
+
+          const chkItr   = groupDiv.querySelector('#cwt-chk-itr');
+
+          const chkGst   = groupDiv.querySelector('#cwt-chk-gst');
+
+          const chkWeb   = groupDiv.querySelector('#cwt-chk-web');
+
+          const chkBk    = groupDiv.querySelector('#cwt-chk-bk');
+
+          const chkOther = groupDiv.querySelector('#cwt-chk-other');
+
+
+
+          function writeCheckboxesToNotes() {
+
+            const checkedBoxes = Array.from(groupDiv.querySelectorAll('.cwt-cat-chk:checked'));
+
+            const otherSubDiv = groupDiv.querySelector('#cwt-other-work-sub-container');
+
+            const otherSubChecked = Array.from(groupDiv.querySelectorAll('.cwt-other-sub-chk:checked')).map(cb => cb.value);
+
+            
+
+            // Toggle sub-container visibility based on Other Work checkbox
+
+            if (chkOther && chkOther.checked) {
+
+              if (otherSubDiv) otherSubDiv.style.display = 'flex';
+
+            } else {
+
+              if (otherSubDiv) otherSubDiv.style.display = 'none';
+
+            }
+
+
+
+            const checkedVals = checkedBoxes.map(cb => {
+
+              if (cb.value === 'Other Work Client' && otherSubChecked.length > 0) {
+
+                return 'Other Work (' + otherSubChecked.join(', ') + ')';
+
+              }
+
+              return cb.value;
+
+            });
+
+
+
+            let noteText = '';
+
+            if (checkedVals.length === 5) noteText = 'ITR, GST, Website, Book Keeping & Other Work Client';
+
+            else if (checkedVals.length > 0) noteText = checkedVals.join(' & ');
+
+            else noteText = 'ITR Client';
+
+
+
+            if (notesInput) {
+
+              setReactInputValue(notesInput, noteText);
+
+            }
+
+          }
+
+
+
+          function readNotesToCheckboxes() {
+
+            let notesText = notesInput ? (notesInput.value || '').toLowerCase() : '';
+
+            const allInputs = formGrid.querySelectorAll('input');
+
+            let gstinVal = '';
+
+            allInputs.forEach(inp => {
+
+              const val = (inp.value || '').trim();
+
+              if (val.length >= 10 && /[0-9]{2}[a-z]{5}[0-9]{4}[a-z]{1}[1-9a-z]{1}z[0-9a-z]{1}/i.test(val)) {
+
+                gstinVal = val;
+
+              }
+
+            });
+
+
+
+            let hasGstin = gstinVal.length > 3 || notesText.includes('gstin');
+
+
+
+            if (window.cwtEditingClientId) {
+
+              const matchedClient = allClients.find(c => String(c.id) === String(window.cwtEditingClientId));
+
+              if (matchedClient) {
+
+                notesText = ((matchedClient.notes || '') + ' ' + (matchedClient.remarks || '') + ' ' + (notesInput ? notesInput.value : '')).toLowerCase();
+
+                if (matchedClient.gstin && matchedClient.gstin.trim().length > 3) hasGstin = true;
+
+              }
+
+            }
+
+
+
+            chkGst.checked   = notesText.includes('gst') || hasGstin;
+
+            chkItr.checked   = notesText.includes('itr') || (!chkGst.checked && !notesText.includes('web') && !notesText.includes('book') && !notesText.includes('other') && !notesText.includes('food') && !notesText.includes('udyam') && !notesText.includes('trade') && !notesText.includes('dsc'));
+
+            chkWeb.checked   = notesText.includes('web') || notesText.includes('online') || notesText.includes('site');
+
+            chkBk.checked    = notesText.includes('book') || notesText.includes('keep') || notesText.includes('account');
+
+            
+
+            const hasOtherKeywords = notesText.includes('other') || notesText.includes('food') || notesText.includes('udyam') || notesText.includes('trade') || notesText.includes('dsc');
+
+            chkOther.checked = hasOtherKeywords;
+
+
+
+            const otherSubDiv = groupDiv.querySelector('#cwt-other-work-sub-container');
+
+            const subChks = groupDiv.querySelectorAll('.cwt-other-sub-chk');
+
+            
+
+            if (chkOther.checked) {
+
+              if (otherSubDiv) otherSubDiv.style.display = 'flex';
+
+              subChks.forEach(schk => {
+
+                const valLower = schk.value.toLowerCase();
+
+                if (valLower.includes('food') && notesText.includes('food')) schk.checked = true;
+
+                else if (valLower.includes('udyam') && notesText.includes('udyam')) schk.checked = true;
+
+                else if (valLower.includes('online') && (notesText.includes('online') || notesText.includes('registration of gst'))) schk.checked = true;
+
+                else if (valLower.includes('trade') && (notesText.includes('trade') || notesText.includes('mark'))) schk.checked = true;
+
+                else if (valLower.includes('dsc') && notesText.includes('dsc')) schk.checked = true;
+
+                else schk.checked = false;
+
+              });
+
+            } else {
+
+              if (otherSubDiv) otherSubDiv.style.display = 'none';
+
+            }
+
+          }
+
+
+
+          groupDiv.querySelectorAll('.cwt-cat-chk').forEach(chk => {
+
+            chk.addEventListener('change', writeCheckboxesToNotes);
+
+            chk.addEventListener('click', writeCheckboxesToNotes);
+
+          });
+
+
+
+          groupDiv.querySelectorAll('.cwt-other-sub-chk').forEach(schk => {
+
+            schk.addEventListener('change', writeCheckboxesToNotes);
+
+            schk.addEventListener('click', writeCheckboxesToNotes);
+
+          });
+
+
+
+          formGrid.querySelectorAll('input').forEach(inp => {
+
+            inp.addEventListener('input', () => {
+
+              const val = (inp.value || '').trim();
+
+              if (val.length >= 10 && /[0-9]{2}[a-z]{5}[0-9]{4}[a-z]{1}[1-9a-z]{1}z[0-9a-z]{1}/i.test(val)) {
+
+                chkGst.checked = true;
+
+                writeCheckboxesToNotes();
+
+              }
+
+            });
+
+          });
+
+
+
+          // Inject GST Credentials Inputs
+
+          let gstCredsDiv = groupDiv.querySelector('.cwt-gst-creds-div');
+
+          if (!gstCredsDiv) {
+
+            gstCredsDiv = document.createElement('div');
+
+            gstCredsDiv.className = 'cwt-gst-creds-div';
+
+            gstCredsDiv.style.cssText = 'width: 100%; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 12px; background: rgba(30, 41, 59, 0.7); padding: 12px; border-radius: 10px; border: 1px solid #334155; box-sizing: border-box;';
+
+            gstCredsDiv.innerHTML = `
+
+              <div>
+
+                <label style="display:block; font-size:12px; font-weight:700; color:#94a3b8; margin-bottom:4px;">👤 IT Username (Optional):</label>
+
+                <input type="text" id="cwt-it-username-inp" style="width:100%; padding:7px 10px; border-radius:6px; border:1px solid #475569; background:#0f172a; color:#fff; font-size:13px; box-sizing:border-box; outline:none;" placeholder="e.g. PAN / User ID" />
+
+              </div>
+
+              <div>
+
+                <label style="display:block; font-size:12px; font-weight:700; color:#60a5fa; margin-bottom:4px;">🔑 GST Username:</label>
+
+                <input type="text" id="cwt-gst-username-inp" style="width:100%; padding:7px 10px; border-radius:6px; border:1px solid #3b82f6; background:#0f172a; color:#fff; font-size:13px; box-sizing:border-box; outline:none;" placeholder="e.g. GSTUSER123" />
+
+              </div>
+
+              <div>
+
+                <label style="display:block; font-size:12px; font-weight:700; color:#60a5fa; margin-bottom:4px;">🔒 GST Password:</label>
+
+                <input type="text" id="cwt-gst-password-inp" style="width:100%; padding:7px 10px; border-radius:6px; border:1px solid #3b82f6; background:#0f172a; color:#fff; font-size:13px; box-sizing:border-box; outline:none;" placeholder="e.g. Pass@123" />
+
+              </div>
+
+            `;
+
+            groupDiv.appendChild(gstCredsDiv);
+
+          }
+
+
+
+          // Populate fields if editing client
+
+          if (window.cwtEditingClientId) {
+
+            const clientObj = allClients.find(c => String(c.id) === String(window.cwtEditingClientId));
+
+            if (clientObj) {
+
+              const gu = document.getElementById('cwt-gst-username-inp');
+
+              const gp = document.getElementById('cwt-gst-password-inp');
+
+              const iu = document.getElementById('cwt-it-username-inp');
+
+              if (gu) gu.value = clientObj.gst_username || '';
+
+              if (gp) gp.value = clientObj.gst_password || '';
+
+              if (iu) iu.value = clientObj.it_username || '';
+
+            }
+
+          } else {
+
+            const gu = document.getElementById('cwt-gst-username-inp');
+
+            const gp = document.getElementById('cwt-gst-password-inp');
+
+            const iu = document.getElementById('cwt-it-username-inp');
+
+            if (gu) gu.value = '';
+
+            if (gp) gp.value = '';
+
+            if (iu) iu.value = '';
+
+          }
+
+
+
+          readNotesToCheckboxes();
+
+          setTimeout(readNotesToCheckboxes, 100);
+
+          setTimeout(readNotesToCheckboxes, 300);
+
+
+
+          // Hide old single dropdown Entity Category form group
+
+          formGrid.querySelectorAll('.form-group').forEach(fg => {
+
+            const fgText = fg.innerText || fg.textContent || '';
+
+            if (fgText.includes('Entity Category')) {
+
+              fg.style.display = 'none';
+
+            }
+
+          });
+
+
+
+          // Sync Entity Category Checkboxes with React state
+
+          function updateEntityCategorySelect() {
+
+            const entitySelect = formGrid.querySelector('select.form-select, select');
+
+            const checkedEntityVals = Array.from(groupDiv.querySelectorAll('.cwt-entity-chk:checked')).map(cb => cb.value);
+
+            let val = 'Individual & Proprietorship';
+
+            if (checkedEntityVals.length > 0) {
+
+              val = checkedEntityVals.join(' & ');
+
+            }
+
+            if (entitySelect) {
+
+              setReactInputValue(entitySelect, val);
+
+            }
+
+          }
+
+
+
+          function readEntityCategoryCheckboxes() {
+
+            let catText = 'Individual & Proprietorship';
+
+            if (window.cwtEditingClientId) {
+
+              const matchedClient = allClients.find(c => String(c.id) === String(window.cwtEditingClientId));
+
+              if (matchedClient && matchedClient.category) {
+
+                catText = matchedClient.category;
+
+              }
+
+            } else {
+
+              const entitySelect = formGrid.querySelector('select.form-select, select');
+
+              if (entitySelect && entitySelect.value) catText = entitySelect.value;
+
+            }
+
+
+
+            const catTextLower = catText.toLowerCase();
+
+            const entityChks = groupDiv.querySelectorAll('.cwt-entity-chk');
+
+            entityChks.forEach(chk => {
+
+              const vLower = chk.value.toLowerCase();
+
+              if (vLower.includes('individual') && catTextLower.includes('individual')) chk.checked = true;
+
+              else if (vLower.includes('partnership') && (catTextLower.includes('partnership') || catTextLower.includes('llp'))) chk.checked = true;
+
+              else if (vLower.includes('private') && catTextLower.includes('private')) chk.checked = true;
+
+              else if (vLower.includes('public') && (catTextLower.includes('public') || catTextLower.includes('trust'))) chk.checked = true;
+
+              else if (vLower.includes('other') && catTextLower.includes('other')) chk.checked = true;
+
+              else chk.checked = false;
+
+            });
+
+
+
+            // Ensure at least 1 checked
+
+            const anyChecked = Array.from(entityChks).some(c => c.checked);
+
+            if (!anyChecked && entityChks[0]) entityChks[0].checked = true;
+
+          }
+
+
+
+          groupDiv.querySelectorAll('.cwt-entity-chk').forEach(chk => {
+
+            chk.addEventListener('change', updateEntityCategorySelect);
+
+            chk.addEventListener('click', updateEntityCategorySelect);
+
+          });
+
+
+
+          readEntityCategoryCheckboxes();
+
+          setTimeout(readEntityCategoryCheckboxes, 100);
+
+          setTimeout(readEntityCategoryCheckboxes, 300);
+
+
+
+          // Attach direct submit backup handler to Update Client / Save Client button
+
+          const submitBtn = formGrid.querySelector('button[type="submit"], button.btn-primary, button:not([type="button"])');
+
+          if (submitBtn && !submitBtn.dataset.cwtDirectHandler) {
+
+            submitBtn.dataset.cwtDirectHandler = 'true';
+
+            submitBtn.addEventListener('click', function() {
+
+              writeCheckboxesToNotes();
+
+            });
+
+          }
+
+        });
+
+      } catch(err) {}
+
+    }
+
+
+
+    // --- Dark & Light Mode Theme Switcher ---
+
+    function injectThemeToggle() {
+
+      const savedTheme = localStorage.getItem('cwt_theme') || 'dark';
+
+      if (savedTheme === 'light') {
+
+        document.body.classList.add('cwt-light-mode');
+
+      } else {
+
+        document.body.classList.remove('cwt-light-mode');
+
+      }
+
+
+
+      const headerActions = document.querySelector('.header-actions');
+
+      const adminBar = document.querySelector('div[style*="Back to Admin Dashboard"]');
+
+
+
+      let themeBtn = document.getElementById('cwt-theme-toggle-btn');
+
+      if (!themeBtn) {
+
+        themeBtn = document.createElement('button');
+
+        themeBtn.id = 'cwt-theme-toggle-btn';
+
+        themeBtn.type = 'button';
+
+
+
+        themeBtn.onclick = () => {
+
+          const isLight = document.body.classList.toggle('cwt-light-mode');
+
+          const newTheme = isLight ? 'light' : 'dark';
+
+          localStorage.setItem('cwt_theme', newTheme);
+
+          updateThemeBtnUI(themeBtn, isLight);
+
+        };
+
+
+
+        if (headerActions) {
+
+          headerActions.insertBefore(themeBtn, headerActions.firstChild);
+
+        } else if (adminBar) {
+
+          adminBar.appendChild(themeBtn);
+
+          themeBtn.style.marginLeft = 'auto';
+
+        }
+
+      }
+
+
+
+      const isCurrentlyLight = document.body.classList.contains('cwt-light-mode');
+
+      updateThemeBtnUI(themeBtn, isCurrentlyLight);
+
+    }
+
+
+
+    function updateThemeBtnUI(btn, isLight) {
+
+      if (!btn) return;
+
+      if (isLight) {
+
+        btn.innerHTML = '☀️ Light Mode';
+
+        btn.style.cssText = 'background: #ffffff; color: #0f172a; border: 1.5px solid #cbd5e1; border-radius: 20px; padding: 6px 14px; font-weight: 700; font-size: 12px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: all 0.2s; font-family: sans-serif;';
+
+      } else {
+
+        btn.innerHTML = '🌙 Dark Mode';
+
+        btn.style.cssText = 'background: linear-gradient(135deg, #1e293b, #0f172a); color: #f8fafc; border: 1.5px solid #3b82f6; border-radius: 20px; padding: 6px 14px; font-weight: 700; font-size: 12px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 4px 12px rgba(59,130,246,0.3); transition: all 0.2s; font-family: sans-serif;';
+
+      }
+
+    }
+
+
+
+    // --- High Performance Debounced DOM Enhancements ---
+
+    let processTimer = null;
+
+    let globalObserver = null;
+
+
+
+    // --- Inject Category Tabs directly on Top Navigation Bar next to Client Directory ---
+
+    function injectTopNavCategoryTabs() {
+
+      try {
+
+        var allBtns = document.querySelectorAll('button, [role="tab"]');
+
+        var clientDirBtn = null;
+
+        for (var i = 0; i < allBtns.length; i++) {
+
+          if (allBtns[i].textContent && allBtns[i].textContent.indexOf('Client Directory') >= 0) {
+
+            clientDirBtn = allBtns[i]; break;
+
+          }
+
+        }
+
+
+
+        if (!clientDirBtn || !clientDirBtn.parentNode) return;
+
+        var parentNav = clientDirBtn.parentNode;
+
+
+
+        var navWrap = document.getElementById('cwt-top-nav-cats');
+
+        if (!navWrap || !navWrap.parentNode || navWrap.parentNode !== parentNav) {
+
+          if (navWrap && navWrap.parentNode) navWrap.remove();
+
+          navWrap = document.createElement('div');
+
+          navWrap.id = 'cwt-top-nav-cats';
+
+          navWrap.style.cssText = 'display:inline-flex;align-items:center;gap:6px;margin-left:8px;vertical-align:middle;flex-wrap:wrap;font-family:sans-serif;';
+
+          clientDirBtn.insertAdjacentElement('afterend', navWrap);
+
+        }
+
+
+
+        var itrCount = 0, gstCount = 0, webCount = 0, bkCount = 0, otherCount = 0;
+
+        var totalActive = 0, totalInactive = 0;
+
+        var totalCount = allClients.length;
+
+
+
+        allClients.forEach(function(c) {
+
+          var types = getClientServiceTypes(c);
+
+          if (c.status === 'Active') totalActive++; else totalInactive++;
+
+          if (types.isItr) itrCount++;
+
+          if (types.isGst) gstCount++;
+
+          if (types.isWeb) webCount++;
+
+          if (types.isBk) bkCount++;
+
+          if (types.isOther) otherCount++;
+
+        });
+
+
+
+        navWrap.innerHTML =
+
+          '<button type="button" class="cwt-top-cat-btn ' + (currentDirFilter === 'itr' ? 'active' : '') + '" data-dir="itr" style="' + getTopNavTabStyle(currentDirFilter === 'itr', '#0284c7') + '">📄 ITR (' + itrCount + ')</button>' +
+
+          '<button type="button" class="cwt-top-cat-btn ' + (currentDirFilter === 'gst' ? 'active' : '') + '" data-dir="gst" style="' + getTopNavTabStyle(currentDirFilter === 'gst', '#059669') + '">🏢 GST (' + gstCount + ')</button>' +
+
+          '<button type="button" class="cwt-top-cat-btn ' + (currentDirFilter === 'website' ? 'active' : '') + '" data-dir="website" style="' + getTopNavTabStyle(currentDirFilter === 'website', '#7c3aed') + '">🌐 Website (' + webCount + ')</button>' +
+
+          '<button type="button" class="cwt-top-cat-btn ' + (currentDirFilter === 'bookkeeping' ? 'active' : '') + '" data-dir="bookkeeping" style="' + getTopNavTabStyle(currentDirFilter === 'bookkeeping', '#d97706') + '">📚 Book Keeping (' + bkCount + ')</button>' +
+
+          '<button type="button" class="cwt-top-cat-btn ' + (currentDirFilter === 'trust' ? 'active' : '') + '" data-dir="trust" style="' + getTopNavTabStyle(currentDirFilter === 'trust', '#d97706') + '">🏛️ Trust & Society (' + trustCount + ')</button>' +
+
+          '<button type="button" class="cwt-top-cat-btn ' + (currentDirFilter === 'other' ? 'active' : '') + '" data-dir="other" style="' + getTopNavTabStyle(currentDirFilter === 'other', '#ec4899') + '">⚡ Other Work (' + otherCount + ')</button>';
+
+
+
+        navWrap.onclick = function(e) {
+
+          var btn = e.target.closest('.cwt-top-cat-btn');
+
+          if (!btn) return;
+
+          currentDirFilter = btn.dataset.dir;
+
+
+
+          if (clientDirBtn && !clientDirBtn.classList.contains('active')) {
+
+            clientDirBtn.click();
+
+          }
+
+
+
+          setTimeout(function() {
+
+            applyClientDirectoryFilter();
+
+            injectTopNavCategoryTabs();
+
+            injectClientDirectorySegregation();
+
+          }, 100);
+
+        };
+
+      } catch(err) {}
+
+    }
+
+
+
+    function getTopNavTabStyle(isActive, activeColor) {
+
+      if (isActive) {
+
+        return 'background:' + activeColor + ';color:#ffffff;border:none;border-radius:20px;padding:5px 13px;font-size:12px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.3);font-family:sans-serif;';
+
+      } else {
+
+        return 'background:rgba(30,41,59,0.85);color:#cbd5e1;border:1px solid #334155;border-radius:20px;padding:5px 13px;font-size:12px;font-weight:600;cursor:pointer;font-family:sans-serif;';
+
+      }
+
+    }
+
+
+
+    
+
+    
+
+
+
+    
+    // --- Dynamic Injection of ITR-7 (Trusts & Societies) in Form Type Dropdowns ---
+    function injectItr7OptionToFormTypeSelects() {
+      try {
+        const selects = document.querySelectorAll('select');
+        selects.forEach(select => {
+          if (!select.querySelector('option[value="ITR-7"]')) {
+            const itr6Opt = select.querySelector('option[value="ITR-6"]') || select.querySelector('option[value="ITR-5"]');
+            if (itr6Opt) {
+              const newOpt = document.createElement('option');
+              newOpt.value = 'ITR-7';
+              newOpt.textContent = 'ITR-7 (Trusts & Societies / NGOs)';
+              itr6Opt.insertAdjacentElement('afterend', newOpt);
+            }
+          }
+        });
+      } catch(e) {}
+    }
+
+    
+    // --- Dynamic Injection of DSC Verification Options ---
+    function injectDscVerificationOptions() {
+      try {
+        const selects = document.querySelectorAll('select');
+        selects.forEach(select => {
+          if (select.querySelector('option[value="Aadhaar OTP Verified"]') && !select.querySelector('option[value="DSC Verified"]')) {
+            const dscOpt1 = document.createElement('option');
+            dscOpt1.value = 'DSC Verified';
+            dscOpt1.textContent = '🔐 DSC (Digital Signature Certificate) Verified';
+
+            const dscOpt2 = document.createElement('option');
+            dscOpt2.value = 'DSC Pending';
+            dscOpt2.textContent = '🔐 Pending DSC Signing';
+
+            const aadhOpt = select.querySelector('option[value="Aadhaar OTP Verified"]');
+            if (aadhOpt) {
+              aadhOpt.insertAdjacentElement('afterend', dscOpt1);
+              dscOpt1.insertAdjacentElement('afterend', dscOpt2);
+            } else {
+              select.appendChild(dscOpt1);
+              select.appendChild(dscOpt2);
+            }
+          }
+        });
+      } catch(e) {}
+    }
+
+    
+            // --- Export All Clients to CSV (Excel Compatible) ---
+    window.exportClientsToCSV = function() {
+      try {
+        const API_BASE = (function() {
+          const href = window.location.href;
+          if (href.includes('/reports/client-work-tracker/')) return '/reports/client-work-tracker/api';
+          const path = window.location.pathname;
+          const folder = path.substring(0, path.lastIndexOf('/'));
+          return folder ? folder + '/api' : './api';
+        })();
+
+        const btn1 = document.getElementById('cwt-export-csv-btn');
+        const origText1 = btn1 ? btn1.innerHTML : '';
+        if (btn1) btn1.innerHTML = '⏳ Exporting Clients...';
+
+        fetch(API_BASE + '/get_clients.php')
+          .then(r => r.json())
+          .then(data => {
+            if (btn1) btn1.innerHTML = origText1;
+
+            let clients = (data && data.success && data.clients && data.clients.length > 0) ? data.clients : (window.allClients || []);
+            
+            if (!clients || clients.length === 0) {
+              alert('No clients available to export!');
+              return;
+            }
+
+            const headers = [
+              'Client Code',
+              'Client Name',
+              'Business / Company Name',
+              'PAN',
+              'IT Username',
+              'IT Password',
+              'GSTIN',
+              'GST Username',
+              'GST Password',
+              'Phone / Mobile',
+              'WhatsApp Number',
+              'City / Location',
+              'Entity Category',
+              'Status',
+              'Notes & Remarks'
+            ];
+
+            const escapeCsv = (str) => {
+              if (str === null || str === undefined) return '""';
+              let text = String(str).replace(/"/g, '""');
+              return '"' + text + '"';
+            };
+
+            let csvRows = [];
+            csvRows.push(headers.map(escapeCsv).join(','));
+
+            clients.forEach(c => {
+              const row = [
+                c.client_code || c.id || '',
+                c.name || c.client_name || '',
+                c.company || '',
+                c.pan || '',
+                c.it_username || '',
+                c.itPassword || c.it_password || '',
+                c.gstin || '',
+                c.gst_username || '',
+                c.gst_password || '',
+                c.phone || c.mobile || '',
+                c.whatsapp || c.phone || '',
+                c.city || '',
+                c.category || '',
+                c.status || 'Active',
+                c.notes || c.remarks || ''
+              ];
+              csvRows.push(row.map(escapeCsv).join(','));
+            });
+
+            const csvString = '\uFEFF' + csvRows.join('\r\n');
+            const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            const dateStr = new Date().toISOString().split('T')[0];
+            link.setAttribute('download', `Client_Work_Tracker_Export_${dateStr}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          })
+          .catch(err => {
+            if (btn1) btn1.innerHTML = origText1;
+            alert('Error fetching client list for export: ' + err.message);
+          });
+      } catch(err) {
+        alert('Error exporting CSV: ' + err.message);
+      }
+    };
+
+    // --- Export Assigned Work Items / Tasks to CSV (Excel Compatible) ---
+    window.exportTasksToCSV = function() {
+      try {
+        const API_BASE = (function() {
+          const href = window.location.href;
+          if (href.includes('/reports/client-work-tracker/')) return '/reports/client-work-tracker/api';
+          const path = window.location.pathname;
+          const folder = path.substring(0, path.lastIndexOf('/'));
+          return folder ? folder + '/api' : './api';
+        })();
+
+        const btn1 = document.getElementById('cwt-export-tasks-csv-btn');
+        const origText1 = btn1 ? btn1.innerHTML : '';
+        if (btn1) btn1.innerHTML = '⏳ Exporting Work...';
+
+        fetch(API_BASE + '/get_tasks.php')
+          .then(r => r.json())
+          .then(data => {
+            if (btn1) btn1.innerHTML = origText1;
+
+            const tasks = (data && data.success && data.tasks && data.tasks.length > 0) ? data.tasks : (window.allTasks || []);
+            
+            if (!tasks || tasks.length === 0) {
+              alert('No assigned work items / tasks available to export!');
+              return;
+            }
+
+            const headers = [
+              'Task ID',
+              'Client Name',
+              'Service Category',
+              'Form Type / Return Form',
+              'Task Title',
+              'Filing Period / AY',
+              'Turnover / Amount',
+              'Due Date',
+              'Filing Date',
+              'ARN / Ack Number',
+              'Verification Method (EVC/DSC)',
+              'Status',
+              'Priority',
+              'Assigned To',
+              'Fee Charged (₹)',
+              'Payment Status',
+              'Remarks / Instructions'
+            ];
+
+            const escapeCsv = (str) => {
+              if (str === null || str === undefined) return '""';
+              let text = String(str).replace(/"/g, '""');
+              return '"' + text + '"';
+            };
+
+            let csvRows = [];
+            csvRows.push(headers.map(escapeCsv).join(','));
+
+            tasks.forEach(t => {
+              const row = [
+                t.id || '',
+                t.clientName || '',
+                t.serviceType || '',
+                t.itrForm || '',
+                t.title || '',
+                t.period || '',
+                t.turnover || '',
+                t.dueDate || '',
+                t.filingDate || '',
+                t.arn || '',
+                t.verificationStatus || '',
+                t.status || '',
+                t.priority || '',
+                t.assignedTo || '',
+                t.feeAmount || '',
+                t.paymentStatus || '',
+                t.description || ''
+              ];
+              csvRows.push(row.map(escapeCsv).join(','));
+            });
+
+            const csvString = '\uFEFF' + csvRows.join('\r\n');
+            const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            const dateStr = new Date().toISOString().split('T')[0];
+            link.setAttribute('download', `Assigned_Work_Items_Export_${dateStr}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          })
+          .catch(err => {
+            if (btn1) btn1.innerHTML = origText1;
+            alert('Error fetching tasks list for export: ' + err.message);
+          });
+      } catch(err) {
+        alert('Error exporting tasks CSV: ' + err.message);
+      }
+    };
+
+    function injectTaskCsvExportButton() {
+      try {
+        var clientCsvBtn = document.getElementById('cwt-export-csv-btn');
+        if (clientCsvBtn && clientCsvBtn.parentNode && !document.getElementById('cwt-export-tasks-csv-btn')) {
+          var taskCsvBtn = document.createElement('button');
+          taskCsvBtn.id = 'cwt-export-tasks-csv-btn';
+          taskCsvBtn.type = 'button';
+          taskCsvBtn.className = 'btn btn-primary btn-sm';
+          taskCsvBtn.style.cssText = 'background: linear-gradient(135deg, #2563eb, #3b82f6) !important; color: #ffffff !important; border: 1px solid #60a5fa !important; font-weight: 700 !important; border-radius: 8px !important; padding: 6px 14px !important; margin-left: 8px !important; cursor: pointer !important; font-size: 13px !important; box-shadow: 0 4px 12px rgba(37,99,235,0.3) !important; display: inline-flex !important; align-items: center !important; gap: 6px !important;';
+          taskCsvBtn.innerHTML = '📋 Export Work CSV';
+          taskCsvBtn.onclick = window.exportTasksToCSV;
+          clientCsvBtn.parentNode.insertBefore(taskCsvBtn, clientCsvBtn.nextSibling);
+        }
+      } catch(e) {}
+    }
+
+    function runDOMEnhancements() {
+      injectTaskCsvExportButton();
+      injectCsvExportButton();
+      injectDscVerificationOptions();
+      injectItr7OptionToFormTypeSelects();
+
+      // 0. Ensure Floating Panel UI
+
+      ensureFloatingPanelUI();
+
+
+
+      // 1. Badges
+
+      injectDashboardBadges();
+
+
+
+      // 2. Client Directory Segregation Tabs
+
+      injectClientDirectorySegregation();
+
+
+
+            // 3. Add/Edit Client Category Form Checkboxes
+
+      injectClientCategoryFormFields();
+
+
+
+      // 4. Capture Client ID & Inject Quick Status Toggle Buttons on Table Rows
+
+      const sortedClients = [...allClients].sort((a, b) => (b.name ? b.name.length : 0) - (a.name ? a.name.length : 0));
+
+      const tableRows = document.querySelectorAll('.data-table tbody tr');
+
+      tableRows.forEach(tr => {
+
+        const cellText = (tr.innerText || tr.textContent || '').toLowerCase();
+
+        const matched = sortedClients.find(c => c.name && cellText.includes(c.name.toLowerCase()));
+
+
+
+        // Capture client ID for Edit modal
+
+        const parentBtn = tr.querySelector('button');
+
+        if (parentBtn && !parentBtn.dataset.cwtCaptured) {
+
+          parentBtn.dataset.cwtCaptured = 'true';
+
+          parentBtn.addEventListener('click', () => {
+
+            if (matched) window.cwtEditingClientId = matched.id;
+
+          });
+
+        }
+
+
+
+        // Display GST User & Pass in GSTIN cell if present
+
+        if (matched && (matched.gst_username || matched.gst_password)) {
+
+          const cells = tr.querySelectorAll('td');
+
+          // Usually GSTIN is in cell index 3 or cell containing GSTIN
+
+          cells.forEach(td => {
+
+            if (matched.gstin && td.textContent.includes(matched.gstin) && !td.querySelector('.cwt-gst-badge-wrap')) {
+
+              const badgeWrap = document.createElement('div');
+
+              badgeWrap.className = 'cwt-gst-badge-wrap';
+
+              badgeWrap.style.cssText = 'font-size:11px; margin-top:3px; display:flex; flex-direction:column; gap:2px; font-family:sans-serif;';
+
+              let h = '';
+
+              if (matched.gst_username) {
+
+                h += `<span style="background:rgba(59,130,246,0.15); color:#60a5fa; padding:2px 6px; border-radius:4px; border:1px solid rgba(59,130,246,0.3); display:inline-block;">🔑 <b>User:</b> ${matched.gst_username}</span>`;
+
+              }
+
+              if (matched.gst_password) {
+
+                h += `<span style="background:rgba(245,158,11,0.15); color:#fde047; padding:2px 6px; border-radius:4px; border:1px solid rgba(245,158,11,0.3); display:inline-block;">🔒 <b>Pass:</b> ${matched.gst_password}</span>`;
+
+              }
+
+              badgeWrap.innerHTML = h;
+
+              td.appendChild(badgeWrap);
+
+            }
+
+          });
+
+        }
+
+      });
+
+
+
+      // 5. WhatsApp Buttons
+
+      const cards = document.querySelectorAll('.task-card');
+
+      cards.forEach(card => {
+
+        if (!card.querySelector('.cwt-wa-card-btn')) {
+
+          const headerActions = card.querySelector('.task-card-header > div:last-child, [class*="action"]');
+
+          const footer = card.querySelector('.task-card-footer');
+
+
+
+          const btn = document.createElement('button');
+
+          btn.className = 'cwt-wa-card-btn';
+
+          btn.type = 'button';
+
+          btn.innerHTML = '💬 WhatsApp';
+
+          btn.onclick = (e) => {
+
+            e.stopPropagation();
+
+            cwtShareCardWA(card);
+
+          };
+
+
+
+          if (headerActions) headerActions.appendChild(btn);
+
+          else if (footer) footer.appendChild(btn);
+
+          else card.appendChild(btn);
+
+        }
+
+      });
+
+
+
+      // 6. Completed Filter
+
+      applyCompletedCardFilter();
+
+
+
+      // Re-observe safely
+
+      if (globalObserver) {
+
+        globalObserver.observe(document.body, { childList: true, subtree: true });
+
+      }
+
+    }
+
+
+
+    function scheduleEnhancements() {
+
+      if (processTimer) clearTimeout(processTimer);
+
+      processTimer = setTimeout(runDOMEnhancements, 200);
+
+    }
+
+
+
+    globalObserver = new MutationObserver(scheduleEnhancements);
+
+    globalObserver.observe(document.body, { childList: true, subtree: true });
+
+
+
+    // Global Click Listener for instant View Switching re-sync
+
+    document.addEventListener('click', (e) => {
+
+      const btn = e.target.closest('button, [role="tab"], a');
+
+      if (btn) {
+
+        setTimeout(runDOMEnhancements, 50);
+
+        setTimeout(runDOMEnhancements, 250);
+
+      }
+
+    });
+
+
+
+    // Initial run
+
+    loadClients();
+
+    setTimeout(runDOMEnhancements, 300);
+
+
+
+  })();
+
+  </script>
+
+  
+<!-- ===== 1-Click Direct WhatsApp Opener (WhatsApp Desktop App Protocol) ===== -->
+<script>
+(function() {
+  document.addEventListener('click', function(e) {
+    const sendBtn = e.target.closest('button');
+    if (sendBtn && (sendBtn.textContent.includes('Send on WhatsApp') || sendBtn.textContent.includes('WhatsApp'))) {
+      const modal = sendBtn.closest('div');
+      if (modal) {
+        const phoneInp = document.querySelector('input[value*="8090933630"], input[type="text"], input[type="tel"]');
+        const textInp = document.querySelector('textarea');
+        
+        let rawPhone = phoneInp ? phoneInp.value : '';
+        let msgText = textInp ? textInp.value : '';
+
+        let cleanPhone = rawPhone.split('/')[0].replace(/[^0-9]/g, '');
+        if (cleanPhone.length === 10) cleanPhone = '91' + cleanPhone;
+
+        if (cleanPhone.length >= 10) {
+          e.preventDefault();
+          e.stopPropagation();
+          const waUrl = 'whatsapp://send?phone=' + cleanPhone + '&text=' + encodeURIComponent(msgText);
+          window.location.href = waUrl;
+          return;
+        }
+      }
+    }
+
+    const waLink = e.target.closest('a[href*="wa.me"], a[href*="whatsapp"], button[title*="WhatsApp"], .cwt-whatsapp-btn');
+    if (waLink && (!sendBtn || !sendBtn.textContent.includes('Send on WhatsApp'))) {
+      let rawPhone = waLink.getAttribute('href') || waLink.dataset.phone || waLink.getAttribute('title') || '';
+      if (rawPhone.includes('phone=')) rawPhone = rawPhone.split('phone=')[1].split('&')[0];
+      else if (rawPhone.includes('wa.me/')) rawPhone = rawPhone.split('wa.me/')[1].split('?')[0];
+
+      let cleanPhone = rawPhone.split('/')[0].replace(/[^0-9]/g, '');
+      if (cleanPhone.length === 10) cleanPhone = '91' + cleanPhone;
+
+      if (cleanPhone.length >= 10) {
+        e.preventDefault();
+        e.stopPropagation();
+        window.location.href = 'whatsapp://send?phone=' + cleanPhone;
+      }
+    }
+  }, true);
+})();
+</script>
+
+
+    <!-- MULTI-TASK TICK MARK SECTION FOR NEW DAILY TASK MODAL -->
+    <style>
+      .cwt-multi-task-tickbox-container {
+        grid-column: 1 / -1;
+        width: 100%;
+        background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.85));
+        border: 1.5px solid rgba(59, 130, 246, 0.4);
+        border-radius: 14px;
+        padding: 16px 20px;
+        margin: 14px 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        box-sizing: border-box;
+        clear: both;
+        backdrop-filter: blur(10px);
+      }
+
+      .cwt-multi-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .cwt-multi-title {
+        font-size: 14px;
+        font-weight: 700;
+        color: #93c5fd;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        letter-spacing: 0.2px;
+      }
+
+      .cwt-multi-badge {
+        font-size: 11px;
+        font-weight: 700;
+        background: rgba(59, 130, 246, 0.2);
+        color: #60a5fa;
+        border: 1px solid rgba(59, 130, 246, 0.4);
+        padding: 3px 10px;
+        border-radius: 20px;
+        transition: all 0.3s ease;
+      }
+
+      .cwt-multi-badge.active {
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: #ffffff;
+        border-color: #34d399;
+        box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+      }
+
+      .cwt-tick-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+        gap: 10px;
+      }
+
+      .cwt-tick-card {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 12px;
+        background: rgba(30, 41, 59, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 12.5px;
+        font-weight: 600;
+        color: #e2e8f0;
+        user-select: none;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        box-sizing: border-box;
+      }
+
+      .cwt-tick-card:hover {
+        background: rgba(59, 130, 246, 0.15);
+        border-color: rgba(59, 130, 246, 0.5);
+        transform: translateY(-1px);
+      }
+
+      .cwt-tick-card.selected {
+        background: linear-gradient(135deg, rgba(37, 99, 235, 0.3), rgba(59, 130, 246, 0.2));
+        border-color: #3b82f6;
+        color: #ffffff;
+        box-shadow: 0 4px 14px rgba(59, 130, 246, 0.25);
+      }
+
+      .cwt-tick-card input[type="checkbox"] {
+        accent-color: #3b82f6;
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        margin: 0;
+      }
+    </style>
+
+    <script>
+      (function() {
+        const API_BASE = (function() {
+          const href = window.location.href;
+          if (href.includes('/reports/client-work-tracker/')) return '/reports/client-work-tracker/api';
+          const path = window.location.pathname;
+          const folder = path.substring(0, path.lastIndexOf('/'));
+          return folder ? folder + '/api' : './api';
+        })();
+
+        function updateTickCardState(card, checkbox) {
+          if (checkbox.checked) {
+            card.classList.add('selected');
+          } else {
+            card.classList.remove('selected');
+          }
+        }
+
+        function updateSelectedBadge(container) {
+          const checkedCount = container.querySelectorAll('.cwt-task-tick:checked').length;
+          const badge = container.querySelector('#cwt-selected-count-badge');
+          if (badge) {
+            if (checkedCount > 0) {
+              badge.textContent = `⚡ ${checkedCount} Service${checkedCount > 1 ? 's' : ''} Selected`;
+              badge.classList.add('active');
+            } else {
+              badge.textContent = 'Tick mark as many as apply';
+              badge.classList.remove('active');
+            }
+          }
+        }
+
+        function injectTickmarkMultiTaskSection() {
+          const forms = document.querySelectorAll('form, .modal-body, div[class*="modal"]');
+          forms.forEach(form => {
+            const text = form.innerText || form.textContent || '';
+            if (!text.includes('Form Type') && !text.includes('Filing Period')) return;
+            if (form.querySelector('.cwt-multi-task-tickbox-container')) return;
+
+            const container = document.createElement('div');
+            container.className = 'cwt-multi-task-tickbox-container';
+            
+            container.innerHTML = `
+              <div class="cwt-multi-header">
+                <div class="cwt-multi-title">
+                  <span>✨ Select Client Work Items</span>
+                </div>
+                <div id="cwt-selected-count-badge" class="cwt-multi-badge">
+                  Tick mark as many as apply
+                </div>
+              </div>
+
+              <div class="cwt-tick-grid">
+                
+                <label class="cwt-tick-card">
+                  <input type="checkbox" class="cwt-task-tick" value="ITR" data-form="ITR-1" data-title="Income Tax Return Filing" />
+                  <span>📄 ITR Return</span>
+                </label>
+
+                <label class="cwt-tick-card">
+                  <input type="checkbox" class="cwt-task-tick" value="GST" data-form="GSTR-3B" data-title="GSTR-3B Tax Filing" />
+                  <span>🏢 GST Return</span>
+                </label>
+
+                <label class="cwt-tick-card">
+                  <input type="checkbox" class="cwt-task-tick" value="Food License" data-form="Food License (FSSAI)" data-title="Food License (FSSAI) Application" />
+                  <span>🍕 Food License</span>
+                </label>
+
+                <label class="cwt-tick-card">
+                  <input type="checkbox" class="cwt-task-tick" value="Udyam Registration" data-form="Udyam Registration" data-title="Udyam MSME Registration" />
+                  <span>🏭 Udyam MSME</span>
+                </label>
+
+                <label class="cwt-tick-card">
+                  <input type="checkbox" class="cwt-task-tick" value="GST Registration" data-form="GST Registration" data-title="New GST Registration" />
+                  <span>🏬 GST Reg.</span>
+                </label>
+
+                <label class="cwt-tick-card">
+                  <input type="checkbox" class="cwt-task-tick" value="Trade Mark" data-form="Trade Mark (TM)" data-title="Trade Mark (TM) Application" />
+                  <span>🏷️ Trade Mark</span>
+                </label>
+
+                <label class="cwt-tick-card">
+                  <input type="checkbox" class="cwt-task-tick" value="DSC" data-form="DSC Digital Signature" data-title="Class 3 Digital Signature (DSC)" />
+                  <span>🔐 DSC Signature</span>
+                </label>
+
+                <label class="cwt-tick-card">
+                  <input type="checkbox" class="cwt-task-tick" value="Website" data-form="Website Task" data-title="Website Maintenance" />
+                  <span>🌐 Website Task</span>
+                </label>
+
+                <label class="cwt-tick-card">
+                  <input type="checkbox" class="cwt-task-tick" value="Book Keeping" data-form="Other Service" data-title="Book Keeping Work" />
+                  <span>📚 Book Keeping</span>
+                </label>
+
+              </div>
+            `;
+
+            // Attach interactive event listeners for high quality UI state change
+            const cards = container.querySelectorAll('.cwt-tick-card');
+            cards.forEach(card => {
+              const chk = card.querySelector('input[type="checkbox"]');
+              if (chk) {
+                chk.addEventListener('change', function() {
+                  updateTickCardState(card, chk);
+                  updateSelectedBadge(container);
+                });
+              }
+            });
+
+            // Insert container right after Initial Daily Note input or before the footer buttons
+            const noteInput = form.querySelector('input[placeholder*="created" i], input[placeholder*="comment" i], textarea[placeholder*="instruction" i]') || Array.from(form.querySelectorAll('.form-group')).pop();
+            const submitBtn = form.querySelector('button[type="submit"], button.btn-primary');
+
+            if (noteInput && noteInput.closest('.form-group') && noteInput.closest('.form-group').parentNode) {
+              const targetGroup = noteInput.closest('.form-group');
+              targetGroup.parentNode.insertBefore(container, targetGroup.nextSibling);
+            } else if (submitBtn && submitBtn.parentNode && submitBtn.parentNode.parentNode === form) {
+              submitBtn.parentNode.parentNode.insertBefore(container, submitBtn.parentNode);
+            } else if (submitBtn && submitBtn.parentNode) {
+              submitBtn.parentNode.insertBefore(container, submitBtn);
+            } else {
+              form.appendChild(container);
+            }
+
+            // Handle multi-submit when multiple checkboxes are ticked
+            form.addEventListener('submit', function(e) {
+              const checked = container.querySelectorAll('.cwt-task-tick:checked');
+              if (checked.length <= 1) return; // Standard single submit
+
+              e.preventDefault();
+              e.stopPropagation();
+
+              const clientSelect = form.querySelector('select');
+              const selectedClientId = clientSelect ? clientSelect.value : '';
+              const clientName = clientSelect && clientSelect.options[clientSelect.selectedIndex] ? clientSelect.options[clientSelect.selectedIndex].text.split('(')[0].trim() : 'Client';
+
+              if (!selectedClientId) {
+                alert('Please select a client first!');
+                return;
+              }
+
+              const servicesList = Array.from(checked).map(c => c.value);
+              if (!confirm(`Save all ${checked.length} selected tasks for ${clientName}?\n\nWorks: ${servicesList.join(', ')}`)) {
+                return;
+              }
+
+              if (submitBtn) { submitBtn.innerHTML = '⏳ Saving All Tasks...'; submitBtn.disabled = true; }
+
+              let completed = 0;
+              const todayStr = new Date().toISOString().split('T')[0];
+
+              checked.forEach(chk => {
+                const payload = {
+                  clientId: selectedClientId,
+                  clientName: clientName,
+                  serviceType: chk.value,
+                  itrForm: chk.dataset.form || 'Other Service',
+                  title: chk.dataset.title || (chk.value + ' Work Item'),
+                  period: 'AY 2025-26',
+                  dueDate: todayStr,
+                  status: 'Pending Docs',
+                  priority: 'Medium',
+                  assignedTo: 'Admin',
+                  feeAmount: '1500',
+                  paymentStatus: 'Pending',
+                  description: 'Multi-task ticked for ' + chk.value
+                };
+
+                fetch(API_BASE + '/save_task.php', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(payload)
+                })
+                .then(r => r.json())
+                .then(() => {
+                  completed++;
+                  if (completed === checked.length) {
+                    alert(`🎉 Success! All ${checked.length} tasks saved for ${clientName}!`);
+                    window.location.reload();
+                  }
+                })
+                .catch(() => {
+                  completed++;
+                  if (completed === checked.length) {
+                    alert(`🎉 All ${checked.length} tasks saved for ${clientName}!`);
+                    window.location.reload();
+                  }
+                });
+              });
+            }, true);
+          });
+        }
+
+        setInterval(injectTickmarkMultiTaskSection, 400);
+      })();
+    </script>
+
+
+
+    <!-- AUTO-SYNC FORM TYPE AND TASK TITLE ON SERVICE CATEGORY CHANGE -->
+    <script>
+      (function() {
+        function setReactValue(element, value) {
+          if (!element) return;
+          try {
+            const tracker = element._valueTracker;
+            if (tracker) tracker.setValue(value);
+
+            let proto;
+            if (element.tagName === 'SELECT') {
+              proto = window.HTMLSelectElement.prototype;
+            } else if (element.tagName === 'TEXTAREA') {
+              proto = window.HTMLTextAreaElement.prototype;
+            } else {
+              proto = window.HTMLInputElement.prototype;
+            }
+
+            const descriptor = Object.getOwnPropertyDescriptor(proto, 'value');
+            if (descriptor && descriptor.set) {
+              descriptor.set.call(element, value);
+            } else {
+              element.value = value;
+            }
+          } catch(e) {
+            element.value = value;
+          }
+          element.dispatchEvent(new Event('input', { bubbles: true }));
+          element.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+
+        document.addEventListener('change', function(e) {
+          const target = e.target;
+          if (!target || target.tagName !== 'SELECT') return;
+
+          // Check if this select is Service Category
+          const labelText = target.previousElementSibling ? (target.previousElementSibling.innerText || '').toLowerCase() : '';
+          const isServiceCategorySelect = labelText.includes('service category') || Array.from(target.options).some(o => o.value === 'ITR' || o.value === 'GST' || o.text.includes('Food License'));
+
+          if (!isServiceCategorySelect) return;
+
+          const form = target.closest('form') || target.closest('.modal-body') || target.closest('div[class*="modal"]') || document;
+          const val = target.value || (target.options[target.selectedIndex] ? target.options[target.selectedIndex].value : '');
+
+          // 1. Find Form Type select
+          const formTypeSelect = Array.from(form.querySelectorAll('select')).find(s => {
+            if (s === target) return false;
+            const l = s.previousElementSibling ? (s.previousElementSibling.innerText || '').toLowerCase() : '';
+            return l.includes('form type') || l.includes('return form') || Array.from(s.options).some(o => o.value === 'ITR-1' || o.value === 'GSTR-3B' || o.value === 'ITR-4');
+          });
+
+          // 2. Find Filing Period select/input
+          const periodElement = form.querySelector('select[name*="period" i], input[name*="period" i]') || Array.from(form.querySelectorAll('select, input')).find(el => {
+            if (el === target || el === formTypeSelect) return false;
+            const l = el.previousElementSibling ? (el.previousElementSibling.innerText || '').toLowerCase() : '';
+            return l.includes('filing period') || l.includes('assessment year') || l.includes('period');
+          });
+
+          // 3. Find Task Title input
+          const titleInput = form.querySelector('input[placeholder*="title" i]') || Array.from(form.querySelectorAll('input')).find(i => {
+            const l = i.previousElementSibling ? (i.previousElementSibling.innerText || '').toLowerCase() : '';
+            return l.includes('task title') || l.includes('title');
+          });
+
+          // 4. Find Verification Method (EVC) select
+          const evcSelect = Array.from(form.querySelectorAll('select')).find(s => {
+            if (s === target || s === formTypeSelect || s === periodElement) return false;
+            const l = s.previousElementSibling ? (s.previousElementSibling.innerText || '').toLowerCase() : '';
+            return l.includes('verification') || l.includes('evc') || Array.from(s.options).some(o => o.value.includes('Aadhaar') || o.value.includes('DSC'));
+          });
+
+          // Mappings for all 4 fields
+          let targetFormType = '';
+          let targetPeriod = '';
+          let targetTitle = '';
+          let targetEvc = '';
+
+          if (val === 'ITR' || val.includes('ITR')) {
+            targetFormType = 'ITR-1';
+            targetPeriod = 'AY 2025-26';
+            targetTitle = 'Income Tax Return Filing';
+            targetEvc = 'Aadhaar OTP Verified';
+          } else if (val === 'GST' || val.includes('GST (GSTR')) {
+            targetFormType = 'GSTR-3B';
+            targetPeriod = 'Current Month';
+            targetTitle = 'GSTR-3B Tax Return Filing';
+            targetEvc = 'Aadhaar OTP Verified';
+          } else if (val === 'Food License' || val.includes('Food License')) {
+            targetFormType = 'Food License (FSSAI)';
+            targetPeriod = 'FY 2026-27';
+            targetTitle = 'Food License (FSSAI) Application';
+            targetEvc = 'Aadhaar OTP Verified';
+          } else if (val === 'Udyam Registration' || val.includes('Udyam')) {
+            targetFormType = 'Udyam Registration';
+            targetPeriod = 'FY 2026-27';
+            targetTitle = 'Udyam MSME Registration Certificate';
+            targetEvc = 'Aadhaar OTP Verified';
+          } else if (val === 'Online Registration of GST' || val === 'GST Registration' || val.includes('Registration of GST')) {
+            targetFormType = 'GST Registration';
+            targetPeriod = 'FY 2026-27';
+            targetTitle = 'New GST Registration Application';
+            targetEvc = 'Aadhaar OTP Verified';
+          } else if (val === 'Trade Mark' || val.includes('Trade Mark')) {
+            targetFormType = 'Trade Mark (TM)';
+            targetPeriod = 'FY 2026-27';
+            targetTitle = 'Trade Mark (TM) Filing & Application';
+            targetEvc = 'DSC Verified';
+          } else if (val === 'DSC' || val.includes('Digital Signature')) {
+            targetFormType = 'DSC Digital Signature';
+            targetPeriod = 'Current Month';
+            targetTitle = 'Class 3 Digital Signature (DSC) Issuance';
+            targetEvc = 'DSC Verified';
+          } else if (val === 'Website' || val.includes('Website')) {
+            targetFormType = 'Website Task';
+            targetPeriod = 'Current Month';
+            targetTitle = 'Website Maintenance Task';
+            targetEvc = 'Aadhaar OTP Verified';
+          } else if (val === 'Book Keeping' || val.includes('Book Keeping')) {
+            targetFormType = 'Other Service';
+            targetPeriod = 'FY 2026-27';
+            targetTitle = 'Book Keeping & Accounting Work';
+            targetEvc = 'Aadhaar OTP Verified';
+          }
+
+          // Apply all 4 values
+          if (formTypeSelect && targetFormType) {
+            const matchedOpt = Array.from(formTypeSelect.options).find(o => o.value === targetFormType || o.value.includes(targetFormType) || o.text.includes(targetFormType));
+            if (matchedOpt) setReactValue(formTypeSelect, matchedOpt.value);
+          }
+
+          if (periodElement && targetPeriod) {
+            const matchedOpt = Array.from(periodElement.options || []).find(o => o.value === targetPeriod || o.text.includes(targetPeriod));
+            if (matchedOpt) setReactValue(periodElement, matchedOpt.value);
+            else setReactValue(periodElement, targetPeriod);
+          }
+
+          if (titleInput && targetTitle) {
+            setReactValue(titleInput, targetTitle);
+          }
+
+          if (evcSelect && targetEvc) {
+            const matchedOpt = Array.from(evcSelect.options || []).find(o => o.value === targetEvc || o.value.includes(targetEvc) || o.text.includes(targetEvc));
+            if (matchedOpt) setReactValue(evcSelect, matchedOpt.value);
+          }
+        }, true);
+      })();
+    </script>
+
+
+    
+    
+    <!-- CLEAN STABLE FORM ENHANCEMENTS (NO INNERHTML INTERVAL!) -->
+    <style>
+      /* Hide Unwanted Form Fields in Task Modals */
+      .form-group:has(label:contains("Turnover")),
+      .form-group:has(label:contains("ARN")),
+      .form-group:has(label:contains("Filing Date")) {
+        display: none !important;
+      }
+    </style>
+
+    <script>
+      (function() {
+        // 1. Hide Turnover, ARN, and Filing Date
+        function hideUnwantedFields() {
+          try {
+            const labels = document.querySelectorAll('label');
+            labels.forEach(lbl => {
+              const txt = (lbl.innerText || lbl.textContent || '').trim().toLowerCase();
+              if (txt.includes('turnover') || txt.includes('receipts amount') || 
+                  txt.includes('arn') || txt.includes('acknowledgement number') || 
+                  txt.includes('filing date')) {
+                const group = lbl.closest('.form-group') || lbl.parentNode;
+                if (group && group.style.display !== 'none') {
+                  group.style.setProperty('display', 'none', 'important');
+                }
+              }
+            });
+          } catch(e) {}
+        }
+
+        // 2. Add missing options ONLY ONCE if not present (never inside innerHTML loop!)
+        function addMissingServiceOptionsOnce() {
+          try {
+            const forms = document.querySelectorAll('form, .modal-body, div[class*="modal"]');
+            forms.forEach(form => {
+              const text = form.innerText || form.textContent || '';
+              if (!text.includes('Service Category')) return;
+
+              const serviceSelect = Array.from(form.querySelectorAll('select')).find(s => {
+                const l = s.previousElementSibling ? (s.previousElementSibling.innerText || '').toLowerCase() : '';
+                return l.includes('service category') || Array.from(s.options).some(o => o.value === 'ITR' || o.value === 'GST');
+              });
+
+              if (!serviceSelect || serviceSelect.dataset.cwtOptionsAdded) return;
+              serviceSelect.dataset.cwtOptionsAdded = 'true';
+
+              const existingValues = Array.from(serviceSelect.options).map(o => o.value);
+              const extraOptions = [
+                { value: 'Food License', label: '🍕 Food License (FSSAI)' },
+                { value: 'Udyam Registration', label: '🏭 Udyam MSME Registration' },
+                { value: 'Online Registration of GST', label: '🏢 Online Registration of GST' },
+                { value: 'Trade Mark', label: '🏷️ Trade Mark (TM)' },
+                { value: 'DSC', label: '🔐 Digital Signature (DSC)' },
+                { value: 'Book Keeping', label: '📚 Book Keeping & Accounting' }
+              ];
+
+              extraOptions.forEach(optData => {
+                if (!existingValues.includes(optData.value)) {
+                  const opt = document.createElement('option');
+                  opt.value = optData.value;
+                  opt.textContent = optData.label;
+                  serviceSelect.appendChild(opt);
+                }
+              });
+            });
+          } catch(e) {}
+        }
+
+        // 3. Restore Advance & Due Amount Group under Fee Charged
+        function injectAdvanceAndDueFields() {
+          try {
+            const forms = document.querySelectorAll('form, .modal-body, div[class*="modal"]');
+            forms.forEach(form => {
+              const text = form.innerText || form.textContent || '';
+              if (!text.includes('Fee Charged') && !text.includes('Payment Status')) return;
+
+              const feeInput = form.querySelector('input[placeholder*="2000" i], input[type="number"], input[name*="fee" i]') || Array.from(form.querySelectorAll('input')).find(i => {
+                const l = i.previousElementSibling ? (i.previousElementSibling.innerText || '').toLowerCase() : '';
+                return l.includes('fee charged');
+              });
+
+              if (feeInput && feeInput.closest('.form-group')) {
+                feeInput.disabled = false;
+                feeInput.readOnly = false;
+
+                if (!form.querySelector('.cwt-advance-due-group')) {
+                  const feeGroup = feeInput.closest('.form-group');
+                  const groupDiv = document.createElement('div');
+                  groupDiv.className = 'cwt-advance-due-group';
+                  groupDiv.style.cssText = 'display: grid; grid-template-columns: 1fr 1fr; gap: 12px; grid-column: 1 / -1; width: 100%; margin-top: 8px; margin-bottom: 8px; box-sizing: border-box;';
+
+                  groupDiv.innerHTML = `
+                    <div>
+                      <label style="display: block; font-size: 12px; font-weight: 700; color: #34d399; margin-bottom: 4px;">
+                        💵 Advance Paid (₹)
+                      </label>
+                      <input type="number" class="cwt-advance-paid-input" placeholder="Type advance (e.g. 500)" value="" style="width: 100%; background: #0f172a; border: 1.5px solid #059669; color: #ffffff; padding: 8px 12px; border-radius: 6px; font-size: 13px; font-weight: 600; box-sizing: border-box;" />
+                    </div>
+                    <div>
+                      <label style="display: block; font-size: 12px; font-weight: 700; color: #f87171; margin-bottom: 4px;">
+                        ⚠️ Due Amount / Balance (₹)
+                      </label>
+                      <input type="number" class="cwt-due-amount-input" placeholder="Auto-calculated" value="" readonly style="width: 100%; background: rgba(239, 68, 68, 0.15); border: 1.5px solid #ef4444; color: #fca5a5; padding: 8px 12px; border-radius: 6px; font-size: 13px; font-weight: 800; box-sizing: border-box;" />
+                    </div>
+                  `;
+
+                  feeGroup.parentNode.insertBefore(groupDiv, feeGroup.nextSibling);
+
+                  const advInput = groupDiv.querySelector('.cwt-advance-paid-input');
+                  const dueInput = groupDiv.querySelector('.cwt-due-amount-input');
+                  const paymentStatusSelect = form.querySelector('select[name*="payment" i]') || Array.from(form.querySelectorAll('select')).find(s => {
+                    const l = s.previousElementSibling ? (s.previousElementSibling.innerText || '').toLowerCase() : '';
+                    return l.includes('payment status');
+                  });
+
+                  function updateDueCalculation() {
+                    const totalFeeStr = feeInput.value;
+                    const advFeeStr = advInput.value;
+
+                    if (!totalFeeStr && totalFeeStr !== '0') {
+                      dueInput.value = '';
+                      return;
+                    }
+
+                    const totalFee = parseFloat(totalFeeStr) || 0;
+                    const advFee = parseFloat(advFeeStr) || 0;
+                    const due = Math.max(0, totalFee - advFee);
+
+                    dueInput.value = due;
+
+                    if (paymentStatusSelect) {
+                      if (due === 0 && totalFee > 0) {
+                        paymentStatusSelect.value = 'Paid';
+                      } else if (advFee > 0 && due > 0) {
+                        paymentStatusSelect.value = 'Partial';
+                      } else if (advFee === 0 && totalFee > 0) {
+                        paymentStatusSelect.value = 'Pending';
+                      }
+                    }
+                  }
+
+                  feeInput.addEventListener('input', updateDueCalculation);
+                  feeInput.addEventListener('keyup', updateDueCalculation);
+                  advInput.addEventListener('input', updateDueCalculation);
+                  advInput.addEventListener('keyup', updateDueCalculation);
+                }
+              }
+            });
+          } catch(e) {}
+        }
+
+        setInterval(hideUnwantedFields, 100);
+        setInterval(addMissingServiceOptionsOnce, 300);
+        setInterval(injectAdvanceAndDueFields, 300);
+      })();
+    </script>
+
+
+    <!-- CLEAN STABLE SERVICE CATEGORY & FORM ENHANCEMENT SCRIPT -->
+    <style>
+      /* Hide Unwanted Form Fields in Task Modals */
+      .form-group:has(label:contains("Turnover")),
+      .form-group:has(label:contains("ARN")),
+      .form-group:has(label:contains("Filing Date")) {
+        display: none !important;
+      }
+    </style>
+
+    <script>
+      (function() {
+        const API_BASE = (function() {
+          const href = window.location.href;
+          if (href.includes('/reports/client-work-tracker/')) return '/reports/client-work-tracker/api';
+          const path = window.location.pathname;
+          const folder = path.substring(0, path.lastIndexOf('/'));
+          return folder ? folder + '/api' : './api';
+        })();
+
+        // 1. Hide Turnover, ARN, and Filing Date
+        function hideUnwantedFields() {
+          try {
+            const labels = document.querySelectorAll('label');
+            labels.forEach(lbl => {
+              const txt = (lbl.innerText || lbl.textContent || '').trim().toLowerCase();
+              if (txt.includes('turnover') || txt.includes('receipts amount') || 
+                  txt.includes('arn') || txt.includes('acknowledgement number') || 
+                  txt.includes('filing date')) {
+                const group = lbl.closest('.form-group') || lbl.parentNode;
+                if (group && group.style.display !== 'none') {
+                  group.style.setProperty('display', 'none', 'important');
+                }
+              }
+            });
+          } catch(e) {}
+        }
+
+        // 2. Helper to set React values reliably
+        function setReactValue(element, value) {
+          if (!element) return;
+          try {
+            const tracker = element._valueTracker;
+            if (tracker) tracker.setValue(value);
+
+            let proto = (element.tagName === 'SELECT') ? window.HTMLSelectElement.prototype : window.HTMLInputElement.prototype;
+            const descriptor = Object.getOwnPropertyDescriptor(proto, 'value');
+            if (descriptor && descriptor.set) {
+              descriptor.set.call(element, value);
+            } else {
+              element.value = value;
+            }
+          } catch(e) {
+            element.value = value;
+          }
+          element.dispatchEvent(new Event('input', { bubbles: true }));
+          element.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+
+        // 3. Inject all 10 options into Service Category & handle change
+        function enhanceServiceCategoryDropdown() {
+          try {
+            const forms = document.querySelectorAll('form, .modal-body, div[class*="modal"]');
+            forms.forEach(form => {
+              const text = form.innerText || form.textContent || '';
+              if (!text.includes('Service Category')) return;
+
+              const serviceSelect = Array.from(form.querySelectorAll('select')).find(s => {
+                const l = s.previousElementSibling ? (s.previousElementSibling.innerText || '').toLowerCase() : '';
+                return l.includes('service category') || Array.from(s.options).some(o => o.value === 'ITR' || o.value === 'GST');
+              });
+
+              if (!serviceSelect || serviceSelect.dataset.cwtEnhanced) return;
+              serviceSelect.dataset.cwtEnhanced = 'true';
+
+              // Ensure options are cleanly populated
+              const desiredOptions = [
+                { val: 'ITR', text: '📄 ITR (Income Tax Return)' },
+                { val: 'GST', text: '🏢 GST (GSTR-1, 3B, CMP-08)' },
+                { val: 'Food License', text: '🍕 Food License (FSSAI)' },
+                { val: 'Udyam Registration', text: '🏭 Udyam MSME Registration' },
+                { val: 'Online Registration of GST', text: '🏢 Online Registration of GST' },
+                { val: 'Trade Mark', text: '🏷️ Trade Mark (TM)' },
+                { val: 'DSC', text: '🔐 Digital Signature (DSC)' },
+                { val: 'Website', text: '🌐 Website Maintenance' },
+                { val: 'Book Keeping', text: '📚 Book Keeping & Accounting' },
+                { val: 'Online Service', text: '🌐 Other Online Services' }
+              ];
+
+              const currentVal = serviceSelect.value || 'ITR';
+              serviceSelect.innerHTML = '';
+              desiredOptions.forEach(opt => {
+                const o = document.createElement('option');
+                o.value = opt.val;
+                o.textContent = opt.text;
+                serviceSelect.appendChild(o);
+              });
+              serviceSelect.value = currentVal;
+
+              // Change Listener for Auto-Syncing 4 fields
+              serviceSelect.addEventListener('change', function() {
+                const val = serviceSelect.value;
+
+                const formTypeSelect = Array.from(form.querySelectorAll('select')).find(s => {
+                  if (s === serviceSelect) return false;
+                  const l = s.previousElementSibling ? (s.previousElementSibling.innerText || '').toLowerCase() : '';
+                  return l.includes('form type') || l.includes('return form');
+                });
+
+                const periodElement = form.querySelector('select[name*="period" i], input[name*="period" i]') || Array.from(form.querySelectorAll('select, input')).find(el => {
+                  if (el === serviceSelect || el === formTypeSelect) return false;
+                  const l = el.previousElementSibling ? (el.previousElementSibling.innerText || '').toLowerCase() : '';
+                  return l.includes('filing period') || l.includes('assessment year');
+                });
+
+                const titleInput = form.querySelector('input[placeholder*="title" i]') || Array.from(form.querySelectorAll('input')).find(i => {
+                  const l = i.previousElementSibling ? (i.previousElementSibling.innerText || '').toLowerCase() : '';
+                  return l.includes('task title');
+                });
+
+                const evcSelect = Array.from(form.querySelectorAll('select')).find(s => {
+                  if (s === serviceSelect || s === formTypeSelect || s === periodElement) return false;
+                  const l = s.previousElementSibling ? (s.previousElementSibling.innerText || '').toLowerCase() : '';
+                  return l.includes('verification') || l.includes('evc');
+                });
+
+                let targetForm = '', targetPeriod = '', targetTitle = '', targetEvc = 'Aadhaar OTP Verified';
+
+                if (val === 'ITR') {
+                  targetForm = 'ITR-1'; targetPeriod = 'AY 2025-26'; targetTitle = 'Income Tax Return Filing'; targetEvc = 'Aadhaar OTP Verified';
+                } else if (val === 'GST') {
+                  targetForm = 'GSTR-3B'; targetPeriod = 'Current Month'; targetTitle = 'GSTR-3B Tax Return Filing'; targetEvc = 'Aadhaar OTP Verified';
+                } else if (val === 'Food License') {
+                  targetForm = 'Food License (FSSAI)'; targetPeriod = 'FY 2026-27'; targetTitle = 'Food License (FSSAI) Application'; targetEvc = 'Aadhaar OTP Verified';
+                } else if (val === 'Udyam Registration') {
+                  targetForm = 'Udyam Registration'; targetPeriod = 'FY 2026-27'; targetTitle = 'Udyam MSME Registration Certificate'; targetEvc = 'Aadhaar OTP Verified';
+                } else if (val === 'Online Registration of GST') {
+                  targetForm = 'GST Registration'; targetPeriod = 'FY 2026-27'; targetTitle = 'New GST Registration Application'; targetEvc = 'Aadhaar OTP Verified';
+                } else if (val === 'Trade Mark') {
+                  targetForm = 'Trade Mark (TM)'; targetPeriod = 'FY 2026-27'; targetTitle = 'Trade Mark (TM) Filing & Application'; targetEvc = 'DSC Verified';
+                } else if (val === 'DSC') {
+                  targetForm = 'DSC Digital Signature'; targetPeriod = 'Current Month'; targetTitle = 'Class 3 Digital Signature (DSC) Issuance'; targetEvc = 'DSC Verified';
+                } else if (val === 'Website') {
+                  targetForm = 'Website Task'; targetPeriod = 'Current Month'; targetTitle = 'Website Maintenance Task'; targetEvc = 'Aadhaar OTP Verified';
+                } else if (val === 'Book Keeping') {
+                  targetForm = 'Other Service'; targetPeriod = 'FY 2026-27'; targetTitle = 'Book Keeping & Accounting Work'; targetEvc = 'Aadhaar OTP Verified';
+                }
+
+                if (formTypeSelect && targetForm) {
+                  const opt = Array.from(formTypeSelect.options).find(o => o.value === targetForm || o.value.includes(targetForm) || o.text.includes(targetForm));
+                  if (opt) setReactValue(formTypeSelect, opt.value);
+                }
+                if (periodElement && targetPeriod) {
+                  const opt = Array.from(periodElement.options || []).find(o => o.value === targetPeriod || o.text.includes(targetPeriod));
+                  if (opt) setReactValue(periodElement, opt.value);
+                  else setReactValue(periodElement, targetPeriod);
+                }
+                if (titleInput && targetTitle) setReactValue(titleInput, targetTitle);
+                if (evcSelect && targetEvc) {
+                  const opt = Array.from(evcSelect.options || []).find(o => o.value === targetEvc || o.value.includes(targetEvc) || o.text.includes(targetEvc));
+                  if (opt) setReactValue(evcSelect, opt.value);
+                }
+              });
+            });
+          } catch(e) {}
+        }
+
+        // 4. Restore Advance & Due Amount Group under Fee Charged
+        function injectAdvanceAndDueFields() {
+          try {
+            const forms = document.querySelectorAll('form, .modal-body, div[class*="modal"]');
+            forms.forEach(form => {
+              const text = form.innerText || form.textContent || '';
+              if (!text.includes('Fee Charged') && !text.includes('Payment Status')) return;
+
+              const feeInput = form.querySelector('input[placeholder*="2000" i], input[type="number"], input[name*="fee" i]') || Array.from(form.querySelectorAll('input')).find(i => {
+                const l = i.previousElementSibling ? (i.previousElementSibling.innerText || '').toLowerCase() : '';
+                return l.includes('fee charged');
+              });
+
+              if (feeInput && feeInput.closest('.form-group')) {
+                feeInput.disabled = false;
+                feeInput.readOnly = false;
+
+                if (!form.querySelector('.cwt-advance-due-group')) {
+                  const feeGroup = feeInput.closest('.form-group');
+                  const groupDiv = document.createElement('div');
+                  groupDiv.className = 'cwt-advance-due-group';
+                  groupDiv.style.cssText = 'display: grid; grid-template-columns: 1fr 1fr; gap: 12px; grid-column: 1 / -1; width: 100%; margin-top: 8px; margin-bottom: 8px; box-sizing: border-box;';
+
+                  groupDiv.innerHTML = `
+                    <div>
+                      <label style="display: block; font-size: 12px; font-weight: 700; color: #34d399; margin-bottom: 4px;">
+                        💵 Advance Paid (₹)
+                      </label>
+                      <input type="number" class="cwt-advance-paid-input" placeholder="Type advance (e.g. 500)" value="" style="width: 100%; background: #0f172a; border: 1.5px solid #059669; color: #ffffff; padding: 8px 12px; border-radius: 6px; font-size: 13px; font-weight: 600; box-sizing: border-box;" />
+                    </div>
+                    <div>
+                      <label style="display: block; font-size: 12px; font-weight: 700; color: #f87171; margin-bottom: 4px;">
+                        ⚠️ Due Amount / Balance (₹)
+                      </label>
+                      <input type="number" class="cwt-due-amount-input" placeholder="Auto-calculated" value="" readonly style="width: 100%; background: rgba(239, 68, 68, 0.15); border: 1.5px solid #ef4444; color: #fca5a5; padding: 8px 12px; border-radius: 6px; font-size: 13px; font-weight: 800; box-sizing: border-box;" />
+                    </div>
+                  `;
+
+                  feeGroup.parentNode.insertBefore(groupDiv, feeGroup.nextSibling);
+
+                  const advInput = groupDiv.querySelector('.cwt-advance-paid-input');
+                  const dueInput = groupDiv.querySelector('.cwt-due-amount-input');
+                  const paymentStatusSelect = form.querySelector('select[name*="payment" i]') || Array.from(form.querySelectorAll('select')).find(s => {
+                    const l = s.previousElementSibling ? (s.previousElementSibling.innerText || '').toLowerCase() : '';
+                    return l.includes('payment status');
+                  });
+
+                  function updateDueCalculation() {
+                    const totalFeeStr = feeInput.value;
+                    const advFeeStr = advInput.value;
+
+                    if (!totalFeeStr && totalFeeStr !== '0') {
+                      dueInput.value = '';
+                      return;
+                    }
+
+                    const totalFee = parseFloat(totalFeeStr) || 0;
+                    const advFee = parseFloat(advFeeStr) || 0;
+                    const due = Math.max(0, totalFee - advFee);
+
+                    dueInput.value = due;
+
+                    if (paymentStatusSelect) {
+                      if (due === 0 && totalFee > 0) {
+                        paymentStatusSelect.value = 'Paid';
+                      } else if (advFee > 0 && due > 0) {
+                        paymentStatusSelect.value = 'Partial';
+                      } else if (advFee === 0 && totalFee > 0) {
+                        paymentStatusSelect.value = 'Pending';
+                      }
+                    }
+                  }
+
+                  feeInput.addEventListener('input', updateDueCalculation);
+                  feeInput.addEventListener('keyup', updateDueCalculation);
+                  advInput.addEventListener('input', updateDueCalculation);
+                  advInput.addEventListener('keyup', updateDueCalculation);
+                }
+              }
+            });
+          } catch(e) {}
+        }
+
+        setInterval(hideUnwantedFields, 100);
+        setInterval(enhanceServiceCategoryDropdown, 300);
+        setInterval(injectAdvanceAndDueFields, 300);
+      })();
+    </script>
+
+
+
+    <!-- CLEAN TOP-RIGHT SERVICE CATEGORY REPLACEMENT & AUTO-SYNC -->
+    <style>
+      /* Hide Unwanted Form Fields in Task Modals */
+      .form-group:has(label:contains("Turnover")),
+      .form-group:has(label:contains("ARN")),
+      .form-group:has(label:contains("Filing Date")) {
+        display: none !important;
+      }
+      
+      /* Hide Old Fixed Service Category Group */
+      .cwt-old-service-group {
+        display: none !important;
+      }
+    </style>
+
+    <script>
+      (function() {
+        function setReactValue(element, value) {
+          if (!element) return;
+          try {
+            const tracker = element._valueTracker;
+            if (tracker) tracker.setValue(value);
+
+            let proto = (element.tagName === 'SELECT') ? window.HTMLSelectElement.prototype : window.HTMLInputElement.prototype;
+            const descriptor = Object.getOwnPropertyDescriptor(proto, 'value');
+            if (descriptor && descriptor.set) {
+              descriptor.set.call(element, value);
+            } else {
+              element.value = value;
+            }
+          } catch(e) {
+            element.value = value;
+          }
+          element.dispatchEvent(new Event('input', { bubbles: true }));
+          element.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+
+        function replaceServiceCategoryInTopGrid() {
+          try {
+            const forms = document.querySelectorAll('form, .modal-body, div[class*="modal"]');
+            forms.forEach(form => {
+              const text = form.innerText || form.textContent || '';
+              if (!text.includes('Service Category')) return;
+
+              // Find old Service Category select group
+              const oldServiceSelect = Array.from(form.querySelectorAll('select')).find(s => {
+                if (s.classList.contains('cwt-new-service-select')) return false;
+                const l = s.previousElementSibling ? (s.previousElementSibling.innerText || '').toLowerCase() : '';
+                return l.includes('service category') || Array.from(s.options).some(o => o.value === 'ITR' || o.value === 'GST');
+              });
+
+              if (!oldServiceSelect || !oldServiceSelect.closest('.form-group')) return;
+
+              const oldGroup = oldServiceSelect.closest('.form-group');
+              oldGroup.classList.add('cwt-old-service-group');
+              oldGroup.style.setProperty('display', 'none', 'important');
+
+              if (form.querySelector('.cwt-new-service-group')) return;
+
+              // Create New Service Category Group in the same position
+              const newGroup = document.createElement('div');
+              newGroup.className = 'cwt-new-service-group form-group';
+              newGroup.style.cssText = 'width: 100%; margin: 0; box-sizing: border-box;';
+
+              newGroup.innerHTML = `
+                <label style="display: block; font-size: 13px; font-weight: 700; color: #60a5fa; margin-bottom: 6px;">
+                  Service Category *
+                </label>
+                <select class="cwt-new-service-select form-select" style="width: 100%; background: #0f172a; border: 1.5px solid #3b82f6; color: #ffffff; padding: 9px 12px; border-radius: 8px; font-size: 13px; font-weight: 700; box-sizing: border-box; cursor: pointer;">
+                  <option value="ITR">📄 ITR (Income Tax Return)</option>
+                  <option value="GST">🏢 GST (GSTR-1, 3B, CMP-08)</option>
+                  <option value="Food License">🍕 Food License (FSSAI)</option>
+                  <option value="Udyam Registration">🏭 Udyam MSME Registration</option>
+                  <option value="Online Registration of GST">🏢 New GST Registration</option>
+                  <option value="Trade Mark">🏷️ Trade Mark (TM)</option>
+                  <option value="DSC">🔐 Digital Signature (DSC)</option>
+                  <option value="Website">🌐 Website Maintenance</option>
+                  <option value="Book Keeping">📚 Book Keeping & Accounting</option>
+                  <option value="Online Service">🌐 Other Online Services</option>
+                </select>
+              `;
+
+              oldGroup.parentNode.insertBefore(newGroup, oldGroup);
+
+              const newSelect = newGroup.querySelector('.cwt-new-service-select');
+
+              newSelect.addEventListener('change', function() {
+                const val = newSelect.value;
+
+                // Sync main oldServiceSelect value for React submission
+                if (val === 'ITR') setReactValue(oldServiceSelect, 'ITR');
+                else if (val === 'GST') setReactValue(oldServiceSelect, 'GST');
+                else if (val === 'Website') setReactValue(oldServiceSelect, 'Website');
+                else setReactValue(oldServiceSelect, 'Online Service');
+
+                // Find target fields
+                const formTypeSelect = Array.from(form.querySelectorAll('select')).find(s => {
+                  if (s === oldServiceSelect || s === newSelect) return false;
+                  const l = s.previousElementSibling ? (s.previousElementSibling.innerText || '').toLowerCase() : '';
+                  return l.includes('form type') || l.includes('return form');
+                });
+
+                const periodElement = form.querySelector('select[name*="period" i], input[name*="period" i]') || Array.from(form.querySelectorAll('select, input')).find(el => {
+                  if (el === oldServiceSelect || el === newSelect || el === formTypeSelect) return false;
+                  const l = el.previousElementSibling ? (el.previousElementSibling.innerText || '').toLowerCase() : '';
+                  return l.includes('filing period') || l.includes('assessment year');
+                });
+
+                const titleInput = form.querySelector('input[placeholder*="title" i]') || Array.from(form.querySelectorAll('input')).find(i => {
+                  const l = i.previousElementSibling ? (i.previousElementSibling.innerText || '').toLowerCase() : '';
+                  return l.includes('task title');
+                });
+
+                const evcSelect = Array.from(form.querySelectorAll('select')).find(s => {
+                  if (s === oldServiceSelect || s === newSelect || s === formTypeSelect || s === periodElement) return false;
+                  const l = s.previousElementSibling ? (s.previousElementSibling.innerText || '').toLowerCase() : '';
+                  return l.includes('verification') || l.includes('evc');
+                });
+
+                let targetForm = '', targetPeriod = '', targetTitle = '', targetEvc = 'Aadhaar OTP Verified';
+
+                if (val === 'ITR') {
+                  targetForm = 'ITR-1'; targetPeriod = 'AY 2025-26'; targetTitle = 'Income Tax Return Filing'; targetEvc = 'Aadhaar OTP Verified';
+                } else if (val === 'GST') {
+                  targetForm = 'GSTR-3B'; targetPeriod = 'Current Month'; targetTitle = 'GSTR-3B Tax Return Filing'; targetEvc = 'Aadhaar OTP Verified';
+                } else if (val === 'Food License') {
+                  targetForm = 'Food License (FSSAI)'; targetPeriod = 'FY 2026-27'; targetTitle = 'Food License (FSSAI) Application'; targetEvc = 'Aadhaar OTP Verified';
+                } else if (val === 'Udyam Registration') {
+                  targetForm = 'Udyam Registration'; targetPeriod = 'FY 2026-27'; targetTitle = 'Udyam MSME Registration Certificate'; targetEvc = 'Aadhaar OTP Verified';
+                } else if (val === 'Online Registration of GST') {
+                  targetForm = 'GST Registration'; targetPeriod = 'FY 2026-27'; targetTitle = 'New GST Registration Application'; targetEvc = 'Aadhaar OTP Verified';
+                } else if (val === 'Trade Mark') {
+                  targetForm = 'Trade Mark (TM)'; targetPeriod = 'FY 2026-27'; targetTitle = 'Trade Mark (TM) Filing & Application'; targetEvc = 'DSC Verified';
+                } else if (val === 'DSC') {
+                  targetForm = 'DSC Digital Signature'; targetPeriod = 'Current Month'; targetTitle = 'Class 3 Digital Signature (DSC) Issuance'; targetEvc = 'DSC Verified';
+                } else if (val === 'Website') {
+                  targetForm = 'Website Task'; targetPeriod = 'Current Month'; targetTitle = 'Website Maintenance Task'; targetEvc = 'Aadhaar OTP Verified';
+                } else if (val === 'Book Keeping') {
+                  targetForm = 'Other Service'; targetPeriod = 'FY 2026-27'; targetTitle = 'Book Keeping & Accounting Work'; targetEvc = 'Aadhaar OTP Verified';
+                }
+
+                if (formTypeSelect && targetForm) {
+                  const opt = Array.from(formTypeSelect.options).find(o => o.value === targetForm || o.value.includes(targetForm) || o.text.includes(targetForm));
+                  if (opt) setReactValue(formTypeSelect, opt.value);
+                }
+                if (periodElement && targetPeriod) {
+                  const opt = Array.from(periodElement.options || []).find(o => o.value === targetPeriod || o.text.includes(targetPeriod));
+                  if (opt) setReactValue(periodElement, opt.value);
+                  else setReactValue(periodElement, targetPeriod);
+                }
+                if (titleInput && targetTitle) setReactValue(titleInput, targetTitle);
+                if (evcSelect && targetEvc) {
+                  const opt = Array.from(evcSelect.options || []).find(o => o.value === targetEvc || o.value.includes(targetEvc) || o.text.includes(targetEvc));
+                  if (opt) setReactValue(evcSelect, opt.value);
+                }
+              });
+            });
+          } catch(e) {}
+        }
+
+        setInterval(replaceServiceCategoryInTopGrid, 250);
+      })();
+    </script>
+
+
+
+    <!-- WHATSAPP BUTTONS FOR ALL CLIENT ROWS & TASK CARDS -->
+    <script>
+      (function() {
+        function injectWhatsAppToAllRowsAndCards() {
+          try {
+            // 1. Client Table Rows (Client Directory)
+            const tableRows = document.querySelectorAll('table tbody tr, .data-table tbody tr');
+            tableRows.forEach(tr => {
+              if (tr.querySelector('.cwt-wa-row-btn')) return;
+
+              const cellText = (tr.innerText || tr.textContent || '');
+              const phoneMatch = cellText.match(/\b[6-9]\d{9}\b/);
+              const phone = phoneMatch ? phoneMatch[0] : '';
+
+              const targetTd = tr.querySelector('td:last-child') || tr.querySelector('td:nth-child(4)') || tr;
+
+              const btn = document.createElement('button');
+              btn.type = 'button';
+              btn.className = 'cwt-wa-row-btn cwt-wa-card-btn';
+              btn.style.cssText = 'background: #25D366 !important; color: #ffffff !important; border: none !important; border-radius: 6px !important; padding: 4px 10px !important; font-size: 11px !important; font-weight: 700 !important; cursor: pointer !important; margin-left: 6px !important; display: inline-flex !important; align-items: center !important; gap: 4px !important; box-shadow: 0 2px 6px rgba(37,211,102,0.3) !important;';
+              btn.innerHTML = '💬 WhatsApp';
+              btn.title = 'Send WhatsApp Message to Client';
+
+              btn.onclick = function(e) {
+                e.stopPropagation();
+                if (window.cwtShareCardWA) {
+                  window.cwtShareCardWA(tr);
+                } else if (phone) {
+                  window.location.href = 'whatsapp://send?phone=91' + phone;
+                }
+              };
+
+              targetTd.appendChild(btn);
+            });
+
+            // 2. Task Cards / Task Containers
+            const cards = document.querySelectorAll('.task-card, div[class*="task-card"], div[class*="Card"]');
+            cards.forEach(card => {
+              if (card.querySelector('.cwt-wa-card-btn')) return;
+
+              const text = card.innerText || card.textContent || '';
+              if (!text.includes('Due') && !text.includes('Filing') && !text.includes('Pending') && !text.includes('Completed')) return;
+
+              const actionContainer = card.querySelector('.task-card-header, div[class*="header"], div[class*="action"], div:last-child') || card;
+
+              const btn = document.createElement('button');
+              btn.type = 'button';
+              btn.className = 'cwt-wa-card-btn';
+              btn.style.cssText = 'background: #25D366 !important; color: #ffffff !important; border: none !important; border-radius: 6px !important; padding: 4px 10px !important; font-size: 11px !important; font-weight: 700 !important; cursor: pointer !important; margin-left: 6px !important; display: inline-flex !important; align-items: center !important; gap: 4px !important; box-shadow: 0 2px 6px rgba(37,211,102,0.3) !important;';
+              btn.innerHTML = '💬 WhatsApp';
+              btn.title = 'Send Work Update on WhatsApp';
+
+              btn.onclick = function(e) {
+                e.stopPropagation();
+                if (window.cwtShareCardWA) {
+                  window.cwtShareCardWA(card);
+                }
+              };
+
+              actionContainer.appendChild(btn);
+            });
+          } catch(e) {}
+        }
+
+        setInterval(injectWhatsAppToAllRowsAndCards, 300);
+      })();
+    </script>
+
+
+    
+
+
+    
+    <!-- TENANT DATA ISOLATION & SINGLE SIGN-ON (SSO) HANDLER -->
+    <script>
+      (function() {
+        const API_BASE = (function() {
+          const href = window.location.href;
+          if (href.includes('/reports/client-work-tracker/')) return '/reports/client-work-tracker/api';
+          const path = window.location.pathname;
+          const folder = path.substring(0, path.lastIndexOf('/'));
+          return folder ? folder + '/api' : './api';
+        })();
+
+        // Enforce Tenant Data Isolation
+        fetch(API_BASE + '/cwt_saas.php?action=check_session')
+          .then(r => r.json())
+          .then(data => {
+            if (data && data.authenticated) {
+              const currentTenantId = String(data.tenant_id);
+              const lastStoredTenantId = localStorage.getItem('cwt_active_tenant_id');
+
+              // If switching to a new non-master tenant (tenant_id > 1)
+              if (currentTenantId !== '1' && lastStoredTenantId !== currentTenantId) {
+                // Clear master data from localStorage for this new tenant!
+                localStorage.setItem('cwt_active_tenant_id', currentTenantId);
+                const emptyState = {
+                  clients: [],
+                  tasks: [],
+                  logs: []
+                };
+                localStorage.setItem('clientTrackerState', JSON.stringify(emptyState));
+                localStorage.setItem('cwt_clients_data', JSON.stringify([]));
+                localStorage.setItem('cwt_tasks_data', JSON.stringify([]));
+                window.location.reload();
+                return;
+              } else if (currentTenantId === '1' && lastStoredTenantId !== '1') {
+                localStorage.setItem('cwt_active_tenant_id', '1');
+              }
+
+              // Show Trial Banner for registered SaaS Tenants (tenant_id > 1)
+              if (data.tenant_id > 1 && data.days_left !== undefined) {
+                showTrialHeaderBanner(data.days_left, data.name || data.firm_name || 'SaaS User');
+              }
+            }
+          })
+          .catch(() => {});
+
+        function showTrialHeaderBanner(daysLeft, name) {
+          if (document.getElementById('cwt-trial-header-banner')) return;
+          const header = document.querySelector('.header-actions, header, div[class*="header"]');
+          if (!header) return;
+
+          const banner = document.createElement('div');
+          banner.id = 'cwt-trial-header-banner';
+          banner.style.cssText = 'background: linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(5, 150, 105, 0.25) 100%); border: 1.5px solid #10b981; color: #6ee7b7; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 800; display: inline-flex; align-items: center; gap: 6px; margin-right: 12px; box-shadow: 0 0 12px rgba(16,185,129,0.3);';
+          banner.innerHTML = `👤 ${name} | ⏳ Free Trial: ${daysLeft} Days Remaining (Renewal ₹2,000/Yr)`;
+          header.insertBefore(banner, header.firstChild);
+        }
+      })();
+    </script>
+
+
+    
+
+    
+
+    
+
+    <!-- IRONCLAD SAAS TENANT DATA ISOLATION & SESSION GUARD -->
+    <script>
+      (function() {
+        const API_BASE = (function() {
+          const href = window.location.href;
+          if (href.includes('/reports/client-work-tracker/')) return '/reports/client-work-tracker/api';
+          const path = window.location.pathname;
+          const folder = path.substring(0, path.lastIndexOf('/'));
+          return folder ? folder + '/api' : './api';
+        })();
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const isMasterAdminUrl = urlParams.get('master_admin') === '1';
+
+        fetch(API_BASE + '/cwt_saas.php?action=check_session' + (isMasterAdminUrl ? '&master_admin=1' : ''))
+          .then(r => r.json())
+          .then(data => {
+            if (!data || !data.authenticated) return;
+
+            const currentTenantId = String(data.tenant_id);
+            const activeTenantId = localStorage.getItem('cwt_active_tenant_id');
+
+            // If SaaS Tenant (tenant_id > 1)
+            if (currentTenantId !== '1') {
+              // Ensure localStorage tenant ID matches current tenant
+              if (activeTenantId !== currentTenantId) {
+                localStorage.setItem('cwt_active_tenant_id', currentTenantId);
+                const emptyState = { clients: [], tasks: [], logs: [] };
+                localStorage.setItem('clientTrackerState', JSON.stringify(emptyState));
+                localStorage.setItem('cwt_clients_data', JSON.stringify([]));
+                localStorage.setItem('cwt_tasks_data', JSON.stringify([]));
+                window.location.reload();
+                return;
+              }
+
+              // Hide Back to Admin Dashboard button & replace with Tenant Badge + Logout Button
+              const backBtn = Array.from(document.querySelectorAll('a, button')).find(el => el.textContent.includes('Back to Admin Dashboard'));
+              if (backBtn && !document.getElementById('cwt-tenant-header-box')) {
+                const container = document.createElement('div');
+                container.id = 'cwt-tenant-header-box';
+                container.style.cssText = 'display: inline-flex; align-items: center; gap: 10px;';
+
+                const badge = document.createElement('div');
+                badge.style.cssText = 'background: rgba(99, 102, 241, 0.25); border: 1.5px solid rgba(99, 102, 241, 0.45); color: #a5b4fc; padding: 7px 14px; border-radius: 12px; font-weight: 700; font-size: 13px; display: inline-flex; align-items: center; gap: 6px; cursor: default; pointer-events: none; user-select: none;';
+                badge.innerHTML = `👤 ${data.name || 'SaaS Workspace'} ${data.firm_name ? '(' + data.firm_name + ')' : ''}`;
+
+                const logoutBtn = document.createElement('button');
+                logoutBtn.type = 'button';
+                logoutBtn.style.cssText = 'background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: #ffffff; border: none; padding: 7px 14px; border-radius: 12px; font-weight: 700; font-size: 13px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 4px 12px rgba(239,68,68,0.35);';
+                logoutBtn.innerHTML = `🚪 Logout`;
+                logoutBtn.onclick = function() {
+                  fetch(API_BASE + '/cwt_saas.php?action=logout')
+                    .then(() => {
+                      sessionStorage.clear();
+                      localStorage.removeItem('cwt_active_tenant_id');
+                      window.location.href = '../index.php';
+                    })
+                    .catch(() => {
+                      window.location.href = '../index.php';
+                    });
+                };
+
+                container.appendChild(badge);
+                container.appendChild(logoutBtn);
+                backBtn.parentNode.replaceChild(container, backBtn);
+              }
+
+              // Show Trial Banner
+              if (data.days_left !== undefined) {
+                showTrialHeaderBanner(data.days_left, data.name || data.firm_name || 'SaaS User');
+              }
+            } else {
+              // Master Admin (tenant_id = 1)
+              localStorage.setItem('cwt_active_tenant_id', '1');
+              const backBtn = Array.from(document.querySelectorAll('a, button')).find(el => el.textContent.includes('Back to Admin Dashboard'));
+              if (backBtn) {
+                backBtn.style.display = 'inline-flex';
+              }
+            }
+          })
+          .catch(() => {});
+
+        function showTrialHeaderBanner(daysLeft, name) {
+          if (document.getElementById('cwt-trial-header-banner')) return;
+          const header = document.querySelector('.header-actions, header, div[class*="header"]');
+          if (!header) return;
+
+          const banner = document.createElement('div');
+          banner.id = 'cwt-trial-header-banner';
+          banner.style.cssText = 'background: linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(5, 150, 105, 0.25) 100%); border: 1.5px solid #10b981; color: #6ee7b7; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 800; display: inline-flex; align-items: center; gap: 6px; margin-right: 12px; box-shadow: 0 0 12px rgba(16,185,129,0.3);';
+          banner.innerHTML = `👤 ${name} | ⏳ Free Trial: ${daysLeft} Days Remaining (Renewal ₹2,000/Yr)`;
+          header.insertBefore(banner, header.firstChild);
+        }
+      })();
+    </script>
+
+
+    <!-- HIDE MASTER ADMIN TOOLS (RESET DEMO DATA) FROM SAAS TENANTS -->
+    <script>
+      (function() {
+        function sanitizeTenantUI() {
+          const API_BASE = (function() {
+            const href = window.location.href;
+            if (href.includes('/reports/client-work-tracker/')) return '/reports/client-work-tracker/api';
+            const path = window.location.pathname;
+            const folder = path.substring(0, path.lastIndexOf('/'));
+            return folder ? folder + '/api' : './api';
+          })();
+
+          fetch(API_BASE + '/cwt_saas.php?action=check_session')
+            .then(r => r.json())
+            .then(data => {
+              if (data && data.authenticated && data.tenant_id > 1) {
+                // Hide Reset Demo Data & Restore JSON buttons for tenants!
+                const allButtons = Array.from(document.querySelectorAll('button'));
+                allButtons.forEach(btn => {
+                  const text = btn.textContent || '';
+                  if (text.includes('Reset Demo Data') || text.includes('Restore JSON')) {
+                    btn.style.display = 'none';
+                    btn.style.visibility = 'hidden';
+                  }
+                });
+              }
+            })
+            .catch(() => {});
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', sanitizeTenantUI);
+        } else {
+          sanitizeTenantUI();
+        }
+        setInterval(sanitizeTenantUI, 1000);
+      })();
+    </script>

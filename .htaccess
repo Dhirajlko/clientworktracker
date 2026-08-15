@@ -1,0 +1,14 @@
+Options -MultiViews
+RewriteEngine On
+
+# 1. Do NOT rewrite requests to api folder or any .php files
+RewriteRule ^api/ - [L,NC]
+RewriteRule \.php$ - [L,NC]
+
+# 2. Serve existing files and directories directly
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# 3. Fallback to index.html for SPA routes
+RewriteRule ^ index.html [QSA,L]
