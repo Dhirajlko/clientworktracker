@@ -1,1 +1,44 @@
+body{
+    background:#0f172a;
+    color:#fff;
+    font-family:Segoe UI,sans-serif;
+}
 
+.card{
+    background:#182335;
+    border:1px solid #2f3d55;
+    border-radius:18px;
+}
+
+.table{
+    color:#fff;
+}
+
+.table thead{
+    background:#1e293b;
+}
+
+.dataTables_wrapper{
+    color:#fff;
+}
+
+.form-control,
+.form-select{
+    background:#111827;
+    color:#fff;
+    border:1px solid #374151;
+}
+
+.form-control:focus,
+.form-select:focus{
+    background:#111827;
+    color:#fff;
+}
+
+.btn-primary{
+    border-radius:10px;
+}
+
+.navbar{
+    border-bottom:1px solid #334155;
+}
