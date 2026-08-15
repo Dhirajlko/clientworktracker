@@ -1,0 +1,761 @@
+[04-Aug-2026 20:49:11 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'username'@'localhost' (using password: YES) in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:5
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(5): mysqli->__construct()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 5
+[04-Aug-2026 20:49:27 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'username'@'localhost' (using password: YES) in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:5
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(5): mysqli->__construct()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 5
+[04-Aug-2026 20:49:33 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'username'@'localhost' (using password: YES) in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:5
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(5): mysqli->__construct()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 5
+[04-Aug-2026 20:50:12 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'username'@'localhost' (using password: YES) in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:5
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(5): mysqli->__construct()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 5
+[04-Aug-2026 20:51:46 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'username'@'localhost' (using password: YES) in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:5
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(5): mysqli->__construct()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 5
+[04-Aug-2026 20:51:53 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'username'@'localhost' (using password: YES) in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:5
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(5): mysqli->__construct()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 5
+[04-Aug-2026 20:54:39 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'username'@'localhost' (using password: YES) in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:5
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(5): mysqli->__construct()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 5
+[04-Aug-2026 20:57:09 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'your_real_username'@'localhost' (using password: YES) in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:5
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(5): mysqli->__construct()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 5
+[04-Aug-2026 20:57:16 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'your_real_username'@'localhost' (using password: YES) in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:5
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(5): mysqli->__construct()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 5
+[04-Aug-2026 21:03:27 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'your_real_username'@'localhost' (using password: YES) in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:5
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(5): mysqli->__construct()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 5
+[04-Aug-2026 21:12:20 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'your_real_username'@'localhost' (using password: YES) in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:5
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(5): mysqli->__construct()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 5
+[04-Aug-2026 21:12:44 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'your_real_username'@'localhost' (using password: YES) in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:5
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(5): mysqli->__construct()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 5
+[04-Aug-2026 21:12:49 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'your_real_username'@'localhost' (using password: YES) in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:5
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(5): mysqli->__construct()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 5
+[04-Aug-2026 21:12:55 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'your_real_username'@'localhost' (using password: YES) in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:5
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(5): mysqli->__construct()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 5
+[04-Aug-2026 21:14:54 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'your_real_username'@'localhost' (using password: YES) in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:5
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(5): mysqli->__construct()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 5
+[04-Aug-2026 21:21:13 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'Dhiraj'@'localhost' to database 'leocomp1' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:4
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(4): mysqli->__construct()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 4
+[04-Aug-2026 21:21:29 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'Dhiraj'@'localhost' to database 'leocomp1' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:4
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(4): mysqli->__construct()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 4
+[04-Aug-2026 21:21:32 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'Dhiraj'@'localhost' to database 'leocomp1' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:4
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(4): mysqli->__construct()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 4
+[04-Aug-2026 21:21:42 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'Dhiraj'@'localhost' to database 'leocomp1' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:4
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(4): mysqli->__construct()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 4
+[04-Aug-2026 21:23:25 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'Dhiraj'@'localhost' to database 'leocomp1' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:4
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(4): mysqli->__construct()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 4
+[04-Aug-2026 21:23:33 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'Dhiraj'@'localhost' to database 'leocomp1' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:4
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(4): mysqli->__construct()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 4
+[04-Aug-2026 21:23:38 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'Dhiraj'@'localhost' to database 'leocomp1' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:4
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(4): mysqli->__construct()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 4
+[04-Aug-2026 21:24:01 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'Dhiraj'@'localhost' to database 'leocomp1' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:4
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(4): mysqli->__construct()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 4
+[05-Aug-2026 03:47:19 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'YOUR_USER'@'localhost' (using password: YES) in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php:8
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php(8): mysqli->__construct()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php on line 8
+[05-Aug-2026 03:51:57 UTC] PHP Warning:  require_once(config.php): Failed to open stream: No such file or directory in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php on line 2
+[05-Aug-2026 03:51:57 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'config.php' (include_path='.:/opt/alt/php82/usr/share/pear:/opt/alt/php82/usr/share/php:/usr/share/pear:/usr/share/php') in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php on line 2
+[05-Aug-2026 03:52:42 UTC] PHP Warning:  require_once(config.php): Failed to open stream: No such file or directory in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php on line 2
+[05-Aug-2026 03:52:42 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'config.php' (include_path='.:/opt/alt/php82/usr/share/pear:/opt/alt/php82/usr/share/php:/usr/share/pear:/usr/share/php') in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php on line 2
+[05-Aug-2026 03:56:38 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'Dhiraj'@'localhost' to database 'leocomp1' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/test_conn.php:3
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/test_conn.php(3): mysqli->__construct()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/test_conn.php on line 3
+[05-Aug-2026 04:02:07 UTC] PHP Fatal error:  Uncaught Error: mysqli_stmt::bind_param(): Argument #3 cannot be passed by reference in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php:26
+Stack trace:
+#0 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php on line 26
+[05-Aug-2026 04:05:15 UTC] PHP Fatal error:  Uncaught Error: mysqli_stmt::bind_param(): Argument #3 cannot be passed by reference in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php:26
+Stack trace:
+#0 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php on line 26
+[05-Aug-2026 04:05:47 UTC] PHP Fatal error:  Uncaught Error: mysqli_stmt::bind_param(): Argument #3 cannot be passed by reference in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php:26
+Stack trace:
+#0 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php on line 26
+[05-Aug-2026 04:06:07 UTC] PHP Fatal error:  Uncaught Error: mysqli_stmt::bind_param(): Argument #3 cannot be passed by reference in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php:26
+Stack trace:
+#0 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php on line 26
+[07-Aug-2026 08:22:11 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getDB() in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 4
+[07-Aug-2026 09:50:09 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getDB() in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 4
+[07-Aug-2026 10:03:43 UTC] PHP Parse error:  syntax error, unexpected identifier "DB_NAME", expecting ")" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/config.php on line 8
+[07-Aug-2026 10:03:43 UTC] PHP Parse error:  syntax error, unexpected identifier "DB_NAME", expecting ")" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/config.php on line 8
+[07-Aug-2026 15:27:01 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate column name 'gst_username' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php:27
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php(27): mysqli->query()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php on line 27
+[07-Aug-2026 15:27:43 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate column name 'gst_username' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php:27
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php(27): mysqli->query()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php on line 27
+[07-Aug-2026 15:33:48 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate column name 'gst_username' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:11
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(11): mysqli->query()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 11
+[07-Aug-2026 15:33:48 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate column name 'gst_username' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:11
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(11): mysqli->query()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 11
+[07-Aug-2026 15:33:48 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate column name 'gst_username' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:11
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(11): mysqli->query()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 11
+[07-Aug-2026 15:34:11 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate column name 'gst_username' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:11
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(11): mysqli->query()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 11
+[07-Aug-2026 15:34:11 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate column name 'gst_username' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:11
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(11): mysqli->query()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 11
+[07-Aug-2026 15:34:11 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate column name 'gst_username' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:11
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(11): mysqli->query()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 11
+[07-Aug-2026 15:34:21 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate column name 'gst_username' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:11
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(11): mysqli->query()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 11
+[07-Aug-2026 15:34:21 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate column name 'gst_username' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:11
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(11): mysqli->query()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 11
+[07-Aug-2026 15:34:21 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate column name 'gst_username' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:11
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(11): mysqli->query()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 11
+[07-Aug-2026 15:38:41 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate column name 'gst_username' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:11
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(11): mysqli->query()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 11
+[07-Aug-2026 15:38:41 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate column name 'gst_username' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:11
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(11): mysqli->query()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 11
+[07-Aug-2026 15:38:41 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate column name 'gst_username' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:11
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(11): mysqli->query()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 11
+[14-Aug-2026 13:16:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 37
+[14-Aug-2026 13:16:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 38
+[14-Aug-2026 13:16:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 39
+[14-Aug-2026 13:16:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 40
+[14-Aug-2026 13:16:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 41
+[14-Aug-2026 13:16:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 42
+[14-Aug-2026 13:16:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 43
+[14-Aug-2026 13:16:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 44
+[14-Aug-2026 13:16:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 45
+[14-Aug-2026 13:16:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 46
+[14-Aug-2026 13:16:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 47
+[14-Aug-2026 13:16:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 48
+[14-Aug-2026 13:16:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 49
+[14-Aug-2026 13:16:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 50
+[14-Aug-2026 13:16:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 51
+[14-Aug-2026 13:16:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 52
+[14-Aug-2026 13:16:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 53
+[14-Aug-2026 13:16:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 54
+[14-Aug-2026 13:16:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 55
+[14-Aug-2026 13:16:51 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 56
+[14-Aug-2026 14:47:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 37
+[14-Aug-2026 14:47:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 38
+[14-Aug-2026 14:47:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 39
+[14-Aug-2026 14:47:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 40
+[14-Aug-2026 14:47:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 41
+[14-Aug-2026 14:47:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 42
+[14-Aug-2026 14:47:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 43
+[14-Aug-2026 14:47:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 44
+[14-Aug-2026 14:47:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 45
+[14-Aug-2026 14:47:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 46
+[14-Aug-2026 14:47:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 47
+[14-Aug-2026 14:47:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 48
+[14-Aug-2026 14:47:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 49
+[14-Aug-2026 14:47:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 50
+[14-Aug-2026 14:47:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 51
+[14-Aug-2026 14:47:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 52
+[14-Aug-2026 14:47:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 53
+[14-Aug-2026 14:47:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 54
+[14-Aug-2026 14:47:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 55
+[14-Aug-2026 14:47:43 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 56
+[14-Aug-2026 14:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 37
+[14-Aug-2026 14:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 38
+[14-Aug-2026 14:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 39
+[14-Aug-2026 14:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 40
+[14-Aug-2026 14:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 41
+[14-Aug-2026 14:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 42
+[14-Aug-2026 14:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 43
+[14-Aug-2026 14:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 44
+[14-Aug-2026 14:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 45
+[14-Aug-2026 14:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 46
+[14-Aug-2026 14:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 47
+[14-Aug-2026 14:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 48
+[14-Aug-2026 14:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 49
+[14-Aug-2026 14:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 50
+[14-Aug-2026 14:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 51
+[14-Aug-2026 14:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 52
+[14-Aug-2026 14:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 53
+[14-Aug-2026 14:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 54
+[14-Aug-2026 14:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 55
+[14-Aug-2026 14:50:10 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/update_client.php on line 56
+[14-Aug-2026 19:55:53 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'leocomp1_mybook.cwt_clients' doesn't exist in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/cwt_saas.php:30
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/cwt_saas.php(30): mysqli->query()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/cwt_saas.php on line 30
+[14-Aug-2026 19:56:01 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'leocomp1_mybook.cwt_clients' doesn't exist in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/cwt_saas.php:30
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/cwt_saas.php(30): mysqli->query()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/cwt_saas.php on line 30
+[14-Aug-2026 20:22:47 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate column name 'tenant_id' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:10
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(10): mysqli->query()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 10
+[14-Aug-2026 21:34:28 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getJSON() in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php on line 8
+[14-Aug-2026 21:34:44 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getJSON() in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php on line 8
+[14-Aug-2026 21:35:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getJSON() in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php on line 8
+[14-Aug-2026 21:36:04 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'leocomp1_mybook'@'localhost' (using password: YES) in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/config.php:23
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/config.php(23): mysqli->__construct()
+#1 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php(25): getDB()
+#2 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/config.php on line 23
+[14-Aug-2026 21:36:16 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'leocomp1_mybook'@'localhost' (using password: YES) in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/config.php:23
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/config.php(23): mysqli->__construct()
+#1 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php(25): getDB()
+#2 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/config.php on line 23
+[14-Aug-2026 21:36:41 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate column name 'tenant_id' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php:28
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php(28): mysqli->query()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php on line 28
+[14-Aug-2026 21:36:47 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate column name 'tenant_id' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php:28
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php(28): mysqli->query()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php on line 28
+[14-Aug-2026 21:37:08 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'company' in 'field list' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php:27
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php(27): mysqli->prepare()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php on line 27
+[14-Aug-2026 21:37:14 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'company' in 'field list' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php:27
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php(27): mysqli->prepare()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_client.php on line 27
+[14-Aug-2026 21:38:52 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'leocomp1_mybook.work_tasks' doesn't exist in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php:12
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php(12): mysqli->query()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 12
+[14-Aug-2026 21:38:52 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'leocomp1_mybook.work_tasks' doesn't exist in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php:12
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php(12): mysqli->query()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 12
+[14-Aug-2026 21:38:58 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'leocomp1_mybook.work_tasks' doesn't exist in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php:12
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php(12): mysqli->query()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 12
+[14-Aug-2026 21:38:58 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'leocomp1_mybook.work_tasks' doesn't exist in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php:12
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php(12): mysqli->query()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 12
+[14-Aug-2026 21:39:04 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'leocomp1_mybook.work_tasks' doesn't exist in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php:12
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php(12): mysqli->query()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 12
+[14-Aug-2026 21:39:04 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'leocomp1_mybook.work_tasks' doesn't exist in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php:12
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php(12): mysqli->query()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 12
+[14-Aug-2026 21:39:36 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'leocomp1_mybook.work_tasks' doesn't exist in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php:12
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php(12): mysqli->query()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 12
+[14-Aug-2026 21:39:36 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'leocomp1_mybook.work_tasks' doesn't exist in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php:12
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php(12): mysqli->query()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 12
+[14-Aug-2026 21:39:38 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'leocomp1_mybook.work_tasks' doesn't exist in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php:12
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php(12): mysqli->query()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 12
+[14-Aug-2026 21:39:38 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'leocomp1_mybook.work_tasks' doesn't exist in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php:12
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php(12): mysqli->query()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 12
+[14-Aug-2026 21:39:47 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'leocomp1_mybook.work_tasks' doesn't exist in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php:12
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php(12): mysqli->query()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 12
+[14-Aug-2026 21:39:47 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'leocomp1_mybook.work_tasks' doesn't exist in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php:12
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php(12): mysqli->query()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 12
+[14-Aug-2026 21:39:55 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'leocomp1_mybook.work_tasks' doesn't exist in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php:12
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php(12): mysqli->query()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 12
+[15-Aug-2026 00:57:04 UTC] PHP Warning:  Undefined variable $pdo in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 11
+[15-Aug-2026 00:57:04 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php:11
+Stack trace:
+#0 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 11
+[15-Aug-2026 00:57:13 UTC] PHP Warning:  Undefined variable $pdo in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 11
+[15-Aug-2026 00:57:13 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php:11
+Stack trace:
+#0 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 11
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 45
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 46
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 47
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 48
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "remarks" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 49
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 65
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 66
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 67
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 68
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 65
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 66
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 67
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 68
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 65
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 66
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 67
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 68
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 65
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 66
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 67
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 68
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 45
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 46
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 47
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 48
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "remarks" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 49
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 65
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 66
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 67
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 68
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 45
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 46
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 47
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 48
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "remarks" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 49
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 45
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 46
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 47
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 48
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "remarks" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 49
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 45
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 46
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 47
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 48
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "remarks" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 49
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 45
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 46
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 47
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 48
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "remarks" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 49
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 45
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 46
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 47
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 48
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "remarks" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 49
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 65
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 66
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 67
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 68
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 45
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 46
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 47
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 48
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "remarks" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 49
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 45
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 46
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 47
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 48
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "remarks" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 49
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 45
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 46
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 47
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 48
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "remarks" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 49
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 45
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 46
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 47
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 48
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "remarks" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 49
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 65
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 66
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 67
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 68
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 65
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 66
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 67
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 68
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 45
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 46
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 47
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 48
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "remarks" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 49
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 45
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 46
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 47
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 48
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "remarks" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 49
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 45
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 46
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 47
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 48
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "remarks" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 49
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 45
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 46
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 47
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 48
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "remarks" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 49
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 45
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 46
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 47
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 48
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "remarks" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 49
+[15-Aug-2026 00:58:03 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 45
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 46
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 47
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 48
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "remarks" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 49
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 65
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 66
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 67
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 68
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 65
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 66
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 67
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 68
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 65
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 66
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 67
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 68
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 65
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 66
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 67
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 68
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 45
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 46
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 47
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 48
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "remarks" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 49
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 65
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 66
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 67
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 68
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 45
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 46
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 47
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 48
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "remarks" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 49
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 45
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 46
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 47
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 48
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "remarks" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 49
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 45
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 46
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 47
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 48
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "remarks" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 49
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 45
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 46
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 47
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 48
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "remarks" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 49
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 45
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 46
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 47
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 48
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "remarks" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 49
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 65
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 66
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 67
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 68
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 45
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 46
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 47
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 48
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "remarks" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 49
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 45
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 46
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 47
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 48
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "remarks" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 49
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 45
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 46
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 47
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 48
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "remarks" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 49
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 45
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 46
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 47
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 48
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "remarks" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 49
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 65
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 66
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 67
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 68
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 65
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 66
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 67
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 68
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 45
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 46
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 47
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 48
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "remarks" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 49
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 45
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 46
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 47
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 48
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "remarks" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 49
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 45
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 46
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 47
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 48
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "remarks" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 49
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 45
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 46
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 47
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 48
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "remarks" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 49
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 45
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "fee_charged" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 46
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 47
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "advance_paid" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 48
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "remarks" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 49
+[15-Aug-2026 00:58:13 UTC] PHP Warning:  Undefined array key "task_title" in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_tasks.php on line 56
+[15-Aug-2026 02:46:43 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'task_title' in 'field list' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_task.php:35
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_task.php(35): mysqli->prepare()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_task.php on line 35
+[15-Aug-2026 02:46:52 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'task_title' in 'field list' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_task.php:35
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_task.php(35): mysqli->prepare()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/save_task.php on line 35
+[15-Aug-2026 03:24:34 UTC] PHP Warning:  syntax error, unexpected '!' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/.env on line 5
+ in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/config.php on line 30
+[15-Aug-2026 03:24:34 UTC] PHP Warning:  foreach() argument must be of type array|object, bool given in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/config.php on line 31
+[15-Aug-2026 03:24:34 UTC] PHP Warning:  syntax error, unexpected '!' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/.env on line 5
+ in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/config.php on line 30
+[15-Aug-2026 03:24:34 UTC] PHP Warning:  foreach() argument must be of type array|object, bool given in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/config.php on line 31
+[15-Aug-2026 03:24:34 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'client_id' in 'field list' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:10
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(10): mysqli->prepare()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 10
+[15-Aug-2026 03:24:34 UTC] PHP Warning:  syntax error, unexpected '!' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/.env on line 5
+ in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/config.php on line 30
+[15-Aug-2026 03:24:34 UTC] PHP Warning:  foreach() argument must be of type array|object, bool given in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/config.php on line 31
+[15-Aug-2026 03:24:35 UTC] PHP Warning:  syntax error, unexpected '!' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/.env on line 5
+ in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/config.php on line 30
+[15-Aug-2026 03:24:35 UTC] PHP Warning:  foreach() argument must be of type array|object, bool given in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/config.php on line 31
+[15-Aug-2026 03:24:35 UTC] PHP Warning:  syntax error, unexpected '!' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/.env on line 5
+ in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/config.php on line 30
+[15-Aug-2026 03:24:35 UTC] PHP Warning:  foreach() argument must be of type array|object, bool given in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/config.php on line 31
+[15-Aug-2026 03:24:35 UTC] PHP Warning:  syntax error, unexpected '!' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/.env on line 5
+ in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/config.php on line 30
+[15-Aug-2026 03:24:35 UTC] PHP Warning:  foreach() argument must be of type array|object, bool given in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/config.php on line 31
+[15-Aug-2026 03:25:31 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'client_id' in 'field list' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:10
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(10): mysqli->prepare()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 10
+[15-Aug-2026 03:26:23 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'name' in 'field list' in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php:10
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php(10): mysqli->prepare()
+#1 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/get_clients.php on line 10
+[15-Aug-2026 08:47:36 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Too many connections in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/config.php:52
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/config.php(52): mysqli->__construct()
+#1 /home/leocomp1/mybook1.in/reports/db_connect.php(3): getDB()
+#2 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/cwt_saas.php(12): require_once('/home/leocomp1/...')
+#3 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/config.php on line 52
+[15-Aug-2026 08:47:37 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Too many connections in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/config.php:52
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/config.php(52): mysqli->__construct()
+#1 /home/leocomp1/mybook1.in/reports/db_connect.php(3): getDB()
+#2 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/cwt_saas.php(12): require_once('/home/leocomp1/...')
+#3 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/config.php on line 52
+[15-Aug-2026 08:47:39 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Too many connections in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/config.php:52
+Stack trace:
+#0 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/config.php(52): mysqli->__construct()
+#1 /home/leocomp1/mybook1.in/reports/db_connect.php(3): getDB()
+#2 /home/leocomp1/mybook1.in/reports/client-work-tracker/api/cwt_saas.php(12): require_once('/home/leocomp1/...')
+#3 {main}
+  thrown in /home/leocomp1/mybook1.in/reports/client-work-tracker/api/config.php on line 52
